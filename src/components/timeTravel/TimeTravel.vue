@@ -1,31 +1,53 @@
 <template>
   <div class="timeContainer">
-    <ul  class="timeLineList">
-        <li class="timeItem" v-for="(time,index) in timeSplite" v-bind:key="index" @click="handleTimeClick">
+    <ul id="timeLineList" class="timeLineList" v-if="supportTouch">
+        <li class="timeItem" v-for="(time,index) in timeSplite" v-bind:key="index"  v-hammer:tap="handleTimeClick">
           <span>{{time.year}}</span>
+          <span v-if="index == 4" class="lastItem">2019</span>
         </li>
+    </ul>
+    <ul id="timeLineList" class="timeLineList" v-else>
+        <li class="timeItem" v-for="(time,index) in timeSplite" v-bind:key="index"  @click.stop="handleTimeClick($event)">
+          <span>{{time.year}}</span>
+          <span v-if="index == 4" class="lastItem">2019</span>
+        </li>      
     </ul>
     <div id="timePointer" class="pointer"></div>
   </div>
 </template>
 <script>
-import Vue from "vue";
-import Velocity from "velocity-animate";
 
+import Velocity from 'velocity-animate'
+import { VueHammer } from 'vue2-hammer' 
+import Vue from 'vue'
+import { EventEmitter } from 'events';
+Vue.use(VueHammer)
 export default {
   name: "TimeTravel",
   data() {
     return {
-      timeSplite: [{'year':'1994'},{'year':'1999'},{'year':'2004'},{'year':'2009'},{'year':'2014'},{'year':'2019'}]
+      supportTouch: false,
+      timeSplite: [{'year':'1994'},{'year':'1999'},{'year':'2004'},{'year':'2009'},{'year':'2014'}]
     }
   },
   methods: {
     handleTimeClick(evt) {
-      console.log(evt);
-
+      evt.preventDefault();
+      moveTapClk(evt.target);
     }
+  },
+  beforeMount(){
+    this.supportTouch = typeof window.ontouchstart === 'undefined' ? false:true;
   }
 };
+
+function moveTapClk(target) {
+      const pointer = document.getElementById('timePointer');
+      const timeLineList = document.getElementById('timeLineList');
+      const slideSpace = pointer.offsetLeft - timeLineList.offsetLeft ;
+      const space =  pointer.offsetLeft - target.offsetLeft - 58;
+      Velocity(timeLineList,{left: space})
+}
 
 </script>
 <style lang="scss" scoped>
@@ -60,6 +82,9 @@ export default {
       outline: none;
       cursor: pointer;
       text-overflow: ellipsis;
+      &:last-child {
+        border-right: 1px solid rgba(0, 0, 0, 0.54);
+      }
       span {
         position: relative;
         display: inline-block;
@@ -72,6 +97,16 @@ export default {
         white-space: nowrap;
         text-overflow: ellipsis;
         opacity: 0.6;
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 15px;
+        line-height: 16px;
+        &.lastItem {
+          position: absolute;
+          right: -50%;
+          opacity: 1;
+          left: 50%;
+          width: 100%;
+        }
       }
     }
   }

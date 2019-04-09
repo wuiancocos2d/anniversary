@@ -34,5 +34,6 @@ body {
   margin: 0 auto;
   height: 100%;
   min-height: 100%;
+  overflow: hidden;
 }
 </style>
