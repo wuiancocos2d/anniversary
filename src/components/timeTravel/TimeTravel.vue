@@ -20,7 +20,6 @@
 import Velocity from 'velocity-animate'
 import { VueHammer } from 'vue2-hammer' 
 import Vue from 'vue'
-import { EventEmitter } from 'events';
 Vue.use(VueHammer)
 export default {
   name: "TimeTravel",
@@ -44,8 +43,8 @@ export default {
 function moveTapClk(target) {
       const pointer = document.getElementById('timePointer');
       const timeLineList = document.getElementById('timeLineList');
-      const slideSpace = pointer.offsetLeft - timeLineList.offsetLeft ;
-      const space =  pointer.offsetLeft - target.offsetLeft - 58;
+      const targetOffL = target.nodeName === 'LI' ? target.offsetLeft:target.parentNode.offsetLeft;
+      const space =  pointer.offsetLeft - targetOffL - 58;
       Velocity(timeLineList,{left: space})
 }
 

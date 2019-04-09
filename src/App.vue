@@ -1,12 +1,36 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>-->
-    <router-view/>
+    <a-layout :style="{height: layoutHeight}">
+      <a-layout-header id="header">
+        <VHeader></VHeader>
+      </a-layout-header>
+      <a-layout>
+        <a-layout-content>
+          <router-view/>
+        </a-layout-content>
+      </a-layout>
+    </a-layout>
   </div>
 </template>
+
+<script>
+import VHeader from "./components/common/Header";
+import { Layout } from "ant-design-vue";
+export default {
+  data() {
+    return {
+      layoutHeight: "100%"
+    };
+  },
+  components: {
+    VHeader,
+    "a-layout": Layout,
+    "a-layout-header": Layout.Header,
+    "a-layout-content": Layout.Content
+  }
+};
+</script>
+
 
 <style lang="scss">
 * {
@@ -35,5 +59,12 @@ body {
   height: 100%;
   min-height: 100%;
   overflow: hidden;
+}
+#header {
+  background: #fff;
+  box-shadow: 0 2px 8px #f0f1f2;
+  position: relative;
+  z-index: 10;
+  max-width: 100%;
 }
 </style>

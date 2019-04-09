@@ -1,6 +1,5 @@
 <template>
   <div class="homeContainer">
-    <VHeader></VHeader>
     <TimeTravel></TimeTravel>
     <div class="waterfallContainer">
       <vue-waterfall-easy
@@ -17,8 +16,6 @@
   </div>
 </template>
 <script>
-// @ is an alias to /src
-import VHeader from "../components/common/Header";
 import TimeTravel from '../components/timeTravel/TimeTravel';
 import axios from "axios";
 import vueWaterfallEasy from "vue-waterfall-easy";
@@ -27,7 +24,6 @@ import Mock from "../mock";
 export default {
   name: "home",
   components: {
-    VHeader,
     TimeTravel,
     vueWaterfallEasy,
   },
@@ -58,10 +54,10 @@ export default {
   height: 100%;
 }
 .waterfallContainer {
-  position: absolute;
-  top: 120px;
+  position: relative;
   width: 100%;
   bottom: 0;
+  height: 100%;
 }
 </style>
 
