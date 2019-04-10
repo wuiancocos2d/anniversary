@@ -55,7 +55,7 @@ function moveTapClk(target) {
   height: 54px;
   padding-bottom: 4px;
   position: relative;
-  z-index: 0;
+  z-index: 100;
   .timeLineList {
     background-color: #fff;
     height: 100%;

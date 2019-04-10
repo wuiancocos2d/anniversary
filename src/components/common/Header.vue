@@ -1,7 +1,7 @@
 <template>
   <a-row>
     <a-col :xs="24" :sm="24" :md="6" :lg="5" :xl="5" :xxl="4">
-      <div class="logo"></div>
+      <div class="logo"><img src="../../assets/logo-with20.svg" alt="" class="logoImg"></div>
     </a-col>
     <a-col :xs="0" :sm="0" :md="18" :lg="19" :xl="19" :xxl="24">
     <a-menu theme="light" mode="horizontal" class="nav-header right" >
@@ -37,12 +37,24 @@ export default {
 .nav-header {
   height: 60px;
   border: none;
+  padding-right: 40px;
   & .nav-item {
     line-height: 60px;
     height: 100%;
   }
   &.right {
     float: right;
+  }
+  
+}
+
+.logo {
+  .logoImg {
+    width: 178px;
+    height: 46px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-indent: 150%;
   }
 }
 </style>

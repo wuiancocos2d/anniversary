@@ -4,9 +4,9 @@
       <a-layout-header id="header">
         <VHeader></VHeader>
       </a-layout-header>
-      <a-layout>
-        <a-layout-content>
-          <router-view/>
+      <a-layout :style="{height: layoutHeight}">
+        <a-layout-content :style="{backgroundColor: contentBk}">
+          <router-view />
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -19,7 +19,8 @@ import { Layout } from "ant-design-vue";
 export default {
   data() {
     return {
-      layoutHeight: "100%"
+      layoutHeight: "100%",
+      contentBk: "#fff"
     };
   },
   components: {
@@ -58,11 +59,11 @@ body {
   margin: 0 auto;
   height: 100%;
   min-height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  padding: 0 5px;
 }
 #header {
   background: #fff;
-  box-shadow: 0 2px 8px #f0f1f2;
   position: relative;
   z-index: 10;
   max-width: 100%;
