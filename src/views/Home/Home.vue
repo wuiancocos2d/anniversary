@@ -49,24 +49,17 @@ export default {
         this.group++;
       });
     },
-    scroll() {
+    scroll () {
       window.onscroll = () => {
-        window.onscroll = function() {
-          console.log(1);
-          let bottomOfWindow =
-            Math.max(
-              window.pageYOffset,
-              document.documentElement.scrollTop,
-              document.body.scrollTop
-            ) +
-              window.innerHeight ===
-            document.documentElement.offsetHeight;
+        console.log(window.pageYOffset,document.documentElement.scrollTop, document.body.scrollTop,window.innerHeight,document.documentElement.offsetHeight);
+        let bottomOfWindow = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight === document.documentElement.offsetHeight
 
-          if (bottomOfWindow) {
-            this.scrolledToBottom = true; // replace it with your code
-          }
-        };
-      };
+        if (bottomOfWindow) {
+          console.log('getData');
+         this.scrolledToBottom = true // replace it with your code
+         this.getData()
+        }
+      }
     }
   },
   created() {

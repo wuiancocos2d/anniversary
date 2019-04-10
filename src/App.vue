@@ -39,14 +39,9 @@ export default {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
-html,
-body,
-#app {
-  height: 100%;
-}
+
 body {
   min-width: 100%;
-  min-height: 100%;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -57,8 +52,7 @@ body {
   min-width: 375px;
   position: relative;
   margin: 0 auto;
-  height: 100%;
-  min-height: 100%;
+
   overflow-x: hidden;
   padding: 0 5px;
 }
