@@ -52,8 +52,9 @@ body {
   min-width: 375px;
   position: relative;
   margin: 0 auto;
-
+  height: 100%;
   overflow-x: hidden;
+  overflow: hidden;
   padding: 0 5px;
 }
 #header {
