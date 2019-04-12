@@ -9,7 +9,9 @@ Vue.use(Vuex)
 
 
 const state = {
-    userInfor: null//用户信息
+    userInfor: {
+        name: ''
+    }
 }
 
 export default new Vuex.Store({

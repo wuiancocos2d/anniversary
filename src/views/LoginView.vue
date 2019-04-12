@@ -47,12 +47,13 @@
   </div>
 </template>
 <script>
-import { Form, Button, Input, Icon, Checkbox } from "ant-design-vue";
-
+import { Form, Button, Input, Icon, Checkbox } from "ant-design-vue"
+import { mapActions } from "vuex"
+import "../mock"
 export default {
   name: "login",
   beforeCreate() {
-    this.form = Form.createForm(this);
+    this.form = Form.createForm(this)
   },
   components: {
     "a-input": Input,
@@ -63,11 +64,30 @@ export default {
     "a-checkbox": Checkbox
   },
   methods: {
+    ...mapActions(['userLogin']),  
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
+            this.$http.post('/api/login',values)
+                .then(res=> {
+                    console.dir(res.data)
+                    if(res.data.success) {
+                        this.userLogin(res.data)
+                        this.$router.push('/')
+                    }else {
+                        this.$message.error(res.data)
+                        return false;
+                    }
+                })
+                .catch(err=> {
+                    console.log('catch',err,this.$router);
+                    this.$message.error(err)
+                    return false;
+                })
+        }else {
+            this.$message.error('表单验证失败')
+            return false;
         }
       });
     }
@@ -89,7 +109,7 @@ export default {
     float: right;
   }
   .login-form-remember {
-      float: left;
+    float: left;
   }
 }
 </style>

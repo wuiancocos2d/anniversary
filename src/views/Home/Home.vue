@@ -10,7 +10,6 @@
 </template>
 <script>
 import TimeTravel from "../../components/timeTravel/TimeTravel";
-import axios from "axios";
 import vueWaterfallEasy from "vue-waterfall-easy";
 import "../../mock";
 import Hero from "./Hero";
@@ -30,7 +29,7 @@ export default {
   },
   methods: {
     getData() {
-      axios.get("/mock/").then(res => {
+      this.$http.get("/mock/").then(res => {
         this.imgsArr = this.imgsArr.concat(res.data.images);
         this.group++;
       });
