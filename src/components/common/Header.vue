@@ -9,7 +9,14 @@
         <router-link to="/">Home</router-link>
       </a-menu-item>
       <a-menu-item class="nav-item">
-        <router-link to="/login">login</router-link>
+        <router-link to="userInfo? '/plofile':'/login'">
+          <span v-if="userInfo">
+            userInfo.name
+          </span>
+          <span v-else>
+            Login
+          </span>
+        </router-link>
       </a-menu-item>
     </a-menu>
     </a-col>
@@ -18,7 +25,7 @@
 <script>
 // @ is an alias to /src
 import { Menu, Row, Col } from "ant-design-vue";
-
+ import {mapState, mapActions} from 'vuex'
 export default {
   name: "vheader",
   components: {
@@ -30,6 +37,17 @@ export default {
   data() {
     return {
     };
+  },
+  mounted(){
+    this.getUserInfo();
+  },
+  computed: {
+    ...mapState(['userInfo'])
+  },
+  methods: {
+    ...mapActions([
+      getUserInfo
+    ]),
   }
 };
 </script>
