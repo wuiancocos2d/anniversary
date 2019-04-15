@@ -9,7 +9,7 @@
         <router-link to="/">Home</router-link>
       </a-menu-item>
       <a-menu-item class="nav-item">
-        <router-link to="user.name? '/plofile':'/login'">
+        <router-link :to="user.name? '/plofile':'/login'">
           <span v-if="user.name">
             {{user.name}}
           </span>
@@ -38,9 +38,10 @@ export default {
   beforeCreate() {
     this.$http.get('/api/userIsLogin')
       .then(res=> {
-        if(res.data.error) {
+        console.log('res',res)
+        if(res.data.error || localStorage.getItem('userInfo')===null) {
           this.$message.error(res.data.error)
-          this.user.name = null;
+          this.user.name = null
           return false
         }else {
           let user = JSON.parse(localStorage.getItem('userInfo'))
@@ -51,6 +52,7 @@ export default {
         }
       })
       .catch(err=> {
+        console.log('err',err)
         this.$message.error('${err.message}',err)
       })
   },
@@ -61,8 +63,18 @@ export default {
       }
     };
   },
+  mounted() {
+    this.getUserInfo()
+  },
+  computed: {
+    ...mapState([
+      'userInfo'
+    ]),
+  },
   methods: {
-
+    ...mapActions([
+      'getUserInfo'
+    ])
   }
 };
 </script>
