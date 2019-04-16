@@ -1,14 +1,15 @@
-import {USER_LOGIN,GET_USERINFO} from './mutaions-types.js'
-import {getUser} from '../service/getData'
+import {GET_USERINFO} from './mutaions-types.js'
+import api from '../service/getData'
+import {getPromiseAction} from '../service/promiseUtils'
 export default {
-    userLogin({commit},user) {
-        commit(USER_LOGIN,user)
-    },
+
     async getUserInfo({
-        commit,
-        state
+        commit,rootState
+        
     }){
-        let res = await getUser()
-        commit(GET_USERINFO, res)
+        let payload = {
+            token: rootState.token
+        }
+        return getPromiseAction(api.loadUserInfo(payload),commit,GET_USERINFO)
     }
 }

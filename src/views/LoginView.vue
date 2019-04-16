@@ -47,13 +47,19 @@
   </div>
 </template>
 <script>
-import { Form, Button, Input, Icon, Checkbox } from "ant-design-vue"
-import { mapActions } from "vuex"
-import "../mock"
+import { Form, Button, Input, Icon, Checkbox } from "ant-design-vue";
+import { mapMutations } from "vuex";
+import { userLogin } from "../service/getData.js";
+
 export default {
   name: "login",
+  data() {
+    return {
+      userInfo: null
+    };
+  },
   beforeCreate() {
-    this.form = Form.createForm(this)
+    this.form = Form.createForm(this);
   },
   components: {
     "a-input": Input,
@@ -64,32 +70,26 @@ export default {
     "a-checkbox": Checkbox
   },
   methods: {
-    ...mapActions(['userLogin']),  
+    ...mapMutations(["RECORD_USERINFO"]),
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-            this.$http.post('/api/login',values)
-                .then(res=> {
-                    console.dir(res.data)
-                    if(res.data.success) {
-                        this.userLogin(res.data)
-                        this.$router.push('/')
-                    }else {
-                        this.$message.error(res.data)
-                        return false;
-                    }
-                })
-                .catch(err=> {
-                    console.log('catch',err,this.$router);
-                    this.$message.error(err)
-                    return false;
-                })
-        }else {
-            this.$message.error('表单验证失败')
-            return false;
+            this.login(values)
+        } else {
+          this.$message.error("表单验证失败");
+          return false;
         }
       });
+    },
+    async login(user) {
+      this.userInfo = await userLogin(user);
+      if (!this.userInfo.user_id) {
+        this.$message.error(this.userInfo.message);
+      } else {
+        this.RECORD_USERINFO(this.userInfo);
+        this.$router.go(-1);
+      }
     }
   }
 };

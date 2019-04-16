@@ -1,21 +1,22 @@
-export const getUser = () => {
-    this.$http.get('/api/userIsLogin')
-      .then(res=> {
-        console.log('res',res)
-        if(res.data.error || localStorage.getItem('userInfo')===null) {
-          this.$message.error(res.data.error)
-          this.user.name = null
-          return false
-        }else {
-          let user = JSON.parse(localStorage.getItem('userInfo'))
-          console.log('user',user)
-          if(user) {
-            this.user.name = user.name
-          }
-        }
-      })
-      .catch(err=> {
-        console.log('err',err)
-        this.$message.error('${err.message}',err)
-      })
+import http from '../config/http'
+import config from '../config/config'
+
+export const loadUserInfo= async function (payload) {
+    let res = await http({
+      url: config.LOAD_USER_INFO,
+      method: 'get',
+      data: {
+        token: payload.token
+      }
+    })
+    return res.data
+}
+
+export const userLogin = async function (user) {
+  let res = await http({
+    url: config.USER_LOGIN,
+    method: 'post',
+    data: user
+  })
+  return res.data
 }
