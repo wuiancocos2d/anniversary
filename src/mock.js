@@ -82,12 +82,13 @@ const userInfor = function () {
     }
 }
 
-const userIsLogin = function() {
+const userLogin = function() {
     return {
-        error: false
+        code: 1,
+        user_id : 1
     }
 }
 
 Mock.mock('/mock/', 'get', postData())
-Mock.mock('/api/login', 'post', userInfor())
-Mock.mock('/api/userIsLogin','get',userIsLogin())
+Mock.mock('/api/login', 'post', userLogin())
+Mock.mock('/api/userInfor','get',userInfor())

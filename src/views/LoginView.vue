@@ -50,7 +50,6 @@
 import { Form, Button, Input, Icon, Checkbox } from "ant-design-vue";
 import { mapMutations } from "vuex";
 import { userLogin } from "../service/getData.js";
-
 export default {
   name: "login",
   data() {
