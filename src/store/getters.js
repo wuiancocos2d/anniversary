@@ -1,5 +1,5 @@
 export default {
-	userInfo: state => {
+	getUserInfo: state => {
         return state.userInfo
     }
 }

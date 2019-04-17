@@ -18,7 +18,6 @@ export const userLogin = async function (user) {
     method: 'post',
     data: user
   })
-  console.log('login data',res)
   return res.data
 }
 
@@ -31,3 +30,4 @@ export const getImages = async function () {
 }
 
 
+export  const getUserInfo = function() {}

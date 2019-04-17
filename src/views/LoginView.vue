@@ -84,10 +84,9 @@ export default {
     },
     async login(user) {
       this.userInfo = await userLogin(user);
-      if (!this.userInfo.user_id) {
+      if (!this.userInfo.userId) {
         this.$message.error(this.userInfo.message);
       } else {
-          console.log('record')
         this.RECORD_USERINFO(this.userInfo);
         // this.$router.go(-1);
       }

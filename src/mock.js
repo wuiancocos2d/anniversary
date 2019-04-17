@@ -76,17 +76,15 @@ const postData = function () {
 
 const userInfor = function () {
     return {
-        success: true,
-        name: 'ian',
-        user_id: 1,
-        user_auth: 10
+        code : 1
     }
 }
 
 const userLogin = function() {
     return {
-        code: 1,
-        user_id : 1
+        userId : 1,
+        userName: 'ian',
+        authority: 10
     }
 }
 
