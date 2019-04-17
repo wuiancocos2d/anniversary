@@ -77,8 +77,9 @@ const postData = function () {
 const userInfor = function () {
     return {
         success: true,
-        name: 'ian'
-
+        name: 'ian',
+        user_id: 1,
+        user_auth: 10
     }
 }
 
@@ -92,3 +93,9 @@ const userLogin = function() {
 Mock.mock('/mock/', 'get', postData())
 Mock.mock('/api/login', 'post', userLogin())
 Mock.mock('/api/userInfor','get',userInfor())
+Mock.mock('http://mock/', 'get', postData())
+Mock.mock('http://api/login', 'post', userLogin())
+Mock.mock('http://api/userInfor','get',userInfor())
+Mock.mock('http://localhost:8080/mock/', 'get', postData())
+Mock.mock('http://localhost:8080/login', 'post', userLogin())
+Mock.mock('http://localhost:8080/userInfor','get',userInfor())

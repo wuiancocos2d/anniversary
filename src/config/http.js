@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charest=UTF-8'
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charest=UTF-8'
 axios.defaults.baseURL = ''
 
 const fetch = (options) => {

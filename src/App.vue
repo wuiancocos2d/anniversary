@@ -2,7 +2,7 @@
   <div id="app">
     <a-layout :style="{height: layoutHeight}">
       <a-layout-header id="header">
-        <VHeader></VHeader>
+        <!-- <VHeader></VHeader> -->
       </a-layout-header>
       <a-layout :style="{height: layoutHeight}">
         <a-layout-content :style="{backgroundColor: contentBk}">
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import VHeader from "./components/common/Header";
+// import VHeader from "./components/common/Header";
 import { Layout } from "ant-design-vue";
 export default {
   data() {
@@ -24,7 +24,7 @@ export default {
     };
   },
   components: {
-    VHeader,
+    // VHeader,
     "a-layout": Layout,
     "a-layout-header": Layout.Header,
     "a-layout-content": Layout.Content

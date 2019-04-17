@@ -9,10 +9,10 @@
   </div>
 </template>
 <script>
-import TimeTravel from "../../components/timeTravel/TimeTravel"
-import vueWaterfallEasy from "vue-waterfall-easy"
-import "../../mock"
-import Hero from "./Hero"
+import TimeTravel from "../../components/timeTravel/TimeTravel";
+import vueWaterfallEasy from "vue-waterfall-easy";
+import { getImages } from "../../service/getData.js";
+import Hero from "./Hero";
 
 export default {
   name: "home",
@@ -28,19 +28,16 @@ export default {
     };
   },
   methods: {
-    getData() {
-      this.$http.get("/mock/").then(res => {
-        this.imgsArr = this.imgsArr.concat(res.data.images)
-        this.group++
-      });
-    },
+    async getData() {
+      const newImages = await getImages();
+      this.imgsArr = this.imgsArr.concat(newImages);
+      this.group++
+    }
   },
   created() {
-    this.getData()
+    this.getData();
   },
-  mounted() {
-
-  },
+  mounted() {}
 };
 </script>
 <style lang="scss" scoped>

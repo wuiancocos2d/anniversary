@@ -50,6 +50,7 @@
 import { Form, Button, Input, Icon, Checkbox } from "ant-design-vue";
 import { mapMutations } from "vuex";
 import { userLogin } from "../service/getData.js";
+import '../mock.js'
 export default {
   name: "login",
   data() {
@@ -86,8 +87,9 @@ export default {
       if (!this.userInfo.user_id) {
         this.$message.error(this.userInfo.message);
       } else {
+          console.log('record')
         this.RECORD_USERINFO(this.userInfo);
-        this.$router.go(-1);
+        // this.$router.go(-1);
       }
     }
   }
