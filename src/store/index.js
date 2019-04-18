@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 
 const state = {
-    userInfor: {
+    userInfo: {
 		userName : '',
 		userId: null,
 		authority: false,

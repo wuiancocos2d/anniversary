@@ -1,13 +1,10 @@
 import http from '../config/http'
 import config from '../config/config'
 
-export const loadUserInfo= async function (payload) {
+export const loadUserInfo= async function () {
     let res = await http({
       url: config.LOAD_USER_INFO,
-      method: 'get',
-      data: {
-        token: payload.token
-      }
+      method: 'post'
     })
     return res.data
 }

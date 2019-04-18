@@ -13,13 +13,12 @@ import TimeTravel from "../../components/timeTravel/TimeTravel";
 import vueWaterfallEasy from "vue-waterfall-easy";
 import { getImages } from "../../service/getData.js";
 import Hero from "./Hero";
-
 export default {
   name: "home",
   components: {
     TimeTravel,
     vueWaterfallEasy,
-    Hero
+    Hero,
   },
   data() {
     return {

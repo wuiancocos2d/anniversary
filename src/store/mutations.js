@@ -6,9 +6,7 @@ export const mutations = {
     [types.RECORD_USERINFO](state, user) {
         console.log('mutaions',user)
         setStore('userInfo',user)
-        state.userName = user.userName
-        state.authority = user.authority
-        state.userId = user.userId
+        state.userInfo = user
     }
 }
 
