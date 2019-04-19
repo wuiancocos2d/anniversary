@@ -5,20 +5,26 @@
         <Hero></Hero>
         <TimeTravel></TimeTravel>
       </div>
+      <div class="img-info" slot-scope="props">
+        <a-icon type="heart" /><span>{{props.value.like}}</span>
+        <p>{{props.value.upUser}}</p>
+      </div>
     </vue-waterfall-easy>
   </div>
 </template>
 <script>
-import TimeTravel from "../../components/timeTravel/TimeTravel";
-import vueWaterfallEasy from "vue-waterfall-easy";
-import { getImages } from "../../service/getData.js";
-import Hero from "./Hero";
+import TimeTravel from "../../components/timeTravel/TimeTravel"
+import vueWaterfallEasy from "vue-waterfall-easy"
+import { getImages } from "../../service/getData.js"
+import Hero from "./Hero"
+import {Icon} from 'ant-design-vue'
 export default {
   name: "home",
   components: {
     TimeTravel,
     vueWaterfallEasy,
     Hero,
+    "a-icon": Icon
   },
   data() {
     return {

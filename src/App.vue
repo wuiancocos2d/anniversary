@@ -15,7 +15,8 @@
 
 <script>
 import VHeader from "./components/common/Header";
-import { Layout } from "ant-design-vue";
+import { Layout} from "ant-design-vue";
+
 export default {
   data() {
     return {

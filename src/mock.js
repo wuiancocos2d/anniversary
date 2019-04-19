@@ -8,7 +8,7 @@ const postData = function () {
             {
                 "src": "https://i.pinimg.com/236x/68/ed/c0/68edc0c04e09e7bf0ba0c4aa843bf290.jpg?b=t",
                 "like": 10,
-
+                "upUser": 'ian'
             },
             {
                 "src": "https://i.pinimg.com/236x/77/53/40/77534014785235372db8f52e7206b45b.jpg",
