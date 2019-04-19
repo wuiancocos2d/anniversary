@@ -3,12 +3,7 @@
     <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData">
       <div slot="waterfall-head">
         <div class="upload-block">
-          <a-upload-dragger
-            name="file"
-            :multiple="true"
-            action="//jsonplaceholder.typicode.com/posts/"
-            @change="handleChange"
-          >
+          <a-button type="dashed" block @click="handleUploadClick">
             <p class="ant-upload-drag-icon">
               <a-icon type="inbox"/>
             </p>
@@ -16,7 +11,7 @@
             <p
               class="ant-upload-hint"
             >Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
-          </a-upload-dragger>
+          </a-button>
         </div>
       </div>
     </vue-waterfall-easy>
@@ -25,13 +20,13 @@
 <script>
 import vueWaterfallEasy from "vue-waterfall-easy"
 import { getImages } from "../service/getData.js"
-import { Upload, Icon } from 'ant-design-vue'
+import { Button, Icon } from "ant-design-vue"
 export default {
   name: "profile",
   components: {
     vueWaterfallEasy,
-    "a-upload-dragger": Upload.dragger,
-    "a-icon": Icon
+    "a-icon": Icon,
+    "a-button": Button
   },
   data() {
     return {
@@ -46,17 +41,9 @@ export default {
       this.imgsArr = this.imgsArr.concat(newImages);
       this.group++;
     },
-    handleChange(info) {
-      const status = info.file.status;
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (status === 'done') {
-        this.$message.success(`${info.file.name} file uploaded successfully.`);
-      } else if (status === 'error') {
-        this.$message.error(`${info.file.name} file upload failed.`);
-      }
-    },
+    handleUploadClick() {
+      this.$router.push('upload/')
+    }
   },
   created() {
     this.getData();
@@ -64,4 +51,22 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.upload-block {
+  border: 1px dashed #d9d9d9;
+  transition: border-color 0.3s;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #fafafa;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 15px 0;
+  .anticon.anticon-inbox {
+    font-size: 48px;
+    color: #40a9ff;
+  }
+}
 </style>

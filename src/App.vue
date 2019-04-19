@@ -5,7 +5,7 @@
         <VHeader></VHeader>
       </a-layout-header>
       <a-layout :style="{height: layoutHeight}">
-        <a-layout-content :style="{backgroundColor: contentBk}">
+        <a-layout-content :style="{backgroundColor: contentBk,height:layoutHeight}">
           <router-view />
         </a-layout-content>
       </a-layout>
@@ -63,5 +63,8 @@ body {
   position: relative;
   z-index: 10;
   max-width: 100%;
+}
+.waterfallContainer {
+  height: 100%;
 }
 </style>
