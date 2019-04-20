@@ -21,12 +21,15 @@
 import vueWaterfallEasy from "vue-waterfall-easy"
 import { getImages } from "../service/getData.js"
 import { Button, Icon } from "ant-design-vue"
+
+
 export default {
   name: "profile",
   components: {
     vueWaterfallEasy,
     "a-icon": Icon,
-    "a-button": Button
+    "a-button": Button,
+
   },
   data() {
     return {
