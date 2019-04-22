@@ -1,6 +1,6 @@
 <template>
   <div class="waterfallContainer">
-    <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData">
+    <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData" @click="cardClickHandle">
       <div slot="waterfall-head">
         <Hero></Hero>
         <TimeTravel></TimeTravel>
@@ -38,9 +38,16 @@ export default {
   },
   methods: {
     async getData() {
-      const newImages = await getImages();
-      this.imgsArr = this.imgsArr.concat(newImages);
+      const newImages = await getImages()
+      this.imgsArr = this.imgsArr.concat(newImages)
       this.group++
+    },
+    cardClickHandle(event, {index,value}) {
+      event.preventDefault()
+      console.log(index,value)
+      if(event.target.tagName.toLowerCase() === 'img') {
+        this.$router.push('/article')
+      }
     }
   },
   created() {

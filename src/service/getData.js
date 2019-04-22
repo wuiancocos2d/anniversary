@@ -26,5 +26,12 @@ export const getImages = async function () {
     return res.data['images']
 }
 
+export const getArticle = async function () {
+    let res = await http({
+        url: config.ARTICEL_URL,
+        method: 'get',
+    })
+    return res.data['article']
+}
 
 export  const getUserInfo = function() {}

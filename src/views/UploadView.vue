@@ -26,7 +26,7 @@
 
 <script>
 import E from "wangeditor"
-import {Upload, Input} from "ant-design-vue"
+import {Upload, Input, Icon} from "ant-design-vue"
 function getBase64 (img, callback) {
   const reader = new FileReader()
   reader.addEventListener('load', () => callback(reader.result))
@@ -36,16 +36,19 @@ export default {
   name: "editor",
   data() {
     return {
-      editorContent: ""
+      editorContent: "",
+      imageUrl: "",
+      loading: false
     };
   },
   components: {
     "a-upload": Upload,
-    "a-input": Input
+    "a-input": Input,
+    "a-icon": Icon
   },
   methods: {
     getContent: function() {
-      alert(this.editorContent);
+      console.log(this.editorContent)
     },
     handleChange (info) {
       if (info.file.status === 'uploading') {
