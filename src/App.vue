@@ -55,14 +55,16 @@ body {
   margin: 0 auto;
   height: 100%;
   overflow-x: hidden;
-  overflow: hidden;
+  overflow-y: hidden;
   padding: 0 5px;
+  
 }
 #header {
   background: #fff;
   position: relative;
   z-index: 10;
   max-width: 100%;
+  box-shadow: 0 1px 3px rgba(26,26,26,.1);
 }
 .waterfallContainer {
   height: 100%;

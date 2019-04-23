@@ -1,36 +1,37 @@
 <template>
   <div class="editor-block">
-    <div class="coverImg">
-      <a-upload
-        name="avatar"
-        listType="picture-card"
-        class="avatar-uploader"
-        :showUploadList="false"
-        action="//jsonplaceholder.typicode.com/posts/"
-        :beforeUpload="beforeUpload"
-        @change="handleChange"
-      >
-        <img v-if="imageUrl" :src="imageUrl" alt="avatar">
-        <div v-else>
-          <a-icon :type="loading ? 'loading' : 'plus'"/>
-          <div class="ant-upload-text">Upload Cover Image</div>
-        </div>
-      </a-upload>
-        <a-input placeholder="Please Input Title"/>
-      <div ref="editor" style="text-align:left"></div>
-
+    <div class="editor-container">
+      <div class="coverImg">
+        <a-upload
+          name="avatar"
+          listType="picture"
+          class="avatar-uploader"
+          :showUploadList="false"
+          action="//jsonplaceholder.typicode.com/posts/"
+          :beforeUpload="beforeUpload"
+          @change="handleChange"
+        >
+          <img v-if="imageUrl" :src="imageUrl" alt="avatar">
+          <div v-else>
+            <a-icon :type="loading ? 'loading' : 'plus'"/>
+            <div class="ant-upload-text">Upload Cover Image</div>
+          </div>
+        </a-upload>
+      </div>
+      <a-input class="title" placeholder="Title"/>
+      <div class="editor-text" ref="editor" style="text-align:left"></div>
+      <button v-on:click="getContent">查看内容</button>
     </div>
-    <button v-on:click="getContent">查看内容</button>
   </div>
 </template>
 
 <script>
-import E from "wangeditor"
-import {Upload, Input, Icon} from "ant-design-vue"
-function getBase64 (img, callback) {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
+import E from "wangeditor";
+import { Upload, Input, Icon } from "ant-design-vue";
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result));
+  reader.readAsDataURL(img);
 }
 export default {
   name: "editor",
@@ -48,32 +49,32 @@ export default {
   },
   methods: {
     getContent: function() {
-      console.log(this.editorContent)
+      console.log(this.editorContent);
     },
-    handleChange (info) {
-      if (info.file.status === 'uploading') {
-        this.loading = true
-        return
+    handleChange(info) {
+      if (info.file.status === "uploading") {
+        this.loading = true;
+        return;
       }
-      if (info.file.status === 'done') {
+      if (info.file.status === "done") {
         // Get this url from response in real world.
-        getBase64(info.file.originFileObj, (imageUrl) => {
-          this.imageUrl = imageUrl
-          this.loading = false
-        })
+        getBase64(info.file.originFileObj, imageUrl => {
+          this.imageUrl = imageUrl;
+          this.loading = false;
+        });
       }
     },
-    beforeUpload (file) {
-      const isJPG = file.type === 'image/jpeg'
+    beforeUpload(file) {
+      const isJPG = file.type === "image/jpeg";
       if (!isJPG) {
-        this.$message.error('You can only upload JPG file!')
+        this.$message.error("You can only upload JPG file!");
       }
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {
-        this.$message.error('Image must smaller than 2MB!')
+        this.$message.error("Image must smaller than 2MB!");
       }
-      return isJPG && isLt2M
-    },
+      return isJPG && isLt2M;
+    }
   },
   mounted() {
     var editor = new E(this.$refs.editor);
@@ -120,20 +121,36 @@ export default {
     editor.customConfig.uploadImgShowBase64 = true; // 使用 base64 保存图片
     editor.create();
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .editor-block {
-  margin: 50px auto;
   padding: 0 15px;
-  max-width: 1000px;
+  width: 100%;
+  min-width: 450px;
+  overflow-y: auto;
+  height: 100%;
   box-sizing: border-box;
+  line-height: 26px;
+  .editor-container {
+    max-width: 660px;
+    margin: 0 auto;
+  }
   .coverImg {
     // background: #f7f8f9;
-    line-height: 192px;
+    margin: 15px auto;
     color: #808080;
-    min-height: 192px;
+    background: #dddedf;
     text-align: center;
+    line-height: 192px;
+    .avatar-uploader {
+      width: 100%;
+      .ant-upload.ant-upload-select.ant-upload-select-picture {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
   }
   .avatar-uploader {
     width: 100%;
@@ -141,6 +158,20 @@ export default {
     img {
       width: 100%;
     }
+  }
+  .title {
+    height: 44px;
+    line-height: 44px;
+    margin: 10px 0;
+    outline: none;
+    font-size: 32px;
+    font-weight: 600;
+    box-shadow: none;
+  }
+  .editor-text {
+    margin-top: 20px;
+    line-height: 25px;
+    height: 100%;
   }
 }
 </style>

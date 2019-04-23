@@ -31,7 +31,15 @@ export const getArticle = async function () {
         url: config.ARTICEL_URL,
         method: 'get',
     })
-    return res.data['article']
+    return res.data
+}
+
+export const getAuthoList = async function() {
+  let res = await http({
+    url: config.AUTHORITYList_URL,
+    method: 'get'
+  })
+  return res.data
 }
 
 export  const getUserInfo = function() {}

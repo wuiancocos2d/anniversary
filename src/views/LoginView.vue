@@ -96,7 +96,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .loginFormContainer {
-  max-width: 400px;
+  max-width: 350px;
   margin: 0 auto;
   min-width: 300px;
   margin-top: 65px;
