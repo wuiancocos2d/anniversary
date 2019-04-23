@@ -5,5 +5,6 @@ export default {
     USER_LOGIN: BASE_URL+'api/login',//用户登陆
     IMAGE_URL: BASE_URL+'mock/',
     ARTICEL_URL: BASE_URL + 'api/article',
-    AUTHORITYList_URL: BASE_URL+ 'api/authoList'
+    AUTHORITYList_URL: BASE_URL+ 'api/authoList',
+    IMGMODAL_URL: 'api/imgModal'
 }

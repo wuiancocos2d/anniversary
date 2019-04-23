@@ -42,4 +42,12 @@ export const getAuthoList = async function() {
   return res.data
 }
 
+export const getImgModal = async function() {
+    let res = await http({
+        url: config.IMGMODAL_URL,
+        method: 'get'
+    })
+    return res.data
+}
+
 export  const getUserInfo = function() {}
