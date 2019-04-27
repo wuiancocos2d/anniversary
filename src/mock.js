@@ -91,6 +91,15 @@ const userLogin = function() {
     }
 }
 
+const imgModal = function() {
+    return {
+        'imgUrl': 'https://i.pinimg.com/564x/aa/e2/35/aae2352a6f49449e20ccb04b827e33fe.jpg',
+        'title':'Macau - Largo do Senado',
+        'context':'Explore Prof. Bubbles oOoO\'s photos on Flickr. Prof. Bubbles oOoO has uploaded 1773 photos to Flickr.',
+        'like': 22
+    }
+}
+
 const article = function() {
     return {
         'title': '艺术是可以超越时代的，还是可以过时的？艺术和时代性的关系是什么？',
@@ -144,10 +153,5 @@ const article = function() {
 Mock.mock('/mock/', 'get', postData())
 Mock.mock('/api/login', 'post', userLogin())
 Mock.mock('/api/userInfo','post',userInfor())
-Mock.mock('http://mock/', 'get', postData())
-Mock.mock('http://api/login', 'post', userLogin())
-Mock.mock('http://api/userInfo','post',userInfor())
 Mock.mock('/api/article','get',article())
-Mock.mock('http://localhost:8080/mock/', 'get', postData())
-Mock.mock('http://localhost:8080/login', 'post', userLogin())
-Mock.mock('http://localhost:8080/userInfo','post',userInfor())
+Mock.mock('/api/imgModal', 'get', imgModal())
