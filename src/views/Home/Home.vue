@@ -3,7 +3,7 @@
     <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData" @click="cardClickHandle">
       <div slot="waterfall-head">
         <Hero></Hero>
-        <TimeTravel></TimeTravel>
+        <!-- <TimeTravel></TimeTravel> -->
       </div>
       <div class="img-info" slot-scope="props">
         <a-icon type="heart" theme="filled" style="heartStyle"/>
@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import TimeTravel from "../../components/timeTravel/TimeTravel";
+// import TimeTravel from "../../components/timeTravel/TimeTravel";
 import vueWaterfallEasy from "vue-waterfall-easy";
 import { getImages, getImgModal } from "../../service/getData.js";
 import Hero from "./Hero";
@@ -31,7 +31,7 @@ import ImgModal from "../../components/imgModal/ImageModal";
 export default {
   name: "home",
   components: {
-    TimeTravel,
+    // TimeTravel,
     vueWaterfallEasy,
     Hero,
     ImgModal,
