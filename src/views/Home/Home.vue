@@ -1,24 +1,6 @@
 <template>
   <div class="waterfallContainer">
-    <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData" @click="cardClickHandle">
-      <div slot="waterfall-head">
-        <Hero></Hero>
-        <!-- <TimeTravel></TimeTravel> -->
-      </div>
-      <div class="img-info" slot-scope="props">
-        <a-icon type="heart" theme="filled" style="heartStyle"/>
-        <span class="rate">{{props.value.like}}</span>
-        <p class="upName">{{props.value.upUser}}</p>
-      </div>
-    </vue-waterfall-easy>
-    <a-modal :title="modal_data.title" centered v-model="modal_visible" @ok="handleOk">
-      <ImgModal
-        :title="modal_data.title"
-        :imgUrl="modal_data.imgUrl"
-        :context="modal_data.context"
-        :like="modal_data.like"
-      ></ImgModal>
-    </a-modal>
+
   </div>
 </template>
 <script>
