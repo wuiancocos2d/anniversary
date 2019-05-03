@@ -73,11 +73,11 @@ const postData = function () {
         ]
     }
 }
-const imgModal = function() {
-    return {
+// const imgModal = function() {
+//     return {
         
-    }
-}
+//     }
+// }
 const userInfor = function () {
     return {
         userId: 1,

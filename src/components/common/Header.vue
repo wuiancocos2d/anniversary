@@ -1,41 +1,44 @@
 <template>
-  <a-row>
-    <a-col :xs="24" :sm="24" :md="6" :lg="5" :xl="5" :xxl="4">
-      <div class="logo">
-        <img src="../../assets/logo-with20.svg" alt class="logoImg">
-      </div>
-    </a-col>
-    <a-col :xs="0" :sm="0" :md="18" :lg="19" :xl="19" :xxl="24">
-      <a-menu theme="light" mode="horizontal" class="nav-header right">
-        <a-menu-item class="nav-item">
-          <router-link to="/">Home</router-link>
-        </a-menu-item>
-        <a-menu-item class="nav-item">
-          <router-link :to="userInfo.userName? '/plofile':'/login'">
-            <span v-if="userInfo.userName">{{userInfo.userName}}</span>
-            <span v-else>Login</span>
-          </router-link>
-        </a-menu-item>
-      </a-menu>
-    </a-col>
-  </a-row>
+  <div>
+    <a-row>
+      <a-col :xs="24" :sm="24" :md="6" :lg="5" :xl="5" :xxl="4">
+        <div class="logo">
+          <img src="../../assets/logo-with20.svg" alt class="logoImg">
+        </div>
+      </a-col>
+      <a-col :xs="0" :sm="0" :md="18" :lg="19" :xl="19" :xxl="24">
+        <a-menu theme="light" mode="horizontal" class="nav-header right">
+          <a-menu-item class="nav-item">
+            <router-link to="/">Home</router-link>
+          </a-menu-item>
+          <a-menu-item class="nav-item">
+            <router-link :to="userInfo.userName? '/plofile':'/login'">
+              <span v-if="userInfo.userName">{{userInfo.userName}}</span>
+              <span v-else>Login</span>
+            </router-link>
+          </a-menu-item>
+        </a-menu>
+      </a-col>
+    </a-row>
+    <navDraw></navDraw>
+  </div>
 </template>
 <script>
 // @ is an alias to /src
-import { Menu, Row, Col } from "ant-design-vue";
-import { mapState, mapActions } from "vuex";
+import { Menu, Row, Col } from "ant-design-vue"
+import { mapState, mapActions } from "vuex"
+import navDraw from "./NavDraw"
 export default {
   name: "vheader",
   components: {
     "a-menu": Menu,
     "a-menu-item": Menu.Item,
     "a-row": Row,
-    "a-col": Col
+    "a-col": Col,
+    navDraw
   },
   data() {
-    return {
-
-    }
+    return {};
   },
   mounted() {
     this.getUser();
@@ -48,7 +51,7 @@ export default {
     getUser() {
       this.getUserInfo().then(
         success => {
-          console.log("success",success);
+          console.log("success", success);
         },
         error => {
           console.log("error", error);

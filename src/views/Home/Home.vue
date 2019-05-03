@@ -1,24 +1,24 @@
 <template>
   <div class="waterfallContainer">
-
+    <Hero></Hero>
   </div>
 </template>
 <script>
 // import TimeTravel from "../../components/timeTravel/TimeTravel";
-import vueWaterfallEasy from "vue-waterfall-easy";
+// import vueWaterfallEasy from "vue-waterfall-easy";
 import { getImages, getImgModal } from "../../service/getData.js";
 import Hero from "./Hero";
-import { Icon, Modal } from "ant-design-vue";
-import ImgModal from "../../components/imgModal/ImageModal";
+// import { Icon, Modal } from "ant-design-vue";
+// import ImgModal from "../../components/imgModal/ImageModal";
 export default {
   name: "home",
   components: {
     // TimeTravel,
-    vueWaterfallEasy,
+    // vueWaterfallEasy,
     Hero,
-    ImgModal,
-    "a-modal": Modal,
-    "a-icon": Icon
+    // ImgModal,
+    // "a-modal": Modal,
+    // "a-icon": Icon
   },
   data() {
     return {
