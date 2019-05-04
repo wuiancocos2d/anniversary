@@ -7,17 +7,7 @@
         </div>
       </a-col>
       <a-col :xs="0" :sm="0" :md="18" :lg="19" :xl="19" :xxl="24">
-        <a-menu theme="light" mode="horizontal" class="nav-header right">
-          <a-menu-item class="nav-item">
-            <router-link to="/">Home</router-link>
-          </a-menu-item>
-          <a-menu-item class="nav-item">
-            <router-link :to="userInfo.userName? '/plofile':'/login'">
-              <span v-if="userInfo.userName">{{userInfo.userName}}</span>
-              <span v-else>Login</span>
-            </router-link>
-          </a-menu-item>
-        </a-menu>
+        <nav-menu :mode="'horizontal'"></nav-menu>
       </a-col>
     </a-row>
     <navDraw></navDraw>
@@ -25,39 +15,19 @@
 </template>
 <script>
 // @ is an alias to /src
-import { Menu, Row, Col } from "ant-design-vue"
-import { mapState, mapActions } from "vuex"
+import { Row, Col } from "ant-design-vue"
+import Navigation from './Nav'
 import navDraw from "./NavDraw"
 export default {
   name: "vheader",
   components: {
-    "a-menu": Menu,
-    "a-menu-item": Menu.Item,
     "a-row": Row,
     "a-col": Col,
+    "nav-menu":Navigation,
     navDraw
   },
   data() {
     return {};
-  },
-  mounted() {
-    this.getUser();
-  },
-  computed: {
-    ...mapState(["userInfo"])
-  },
-  methods: {
-    ...mapActions(["getUserInfo"]),
-    getUser() {
-      this.getUserInfo().then(
-        success => {
-          console.log("success", success);
-        },
-        error => {
-          console.log("error", error);
-        }
-      );
-    }
   }
 };
 </script>
@@ -66,10 +36,7 @@ export default {
   height: 60px;
   border: none;
   padding-right: 40px;
-  & .nav-item {
-    line-height: 60px;
-    height: 100%;
-  }
+  
   &.right {
     float: right;
   }
