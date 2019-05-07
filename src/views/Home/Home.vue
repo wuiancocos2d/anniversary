@@ -1,66 +1,30 @@
 <template>
   <div class="waterfallContainer">
     <Hero></Hero>
+    <div class="content">
+      <component :is=showComponent></component>
+    </div>
   </div>
 </template>
 <script>
-// import TimeTravel from "../../components/timeTravel/TimeTravel";
-// import vueWaterfallEasy from "vue-waterfall-easy";
-import { getImages, getImgModal } from "../../service/getData.js";
 import Hero from "./Hero";
-// import { Icon, Modal } from "ant-design-vue";
-// import ImgModal from "../../components/imgModal/ImageModal";
+import Rules from '../../components/rules/Rules'
 export default {
   name: "home",
   components: {
-    // TimeTravel,
-    // vueWaterfallEasy,
     Hero,
-    // ImgModal,
-    // "a-modal": Modal,
-    // "a-icon": Icon
+    Rules
   },
   data() {
     return {
-      imgsArr: [],
-      group: 0,
-      heartStyle: {
-        color: "#8c7e7e",
-        backgroundColor: "#8c7e7e"
-      },
-      modal_visible: false,
-      modal_data: {
-        'imgUrl': '',
-        'title':'',
-        'context':'',
-        'like':0
-      }
+      showComponent: "Rules"
     };
   },
   methods: {
-    async getData() {
-      const newImages = await getImages();
-      this.imgsArr = this.imgsArr.concat(newImages);
-      this.group++;
-    },
-    cardClickHandle(event, { index, value }) {
-      event.preventDefault();
-      console.log(index, value);
-      if (event.target.tagName.toLowerCase() === "img") {
-        getImgModal().then((data)=>{
-          this.modal_data = data
-        },(reason)=> {
-          this.$message.error(reason)
-        })
-        this.modal_visible = true
-      }
-    },
-    handleOk() {
-      this.modal_visible  = false
-    },
+
   },
   created() {
-    this.getData();
+
   },
   mounted() {}
 };

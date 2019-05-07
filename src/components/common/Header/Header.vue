@@ -3,7 +3,7 @@
     <a-row>
       <a-col :xs="24" :sm="24" :md="6" :lg="5" :xl="5" :xxl="4">
         <div class="logo">
-          <img src="../../assets/logo-with20.svg" alt class="logoImg">
+          <img src="../../../assets/logo-with20.svg" alt class="logoImg">
         </div>
       </a-col>
       <a-col :xs="0" :sm="0" :md="18" :lg="19" :xl="19" :xxl="24">

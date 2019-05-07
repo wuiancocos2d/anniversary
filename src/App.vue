@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import VHeader from "./components/common/Header";
+import VHeader from "./components/common/Header/Header";
 import { Layout} from "ant-design-vue";
 
 export default {
