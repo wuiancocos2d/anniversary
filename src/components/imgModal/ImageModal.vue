@@ -1,38 +1,42 @@
 <template>
-    <div class="content">
-        <div class="img-container">
-            <img :src="imgUrl" alt="">
-        </div>
-        <div class="title"><p>{{title}}</p></div>
-        <div class="like"><a-icon type="heart" /><p>{{like}}</p></div>
-        <div class="context">
-            <span>{{context}}</span>
-        </div>
-    </div>
+  <div class="modal-container">
+    <a-card>
+        <img src="props.imgUrl" alt="" slot="cover">
+        <a-card-meta title="props.title">
+            <template slot="description">
+                
+            </template>
+        </a-card-meta>
+        <template slot="actions">
+            
+        </template>
+    </a-card>
+  </div>
 </template>
 <script>
-import {Icon} from 'ant-design-vue'
+import {Card } from 'ant-design-vue'
 export default {
-    name: 'imgModal',
-    props: [
-        'imgUrl',
-        'title',
-        'context',
-        'like'
-    ],
-    components: {
-        'a-icon': Icon
+  name: "ImageModal",
+  components: {
+      "a-card": Card,
+      "a-card-meta": Card.Meta
+  },
+  props: {
+    status: {
+      type: String,
+      required: true
+    },
+    imgUrl: {
+        type: String,
+        required: true,
+
+    },
+    title: {
+        type: String,
+        required: true,
     }
-}
+  }
+};
 </script>
 <style lang="scss" scoped>
-    .img-container {
-        display: block;
-        width: 100%;
-        img {
-            display: block;
-            width: 100%;
-            
-        }
-    }
 </style>

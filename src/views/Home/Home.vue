@@ -1,57 +1,46 @@
 <template>
   <div class="waterfallContainer">
     <Hero></Hero>
+    <div>
+      <button @click="showComponent = 'Rules'">Rules</button>
+      <button @click="showComponent = 'Likes'">Likes</button>
+    </div>
     <div class="content">
-      <component :is=showComponent></component>
+      <component :is="showComponent"></component>
     </div>
   </div>
 </template>
 <script>
 import Hero from "./Hero";
-import Rules from '../../components/rules/Rules'
+import Rules from "../../components/rules/Rules";
+import Likes from "./Likes";
 export default {
   name: "home",
   components: {
     Hero,
-    Rules
+    Rules,
+    Likes
   },
   data() {
     return {
+      showOpts: ["Rules", "Likes"],
       showComponent: "Rules"
     };
   },
-  methods: {
-
-  },
-  created() {
-
-  },
+  methods: {},
+  created() {},
   mounted() {}
 };
-
-
 </script>
 <style lang="scss" scoped>
 .waterfallContainer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  color: #8c7e7e;
-  .rate {
-    color: #8c7e7e;
-  }
-  .upName {
-    border-top: 1px solid #f2f2f2;
-    color: #8c7e7e;
-    text-align: left;
-    padding: 5px 10px;
-  }
+  display: block;
+
 }
-.anticon {
-  font-size: 13px;
-  line-height: 13px;
-  padding: 10px 5px;
-  color: #8c7e7e;
+.content {
+  display: block;
+  height: 100%;
+  position: relative;
 }
 </style>
 
