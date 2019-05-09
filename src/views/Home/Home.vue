@@ -1,23 +1,21 @@
 <template>
   <div class="waterfallContainer">
-    <Hero></Hero>
     <div>
       <button @click="showComponent = 'Rules'">Rules</button>
       <button @click="showComponent = 'Likes'">Likes</button>
     </div>
-    <div class="content">
+    <div class="componet-contnet">
       <component :is="showComponent"></component>
     </div>
   </div>
 </template>
 <script>
-import Hero from "./Hero";
+
 import Rules from "../../components/rules/Rules";
 import Likes from "./Likes";
 export default {
   name: "home",
   components: {
-    Hero,
     Rules,
     Likes
   },
@@ -35,12 +33,15 @@ export default {
 <style lang="scss" scoped>
 .waterfallContainer {
   display: block;
-
+  height: 100%;
+  width: 100%;
 }
-.content {
+.componet-contnet {
   display: block;
   height: 100%;
-  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  position: absolute;
 }
 </style>
 
