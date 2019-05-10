@@ -62,7 +62,6 @@ export default {
     },
     cardClickHandle(event, {index,value}) {
       event.preventDefault()
-      console.log(index,value)
       if(event.target.tagName.toLowerCase() === 'img') {
         this.modal_visible = true
       }

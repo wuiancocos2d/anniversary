@@ -21,7 +21,7 @@
       </div>
     </vue-waterfall-easy>
     <a-modal :title="imgTitle" v-model="modalOpen" :footer="null" :centered=true :width="420">
-      <ImageModal :status="imgStatus" :imgUrl="imgUrl" :title="imgTitle" :ableRate="ableRate"></ImageModal>
+      <ImageModal :status="imgStatus" :imgUrl="imgUrl" :title="imgTitle" :ableRate="ableRate" :showDiscription=true ></ImageModal>
     </a-modal>
   </div>
 </template>
@@ -50,23 +50,24 @@ export default {
       imgStatus: "",
       modalOpen: false,
       ableRate: true,
+      discription: ""
     };
   },
   methods: {
     async getData() {
-      let imgs = await getImages();
-      this.imgsArr = this.imgsArr.concat(imgs);
-      this.group++;
+      let imgs = await getImages()
+      this.imgsArr = this.imgsArr.concat(imgs)
+      this.group++
     },
     openModal(event, { value }) {
       this.imgUrl = value.src;
-      console.log(value.src)
       this.imgTitle = value.title;
+      this.discription = value.discription;
       this.modalOpen = true;
     },
   },
   created() {
-    this.getData();
+    this.getData()
   }
 };
 </script>

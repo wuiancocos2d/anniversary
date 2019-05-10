@@ -1,6 +1,7 @@
 <template>
   <div class="rules-container">
     <div class="rules">
+        
       <a-timeline mode="alternate">
         <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
         <a-timeline-item color="green">Solve initial network problems 2015-09-01</a-timeline-item>
@@ -29,4 +30,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>
