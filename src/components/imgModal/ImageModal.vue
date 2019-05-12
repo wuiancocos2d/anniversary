@@ -64,7 +64,8 @@ export default {
       required: true
     },
     discription: {
-      type: 'String',
+      type: String,
+      default: '',
       required: false
     },
     showDiscription: {

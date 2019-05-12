@@ -60,7 +60,7 @@ export default {
     handleUploadClick() {
       this.$router.push('upload/')
     },
-    cardClickHandle(event, {index,value}) {
+    cardClickHandle(event) {
       event.preventDefault()
       if(event.target.tagName.toLowerCase() === 'img') {
         this.modal_visible = true
