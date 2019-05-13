@@ -21,7 +21,6 @@
       v-model="modal_visible"
       @ok="handleOk"
     >
-    <ImgModal :title=modal_title :imgUrl=imgUrl :context=context :like=like></ImgModal>
     </a-modal>
   </div>
 </template>
@@ -29,14 +28,12 @@
 import vueWaterfallEasy from "vue-waterfall-easy"
 import { getImages } from "../service/getData.js"
 import { Button, Icon, Modal } from "ant-design-vue"
-import ImgModal from '../components/imgModal/ImageModal'
 export default {
   name: "profile",
   components: {
     vueWaterfallEasy,
     "a-icon": Icon,
     "a-button": Button,
-    ImgModal,
     "a-modal": Modal
   },
   data() {

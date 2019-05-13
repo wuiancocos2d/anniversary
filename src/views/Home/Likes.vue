@@ -21,7 +21,7 @@
       </div>
     </vue-waterfall-easy>
     <a-modal :title="imgTitle" v-model="modalOpen" :footer="null" :centered=true :width="420">
-      <ImageModal :status="imgStatus" :imgUrl="imgUrl" :title="imgTitle" :ableRate="ableRate" :showDiscription=true ></ImageModal>
+      <ImageModal :status="imgStatus" :imgUrl="imgUrl" :title="imgTitle" :ableRate="ableRate" :showDiscription=true :like="like"></ImageModal>
     </a-modal>
   </div>
 </template>
@@ -39,31 +39,40 @@ export default {
     "a-icon": Icon,
     "a-modal": Modal,
     ImageModal
+  }, 
+  props: {
+    state: {
+      type: Number,
+      default: 0
+    }
   },
-  props: {},
   data() {
     return {
       imgsArr: [],
       group: 0,
       imgUrl: "",
       imgTitle: "",
-      imgStatus: "",
+      imgStatus: 2,
       modalOpen: false,
       ableRate: true,
-      discription: ""
+      discription: "",
+      like: 0
     };
   },
   methods: {
     async getData() {
       let imgs = await getImages()
+      console.log('imgs',imgs)
       this.imgsArr = this.imgsArr.concat(imgs)
       this.group++
     },
     openModal(event, { value }) {
-      this.imgUrl = value.src;
-      this.imgTitle = value.title;
-      this.discription = value.discription;
-      this.modalOpen = true;
+      console.log(value)
+      this.imgUrl = value.src
+      this.imgTitle = value.title
+      this.discription = value.discription
+      this.modalOpen = true
+      this.like = value.like
     },
   },
   created() {
@@ -98,7 +107,7 @@ export default {
         font-size: 16px;
         color: #5a5a5a;
         text-align: left;
-        white-space: nowrap;
+        white-space: normal;
       }
     }
   }

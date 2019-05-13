@@ -19,11 +19,12 @@ export const userLogin = async function (user) {
 }
 
 export const getImages = async function () {
+  console.log('get')
     let res = await http({
       url:config.IMAGE_URL,
       method: 'get',
     })
-    return res.data['images']
+    return res.data
 }
 
 export const getArticle = async function () {
