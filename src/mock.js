@@ -59,6 +59,7 @@ const postData = function () {
     let imagesData = []
     for (let i = 0; i < images.length; i++) {
         let image = {
+            id: i,
             src: images[i].src,
             like: Math.floor(Math.random() * (+1000 - +0)) + +0,
             discription: "o values. The returned value is no lower than min or it is the next integer greater than min if min isn’t an integer.It i ",

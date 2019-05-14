@@ -19,7 +19,6 @@ export const userLogin = async function (user) {
 }
 
 export const getImages = async function () {
-  console.log('get')
     let res = await http({
       url:config.IMAGE_URL,
       method: 'get',

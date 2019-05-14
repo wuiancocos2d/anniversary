@@ -55,10 +55,14 @@ export default {
 
       //like
       likeHover: false,
-      hasLike = false
       };
   },
   props: {
+    id: {
+      type: Number,
+      required: true,
+      default: 0
+    },
     status: {
       type: Number,
       required: true,
@@ -101,10 +105,9 @@ export default {
   methods: {
     handleLikeClick() {
         if(!this.hasLike) {
-          this.hasLike ++
-          this.hasLike = !this.hasLike
+          this.$emit("listenLikeEvent",this.id)
         }else {
-          this.hasLike = false
+          this.$message.warning("You aready like")
         }
     }
   }

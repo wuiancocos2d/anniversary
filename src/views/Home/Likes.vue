@@ -20,8 +20,18 @@
         </div>
       </div>
     </vue-waterfall-easy>
-    <a-modal :title="imgTitle" v-model="modalOpen" :footer="null" :centered=true :width="420">
-      <ImageModal :status="imgStatus" :imgUrl="imgUrl" :title="imgTitle" :ableRate="ableRate" :showDiscription=true :like="like"></ImageModal>
+    <a-modal :title="imgTitle" v-model="modalOpen" :footer="null" :centered="true" :width="420">
+      <ImageModal
+        :id="id"
+        :status="imgStatus"
+        :imgUrl="imgUrl"
+        :title="imgTitle"
+        :ableRate="ableRate"
+        :showDiscription="true"
+        :like="like"
+        :hasLike="hasLike"
+        v-on:listenLikeEvent="handleLike"
+      ></ImageModal>
     </a-modal>
   </div>
 </template>
@@ -39,7 +49,7 @@ export default {
     "a-icon": Icon,
     "a-modal": Modal,
     ImageModal
-  }, 
+  },
   props: {
     state: {
       type: Number,
@@ -48,6 +58,7 @@ export default {
   },
   data() {
     return {
+      id: 0,
       imgsArr: [],
       group: 0,
       imgUrl: "",
@@ -56,27 +67,32 @@ export default {
       modalOpen: false,
       ableRate: true,
       discription: "",
-      like: 0
+      like: 0,
+      hasLike: false
     };
   },
   methods: {
     async getData() {
-      let imgs = await getImages()
-      console.log('imgs',imgs)
-      this.imgsArr = this.imgsArr.concat(imgs)
-      this.group++
+      let imgs = await getImages();
+      this.imgsArr = this.imgsArr.concat(imgs);
+      this.group++;
     },
     openModal(event, { value }) {
-      console.log(value)
-      this.imgUrl = value.src
-      this.imgTitle = value.title
-      this.discription = value.discription
-      this.modalOpen = true
-      this.like = value.like
+      this.id = value.id;
+      this.imgUrl = value.src;
+      this.imgTitle = value.title;
+      this.discription = value.discription;
+      this.modalOpen = true;
+      this.like = value.like;
     },
-  },
+    handleLike: function(id){
+        this.hasLike = true
+        this.like++
+        console.log('like' + id)
+    }
+  }, 
   created() {
-    this.getData()
+    this.getData();
   }
 };
 </script>
