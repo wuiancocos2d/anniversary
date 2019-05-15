@@ -63,7 +63,7 @@ export default {
       group: 0,
       imgUrl: "",
       imgTitle: "",
-      imgStatus: 2,
+      imgStatus: 3,
       modalOpen: false,
       ableRate: true,
       discription: "",
