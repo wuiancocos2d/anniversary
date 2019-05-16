@@ -91,6 +91,14 @@ const userLogin = function () {
     }
 }
 
+// const imageUpload = function() {
+//     return {
+//         code: 200,
+//         message: "ok",
+//         data: "https://i.pinimg.com/564x/7b/b9/49/7bb94942a001c923611ebbf97e00b83d.jpg"
+//     }
+// }
+
 const article = function () {
     return {
         'title': '艺术是可以超越时代的，还是可以过时的？艺术和时代性的关系是什么？',
@@ -145,3 +153,4 @@ Mock.mock('/mock/', 'get', postData())
 Mock.mock('/api/login', 'post', userLogin())
 Mock.mock('/api/userInfo', 'post', userInfor())
 Mock.mock('/api/article', 'get', article())
+// Mock.mock('http://192.168.110.93:7777/resource/image','post',imageUpload())

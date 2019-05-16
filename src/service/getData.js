@@ -50,4 +50,20 @@ export const getImgModal = async function() {
     return res.data
 }
 
-export  const getUserInfo = function() {}
+export  const uploadImgData = async function(imgData) {
+  let res = await http({
+    url: config.IMGUPLOAD_URL + parseJsonToPostString(imgData),
+    method: 'post'
+  })
+  return res.data
+}
+
+
+function parseJsonToPostString(obj)  {
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+}

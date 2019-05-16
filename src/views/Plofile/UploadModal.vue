@@ -1,47 +1,147 @@
 <template>
-    <div class="upload-container">
-        <a-upload class="img-block" @click="handleUploadClick">
-            <a-icon class="plus"  type="plus" />
+  <div class="upload-container">
+    <a-form class="uploadForm" :layout="'horizontal'" :form="form" @submit="handleFormSubmit">
+      <a-form-item label="Pic">
+        <a-upload
+          class="img-block"
+          listType="picture-card"
+          :showUploadList="false"
+          action="http://192.168.110.93:7777/resource/image"
+          :beforeUpload="beforeUpload"
+          @change="handleImgChange"
+          :name="'image'"
+        >
+          <img class="uploadShow" v-if="imageUrl" :src="imageUrl" alt="avatar">
+          <div v-else>
+            <a-icon class="plus" type="plus"/>
             <p class="hint">Please upload you image here</p>
+          </div>
         </a-upload>
-    </div>
+      </a-form-item>
+      <a-form-item label="Title">
+        <a-input
+          placeholder="Give it a title~"
+          v-decorator="[
+                'title',
+                {rules: [{required: true,message: 'Please give a title'}]}
+            ]"
+        ></a-input>
+      </a-form-item>
+      <a-form-item label="Discription">
+        <a-textarea
+          class="discription"
+          placeholder="Would you like to Tell us what your Pic is about?"
+          :autosize="true"
+          v-decorator="[
+                'discription',
+                {rules: [{required: true,message: 'Please fill discription'},{max: 500,message: 'Oops,the discription is getting long ,try cutting it down'}]}
+          ]"
+        ></a-textarea>
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" html-type="submit">Submit</a-button>
+      </a-form-item>
+    </a-form>
+  </div>
 </template>
 <script>
-import {Icon, Upload} from 'ant-design-vue'
+import { Icon, Upload, Form, Input, Button } from "ant-design-vue"
+import {uploadImgData } from '../../service/getData.js'
 export default {
-    name: 'UploadModal',
-    components: {
-        "a-icon": Icon,
-        "a-upload": Upload
+  name: "UploadModal",
+  components: {
+    "a-icon": Icon,
+    "a-upload": Upload,
+    "a-form": Form,
+    "a-form-item": Form.Item,
+    "a-input": Input,
+    "a-textarea": Input.TextArea,
+    "a-button": Button
+  },
+  data() {
+    return {
+      imgLoading: false,
+      imageUrl: "",
+      form: this.$form.createForm(this)
+    };
+  },
+  methods: {
+    beforeUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      if (!isJPG) {
+        this.$message.error("You can only upload JPG file!");
+      }
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.$message.error("Image must smaller than 2MB!");
+      }
+      return isJPG && isLt2M;
     },
-    methods: {
-        handleUploadClick() {
-
+    handleImgChange(info) {
+      if (info.file.status === "uploading") {
+        this.loading = true;
+        return;
+      }
+      if (info.file.status === "done") {
+        const res = info.file.response;
+        if (res.code === 200) {
+          this.imageUrl =
+            "http://192.168.110.93:2222/static/images/" + res.data;
+        } else {
+          this.$message.error(
+            "Error code:" + res.code + "  message:" + res.data
+          );
         }
+      }
+    },
+    handleFormSubmit(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          return 
+        } else {
+          let formVl = values;
+          if (this.imageUrl.length > 0) {
+              formVl.resourceUrl = this.imageUrl
+              (async function(formVl){
+                const res= await uploadImgData(formVl)
+                console.log('res',res)
+              })(formVl)
+          }else {
+              this.$message.error('Please upload your Pictrue')
+          }
+        }
+      });
     }
-}
+  }
+};
 </script>
 <style lang="scss" scoped>
-    .upload-container {
-        width: 100%;
-        padding: 0 10px;
-        .img-block {
-            width: 100%;
-            height: 150px;
-            background-color: rgb(239, 239, 239);
-            text-align: center;
-            position: relative;
-            cursor: pointer;
-            .plus {
-                position: relative;
-                font-size: 28px;
-                line-height: 150px;
-            }
-            .hint {
-                position: absolute;
-                top: 20px;
-                left: 50px;
-            }
-        }
+.upload-container {
+  width: 100%;
+  padding: 0 10px;
+  .img-block {
+    display: block;
+
+    text-align: center;
+    cursor: pointer;
+
+    .plus {
+      margin-top: 28px;
+      padding-bottom: 20px;
+      position: relative;
+      font-size: 38px;
     }
+    .hint {
+      width: 262px;
+      top: 20px;
+      left: 50px;
+    }
+
+    .uploadShow {
+      width: 264px;
+      height: auto;
+    }
+  }
+}
 </style>
