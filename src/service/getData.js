@@ -51,12 +51,16 @@ export const getImgModal = async function() {
 }
 
 export  const uploadImgData = async function(imgData) {
+  parseJsonToPostString(imgData)
   let res = await http({
-    url: config.IMGUPLOAD_URL + parseJsonToPostString(imgData),
+    // url: config.USERUPLOAD_URL + parseJsonToPostString(imgData),
+    url: config.USERUPLOAD_URL,
     method: 'post'
   })
+  console.log('img upload',res)
   return res.data
 }
+
 
 
 function parseJsonToPostString(obj)  {

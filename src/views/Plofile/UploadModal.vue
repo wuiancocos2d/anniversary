@@ -39,14 +39,14 @@
         ></a-textarea>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit">Submit</a-button>
+        <a-button type="primary" html-type="submit" :loading="uploading">Submit</a-button>
       </a-form-item>
     </a-form>
   </div>
 </template>
 <script>
-import { Icon, Upload, Form, Input, Button } from "ant-design-vue"
-import {uploadImgData } from '../../service/getData.js'
+import { Icon, Upload, Form, Input, Button } from "ant-design-vue";
+import { uploadImgData } from "../../service/getData.js";
 export default {
   name: "UploadModal",
   components: {
@@ -62,7 +62,8 @@ export default {
     return {
       imgLoading: false,
       imageUrl: "",
-      form: this.$form.createForm(this)
+      form: this.$form.createForm(this),
+      uploading: false
     };
   },
   methods: {
@@ -85,8 +86,7 @@ export default {
       if (info.file.status === "done") {
         const res = info.file.response;
         if (res.code === 200) {
-          this.imageUrl =
-            "http://192.168.110.93:2222/static/images/" + res.data;
+          this.imageUrl = res.data;
         } else {
           this.$message.error(
             "Error code:" + res.code + "  message:" + res.data
@@ -96,19 +96,20 @@ export default {
     },
     handleFormSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          return 
+      this.form.validateFields(async (err, values) => {
+        if (err) {
+          console.log("err");
+          return;
         } else {
           let formVl = values;
           if (this.imageUrl.length > 0) {
-              formVl.resourceUrl = this.imageUrl
-              (async function(formVl){
-                const res= await uploadImgData(formVl)
-                console.log('res',res)
-              })(formVl)
-          }else {
-              this.$message.error('Please upload your Pictrue')
+            this.uploading = true;
+            formVl.resourceUrl = this.imageUrl;
+            const res = await uploadImgData(formVl);
+            this.uploading = false;
+            console.log("res", res);
+          } else {
+            this.$message.error("Please upload your Pictrue");
           }
         }
       });

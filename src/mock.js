@@ -1,3 +1,4 @@
+import config from './config/config'
 const Mock = require('mockjs')
 
 
@@ -91,13 +92,28 @@ const userLogin = function () {
     }
 }
 
-// const imageUpload = function() {
-//     return {
-//         code: 200,
-//         message: "ok",
-//         data: "https://i.pinimg.com/564x/7b/b9/49/7bb94942a001c923611ebbf97e00b83d.jpg"
-//     }
-// }
+const imageUpload = function () {
+
+    return {
+        code: 200,
+        message: "ok",
+        data: "https://i.pinimg.com/564x/7b/b9/49/7bb94942a001c923611ebbf97e00b83d.jpg"
+    }
+
+}
+
+const userUpload = function () {
+    setTimeout(() => {
+        return {
+            code: 200,
+            message: "ok",
+            data: {
+
+            }
+        }
+    }, 5000);
+
+}
 
 const article = function () {
     return {
@@ -153,4 +169,5 @@ Mock.mock('/mock/', 'get', postData())
 Mock.mock('/api/login', 'post', userLogin())
 Mock.mock('/api/userInfo', 'post', userInfor())
 Mock.mock('/api/article', 'get', article())
-// Mock.mock('http://192.168.110.93:7777/resource/image','post',imageUpload())
+Mock.mock('http://192.168.110.93:7777/resource/image', 'post', imageUpload())
+Mock.mock(config.USERUPLOAD_URL, 'post', userUpload())

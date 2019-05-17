@@ -7,5 +7,6 @@ export default {
     ARTICEL_URL: BASE_URL + 'api/article',
     AUTHORITYList_URL: BASE_URL+ 'api/authoList',
     IMGMODAL_URL:  BASE_URL+'api/imgModal',
-    IMGUPLOAD_URL:'http://192.168.110.93:7777/resource/submit?'
+    IMGUPLOAD_URL:'http://192.168.110.93:7777/resource/submit?',
+    USERUPLOAD_URL: 'http://192.168.110.93:7777/resource/submit?/*'
 }
