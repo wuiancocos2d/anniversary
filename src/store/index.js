@@ -13,7 +13,8 @@ const state = {
 		userName : '',
 		userId: null,
 		authority: false,
-    }
+		},
+		stage: 0
 }
 
 export default new Vuex.Store({

@@ -86,7 +86,9 @@ export default {
       if (info.file.status === "done") {
         const res = info.file.response;
         if (res.code === 200) {
+
           this.imageUrl = res.data;
+
         } else {
           this.$message.error(
             "Error code:" + res.code + "  message:" + res.data
@@ -103,11 +105,11 @@ export default {
         } else {
           let formVl = values;
           if (this.imageUrl.length > 0) {
-            this.uploading = true;
-            formVl.resourceUrl = this.imageUrl;
-            const res = await uploadImgData(formVl);
-            this.uploading = false;
-            console.log("res", res);
+            this.uploading = true
+            formVl.resourceUrl = this.imageUrl
+            const res = await uploadImgData(formVl)
+            this.uploading = false
+            this.$emit("user-upload-event",res.data.data)
           } else {
             this.$message.error("Please upload your Pictrue");
           }

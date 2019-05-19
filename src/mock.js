@@ -1,7 +1,9 @@
 import config from './config/config'
 const Mock = require('mockjs')
 
-
+Mock.setup({
+    timeout: '500-1000'
+})
 
 const postData = function () {
 
@@ -69,11 +71,7 @@ const postData = function () {
         }
         imagesData.push(image)
     }
-
-    console.log(imagesData)
     return imagesData
-
-
 }
 const userInfor = function () {
     return {
@@ -103,16 +101,15 @@ const imageUpload = function () {
 }
 
 const userUpload = function () {
-    setTimeout(() => {
-        return {
-            code: 200,
-            message: "ok",
-            data: {
-
-            }
+    return {
+        code: 200,
+        message: "ok",
+        data: {
+            imgTitle: 'Night',
+            imgUrl: 'https://i.pinimg.com/564x/26/39/3b/26393be923227bea1d6ba5109fc09976.jpg',
+            description: 'night picture '
         }
-    }, 5000);
-
+    }
 }
 
 const article = function () {

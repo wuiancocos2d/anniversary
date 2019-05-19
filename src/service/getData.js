@@ -57,8 +57,7 @@ export  const uploadImgData = async function(imgData) {
     url: config.USERUPLOAD_URL,
     method: 'post'
   })
-  console.log('img upload',res)
-  return res.data
+  return res
 }
 
 
