@@ -27,19 +27,30 @@
             ]"
         ></a-input>
       </a-form-item>
-      <a-form-item label="Discription">
+      <a-form-item label="description">
         <a-textarea
-          class="discription"
+          class="description"
           placeholder="Would you like to Tell us what your Pic is about?"
           :autosize="true"
           v-decorator="[
-                'discription',
-                {rules: [{required: true,message: 'Please fill discription'},{max: 500,message: 'Oops,the discription is getting long ,try cutting it down'}]}
+                'description',
+                {rules: [{required: true,message: 'Please fill description'},{max: 500,message: 'Oops,the description is getting long ,try cutting it down'}]}
           ]"
         ></a-textarea>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" :loading="uploading">Submit</a-button>
+        <a-button type="primary" html-type="submit" :loading="uploading" block>
+          <div v-if="pState==='upload'">Upload</div>
+          <div v-if="pState==='change'">Update</div>
+        </a-button>
+        <a-button
+          v-if="pState==='change'"
+          @click="handleDelet"
+          :loading="uploading"
+          type="danger"
+          class="deletBtn"
+          block
+        >Delet</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -60,11 +71,29 @@ export default {
   },
   data() {
     return {
+      id: null,
       imgLoading: false,
       imageUrl: "",
       form: this.$form.createForm(this),
       uploading: false
     };
+  },
+  props: {
+    imageModal: {
+      type: Object
+    },
+    pState: {
+      type: String
+    }
+  },
+  mounted() {
+    this.$nextTick(function() {
+      const imageModal = this.imageModal;
+      if (imageModal && imageModal.id !== undefined) {
+        this.form.setFieldsValue({ title: imageModal.title });
+        this.form.setFieldsValue({ description: imageModal.description });
+      }
+    });
   },
   methods: {
     beforeUpload(file) {
@@ -86,9 +115,7 @@ export default {
       if (info.file.status === "done") {
         const res = info.file.response;
         if (res.code === 200) {
-
           this.imageUrl = res.data;
-
         } else {
           this.$message.error(
             "Error code:" + res.code + "  message:" + res.data
@@ -105,17 +132,18 @@ export default {
         } else {
           let formVl = values;
           if (this.imageUrl.length > 0) {
-            this.uploading = true
-            formVl.resourceUrl = this.imageUrl
-            const res = await uploadImgData(formVl)
-            this.uploading = false
-            this.$emit("user-upload-event",res.data.data)
+            this.uploading = true;
+            formVl.resourceUrl = this.imageUrl;
+            const res = await uploadImgData(formVl);
+            this.uploading = false;
+            this.$emit("user-upload-event", res.data.data);
           } else {
             this.$message.error("Please upload your Pictrue");
           }
         }
       });
-    }
+    },
+    handleDelet() {}
   }
 };
 </script>
@@ -144,6 +172,10 @@ export default {
     .uploadShow {
       width: 264px;
       height: auto;
+    }
+    .deletBtn {
+        display: block;
+        margin-top: 10px;
     }
   }
 }
