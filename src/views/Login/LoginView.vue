@@ -1,24 +1,12 @@
 <template>
   <div class="login-container">
-    <a-row class="login-row">
-      <a-col
-        :xs="{span: 24}"
-        :sm="{span: 24}"
-        :md="{span: 12 }"
-        :lg="{span: 12}"
-        :xl="{span: 12}"
-        class="banner-col"
-      >
-        <BannerShow></BannerShow>
+    <a-row>
+      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+        <div class="banner">
+          <img class="banner" src="../../../public/imgs/banner1200_400.png" alt>
+        </div>
       </a-col>
-      <a-col
-        :xs="{span: 24}"
-        :sm="{span: 24}"
-        :md="{span: 12}"
-        :lg="{span: 12}"
-        :xl="{span: 12}"
-        class="login-col"
-      >
+      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <div class="loginFormContainer">
           <a-form
             id="components-form-demo-normal-login"
@@ -73,7 +61,6 @@
 import { Form, Button, Input, Icon, Checkbox, Row, Col } from "ant-design-vue";
 import { mapMutations } from "vuex";
 import { userLogin } from "../../service/getData.js";
-import BannerShow from "./BannerShow";
 export default {
   name: "login",
   data() {
@@ -92,8 +79,7 @@ export default {
     "a-icon": Icon,
     "a-checkbox": Checkbox,
     "a-row": Row,
-    "a-col": Col,
-    BannerShow
+    "a-col": Col
   },
   methods: {
     ...mapMutations(["RECORD_USERINFO"]),
@@ -125,7 +111,17 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
-  overflow-y: auto;
+  overflow: hidden;
+  .banner {
+    margin: 30px auto 0;
+    height: 240px;
+  }
+  @media only screen and (max-width: 600px) {
+  .banner {
+    margin: 30px auto 0;
+    height: 160px;
+  }
+}
   .loginFormContainer {
     position: relative;
     max-width: 350px;
@@ -147,6 +143,7 @@ export default {
     }
   }
 }
+
 </style>
 
 

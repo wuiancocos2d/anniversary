@@ -6,7 +6,7 @@
           <img src="../../../assets/logo-with20.svg" alt class="logoImg">
         </div>
       </a-col>
-      <a-col :xs="0" :sm="0" :md="18" :lg="19" :xl="19" :xxl="24">
+      <a-col :xs="0" :sm="0" :md="18" :lg="19" :xl="19" :xxl="20">
         <nav-menu :mode="'horizontal'"></nav-menu>
       </a-col>
     </a-row>
