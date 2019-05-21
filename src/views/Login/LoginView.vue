@@ -48,7 +48,7 @@
 </template>
 <script>
 import { Form, Button, Input, Icon, Row, Col } from "ant-design-vue";
-import {  mapActions } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "login",
   data() {
@@ -75,7 +75,7 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.login(values);
+          this.login(values)
         } else {
           this.$message.error("Form valid failed, fill neccessary ");
           return false;
@@ -90,6 +90,8 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   overflow: hidden;
   .banner {
     margin: 30px auto 0;

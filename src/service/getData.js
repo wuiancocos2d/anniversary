@@ -11,7 +11,7 @@ export const loadUserInfo= async function () {
 
 export const userLogin = async function (user) {
   let res = await http({
-    url: config.USER_LOGIN+parseJsonToPostString(user),
+    url: config.USER_LOGIN,
     method: 'post',
     data: user
   })

@@ -1,4 +1,4 @@
-import config from './config/config'
+import {devPath} from './config/config'
 const Mock = require('mockjs')
 
 Mock.setup({
@@ -84,9 +84,22 @@ const userInfor = function () {
 
 const userLogin = function () {
     return {
-        userId: 1,
-        userName: 'ian',
-        authority: 10
+        code: 200,
+        message: '',
+        data: {
+            "userNo": 4035,
+            "userNm": "Wu Yiyan,Ian",
+            "pwd": null,
+            "jobTitle": "Assistant IT Operation Maintenance Engineer",
+            "department": "General Affairs Department",
+            "location": "NX",
+            "division": "Information Technology",
+            "emailAddrs": "ian.wu@airmacau.com.mo",
+            "busnPhone": "8396 6691",
+            "updateDt": "2019-05-13T15:00:01.000+0000",
+            "birthDay": null,
+            "userStatus": null
+		}
     }
 }
 
@@ -162,9 +175,9 @@ const article = function () {
     }
 }
 
-Mock.mock('/mock/', 'get', postData())
-Mock.mock('/api/login', 'post', userLogin())
-Mock.mock('/api/userInfo', 'post', userInfor())
-Mock.mock('/api/article', 'get', article())
-Mock.mock('http://192.168.110.93:7777/resource/image', 'post', imageUpload())
-Mock.mock(config.USERUPLOAD_URL, 'post', userUpload())
+Mock.mock(devPath.IMAGE_URL ,'get', postData())
+Mock.mock(devPath.USER_LOGIN, 'post', userLogin())
+Mock.mock(devPath.LOAD_USER_INFO, 'post', userInfor())
+Mock.mock(devPath.ARTICEL_URL, 'get', article())
+Mock.mock(devPath.IMGUPLOAD_URL, 'post', imageUpload())
+Mock.mock(devPath.USERUPLOAD_URL, 'post', userUpload())
