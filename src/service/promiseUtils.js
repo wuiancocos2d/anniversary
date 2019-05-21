@@ -1,7 +1,7 @@
 export function getPromiseAction(p, commit, mutationType) {
     let promise = new Promise((resolve, reject)=> {
         p.then(res => {
-            if(res.code===1) {
+            if(res.code===200) {
                 commit(mutationType, res)
                 return resolve()
             }else {

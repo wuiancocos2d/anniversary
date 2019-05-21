@@ -9,6 +9,10 @@ export const mutations = {
     },
     [types.STAGE] (state, stage) {
         state.stage = stage
+    },
+    [types.USER_LOGIN] (state,{status,message}) {
+        state.loginStatus.status = status
+        state.loginStatus.message = message
     }
 }
 

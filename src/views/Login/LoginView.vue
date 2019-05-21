@@ -17,10 +17,10 @@
             <a-form-item>
               <a-input
                 v-decorator="[
-          'userName',
-          { rules: [{ required: true, message: 'Please input your username!' }] }
+          'staffNo',
+          { rules: [{ required: true, message: 'Please input your Staff number!(s:04035)' }] }
         ]"
-                placeholder="Username"
+                placeholder="StaffNo"
               >
                 <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
               </a-input>
@@ -28,27 +28,16 @@
             <a-form-item>
               <a-input
                 v-decorator="[
-          'password',
-          { rules: [{ required: true, message: 'Please input your Password!' }] }
+          'birthday',
+          { rules: [{ required: true, message: 'Please input your Birthday!(s:19901230)' }] }
         ]"
                 type="password"
-                placeholder="Password"
+                placeholder="Birthday"
               >
                 <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
               </a-input>
             </a-form-item>
             <a-form-item>
-              <a-checkbox
-                class="login-form-remember"
-                v-decorator="[
-          'remember',
-          {
-            valuePropName: 'checked',
-            initialValue: true,
-          }
-        ]"
-              >Remember me</a-checkbox>
-              <a class="login-form-forgot" href>Forgot password</a>
               <a-button type="primary" html-type="submit" class="login-form-button">Log in</a-button>
             </a-form-item>
           </a-form>
@@ -58,9 +47,8 @@
   </div>
 </template>
 <script>
-import { Form, Button, Input, Icon, Checkbox, Row, Col } from "ant-design-vue";
-import { mapMutations } from "vuex";
-import { userLogin } from "../../service/getData.js";
+import { Form, Button, Input, Icon, Row, Col } from "ant-design-vue";
+import {  mapActions } from "vuex";
 export default {
   name: "login",
   data() {
@@ -77,31 +65,22 @@ export default {
     "a-form": Form,
     "a-form-item": Form.Item,
     "a-icon": Icon,
-    "a-checkbox": Checkbox,
     "a-row": Row,
     "a-col": Col
   },
+
   methods: {
-    ...mapMutations(["RECORD_USERINFO"]),
+    ...mapActions(["login"]),
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
           this.login(values);
         } else {
-          this.$message.error("表单验证失败");
+          this.$message.error("Form valid failed, fill neccessary ");
           return false;
         }
       });
-    },
-    async login(user) {
-      this.userInfo = await userLogin(user);
-      if (!this.userInfo.userId) {
-        this.$message.error(this.userInfo.message);
-      } else {
-        this.RECORD_USERINFO(this.userInfo);
-        // this.$router.go(-1);
-      }
     }
   }
 };
@@ -117,11 +96,11 @@ export default {
     height: 240px;
   }
   @media only screen and (max-width: 600px) {
-  .banner {
-    margin: 30px auto 0;
-    height: 160px;
+    .banner {
+      margin: 30px auto 0;
+      height: 160px;
+    }
   }
-}
   .loginFormContainer {
     position: relative;
     max-width: 350px;
@@ -143,7 +122,6 @@ export default {
     }
   }
 }
-
 </style>
 
 

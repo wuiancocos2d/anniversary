@@ -10,11 +10,24 @@ Vue.use(Vuex)
 
 const state = {
     userInfo: {
-		userName : '',
-		userId: null,
-		authority: false,
+			"userNo": 0,
+			"userNm": "",
+			"pwd": null,
+			"jobTitle": "",
+			"department": "",
+			"location": "",
+			"division": "",
+			"emailAddrs": "",
+			"busnPhone": "",
+			"updateDt": "",
+			"birthDay": null,
+			"userStatus": null
 		},
-		stage: 0
+		stage: 0,
+		loginStatus: {
+			status: false,
+			message: ''
+		}
 }
 
 export default new Vuex.Store({
