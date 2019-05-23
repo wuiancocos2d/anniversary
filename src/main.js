@@ -6,6 +6,7 @@ import store from './store/'
 import {Message, Modal} from 'ant-design-vue'
 import {setCookie,getCookie,delCookie} from './config/mUtils'
 import "./mock" 
+import axios from 'axios'
 Vue.config.productionTip = false
 
 Vue.prototype.$message = Message
@@ -16,6 +17,8 @@ Vue.prototype.$modal = Modal
 Vue.prototype.setCookie = setCookie
 Vue.prototype.getCookie = getCookie
 Vue.prototype.delCookie = delCookie
+
+Vue.prototype.$axios = axios
 
 new Vue({
   router,

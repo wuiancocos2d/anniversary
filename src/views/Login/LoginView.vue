@@ -47,9 +47,9 @@
   </div>
 </template>
 <script>
-import { Form, Button, Input, Icon, Row, Col } from "ant-design-vue";
-import { mapMutations } from "vuex";
-import { userLogin } from "../../service/getData";
+import { Form, Button, Input, Icon, Row, Col } from "ant-design-vue"
+import { mapMutations } from "vuex"
+import { userLogin } from "../../service/getData"
 export default {
   name: "login",
   data() {
@@ -71,7 +71,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["RECORD_USERINFO"]),
+    ...mapMutations(["RECORD_USERID"]),
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
@@ -89,9 +89,7 @@ export default {
         res => {
           if (res.code === 200) {
             setTimeout(loadingMessage, 0);
-            this.RECORD_USERINFO(res.data)
-            let expireDays = 1000 * 60 * 1;
-            this.setCookie('loginUser',JSON.stringify(res.data), expireDays);
+            this.RECORD_USERID(res.data.userNo)
             this.$message.success('Welcome to AirMacau 25th anniverary, Redircting...',2).then(
               ()=>{
                 this.$router.push('/')

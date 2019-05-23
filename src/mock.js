@@ -115,7 +115,7 @@ const imageUpload = function () {
 
 const userUpload = function () {
     return {
-        code: 200,
+        code: 10000,
         message: "ok",
         data: {
             imgTitle: 'Night',

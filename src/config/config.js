@@ -9,7 +9,8 @@ export const devPath = {
     AUTHORITYList_URL: BASE_URL+ 'api/authoList',
     IMGMODAL_URL:  BASE_URL+'api/imgModal',
     IMGUPLOAD_URL:'http://192.168.110.93:7777/resource/submit?',
-    USERUPLOAD_URL: 'http://192.168.110.93:7777/resource/submit?/*'
+    USERUPLOAD_URL: 'http://192.168.110.93:7777/resource/submit?/*',
+    LOAD_USER_BY_ID: BASE_URL+'api/getUserById'
 }
 
 export const production = {
@@ -20,7 +21,8 @@ export const production = {
     AUTHORITYList_URL: BASE_URL+ 'api/authoList',
     IMGMODAL_URL:  BASE_URL+'api/imgModal',
     IMGUPLOAD_URL:'http://192.168.110.93:7777/resource/submit?',
-    USERUPLOAD_URL: 'http://192.168.110.93:7777/resource/submit?/*'
+    USERUPLOAD_URL: 'http://192.168.110.93:7777/resource/submit?/*',
+    LOAD_USER_BY_ID: BASE_URL+'api/getUserById'
 }
 
 export default devPath

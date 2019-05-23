@@ -1,5 +1,7 @@
-export const RECORD_USERINFO = 'RECORD_USERINFO'
+export const RECORD_USERID = 'RECORD_USERID'
 export const GET_USERINFO = 'GET_USERINFO'
 export const OUT_LOGIN = 'OUT_LOGIN'
 export const USER_LOGIN = 'USER_LOGIN'
 export const STAGE = 'STAGE'
+export const USER_LOGOUT = 'USER_LOGOUT'
+export const RECORD_USERINFO = 'RECORD_USERINFO'

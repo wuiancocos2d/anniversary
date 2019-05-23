@@ -1,12 +1,24 @@
 import http from '../config/http'
 import config from '../config/config'
+import {getStore} from '../config/mUtils'
 
 export const loadUserInfo= async function () {
     let res = await http({
       url: config.LOAD_USER_INFO,
-      method: 'post'
+      method: 'post',
+      data: {userId: getStore('userId')}
     })
     return res.data
+}
+
+export const loadUserInfoById = async function() {
+  const userId = getStore('userId')
+  let res = await http({
+    url: config.LOAD_USER_BY_ID,
+    method: 'post',
+    data: {'userNu': userId}
+  })
+  return res.data
 }
 
 export const userLogin = async function (user) {

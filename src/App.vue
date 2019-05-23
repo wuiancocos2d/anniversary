@@ -6,7 +6,7 @@
       </a-layout-header>
       <a-layout :style="{height: layoutHeight}">
         <a-layout-content :style="{backgroundColor: contentBk,height:layoutHeight}">
-          <router-view />
+          <router-view/>
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -14,9 +14,8 @@
 </template>
 
 <script>
-import VHeader from "./components/common/Header/Header";
-import { Layout} from "ant-design-vue";
-
+import VHeader from "./components/common/Header/Header"
+import { Layout } from "ant-design-vue"
 export default {
   data() {
     return {
@@ -29,6 +28,23 @@ export default {
     "a-layout": Layout,
     "a-layout-header": Layout.Header,
     "a-layout-content": Layout.Content
+  },
+  methods: {
+    valideUser() {
+
+    },
+
+  },
+  created: function () {
+    this.$axios.interceptors.response.use(function (response) {
+    if(response && response.data && response.data.code === 10000) {
+      this.store.dispatch('logout')
+      this.router.push('/login')
+    }else return response;
+  }, function (error) {
+    // Do something with response error
+    return Promise.reject(error);
+  });
   }
 };
 </script>
@@ -57,14 +73,13 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
   padding: 0 5px;
-  
 }
 #header {
   background: #fff;
   position: relative;
   z-index: 10;
   max-width: 100%;
-  box-shadow: 0 1px 3px rgba(26,26,26,.1);
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
 }
 .waterfallContainer {
   height: 100%;
