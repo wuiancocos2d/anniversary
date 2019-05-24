@@ -58,7 +58,7 @@
 <script>
 import { Icon, Upload, Form, Input, Button } from "ant-design-vue";
 import { uploadImgData } from "../../service/getData.js";
-import config from '../../config/config'
+import config from "../../config/config";
 export default {
   name: "UploadModal",
   components: {
@@ -134,14 +134,15 @@ export default {
         } else {
           let formVl = values;
           if (this.imageUrl.length > 0) {
-            this.uploading = true
-            formVl.resourceUrl = this.imageUrl
-            const res = await uploadImgData(formVl)
-            this.uploading = false
-            console.log('res',res)
-            this.$emit("user-upload-event", res.data.data);
+            this.uploading = true;
+            formVl.resourceUrl = this.imageUrl;
+            const res = await uploadImgData(formVl);
+            this.uploading = false;
+            if (res.data) {
+              this.$emit("user-upload-event", res.data.data)
+            }
           } else {
-            this.$message.error("Please upload your Pictrue");
+            this.$message.error("Please upload your Pictrue")
           }
         }
       });
@@ -177,8 +178,8 @@ export default {
       height: auto;
     }
     .deletBtn {
-        display: block;
-        margin-top: 10px;
+      display: block;
+      margin-top: 10px;
     }
   }
 }

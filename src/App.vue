@@ -14,8 +14,10 @@
 </template>
 
 <script>
-import VHeader from "./components/common/Header/Header"
-import { Layout } from "ant-design-vue"
+import VHeader from "./components/common/Header/Header";
+import { Layout } from "ant-design-vue";
+import { mapActions } from "vuex";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -30,21 +32,37 @@ export default {
     "a-layout-content": Layout.Content
   },
   methods: {
-    valideUser() {
-
-    },
-
+    ...mapActions(["getUserInfo"]),
+    getUser: function() {
+      this.getUserInfo();
+    }
   },
-  created: function () {
-    this.$axios.interceptors.response.use(function (response) {
-    if(response && response.data && response.data.code === 10000) {
-      this.store.dispatch('logout')
-      this.router.push('/login')
-    }else return response;
-  }, function (error) {
-    // Do something with response error
-    return Promise.reject(error);
-  });
+  created: function() {
+    axios.interceptors.response.use(
+      response => {
+        if (response && response.data && response.data.code === 10000) {
+          const h = this.$createElement;
+          const that = this
+          this.$info({
+            title: "This is a notification message",
+            content: h("div", {}, [
+              h("p", "Login overtime, please login again"),
+              h("p", "登陆超时，请重新登陆")
+            ]),
+            onOk() {
+              that.$store.dispatch("logout");
+            }
+          });
+        } else {
+          return response;
+        }
+      },
+      function(error) {
+        // Do something with response error
+        return Promise.reject(error);
+      }
+    );
+    this.getUser();
   }
 };
 </script>

@@ -71,7 +71,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["RECORD_USERID"]),
+    ...mapMutations(["RECORD_USERID","RECORD_USERINFO"]),
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
@@ -90,6 +90,7 @@ export default {
           if (res.code === 200) {
             setTimeout(loadingMessage, 0);
             this.RECORD_USERID(res.data.userNo)
+            this.RECORD_USERINFO(res.data)
             this.$message.success('Welcome to AirMacau 25th anniverary, Redircting...',2).then(
               ()=>{
                 this.$router.push('/')

@@ -75,11 +75,44 @@ const postData = function () {
 }
 const userInfor = function () {
     return {
-        userId: 1,
-        userName: 'ian',
-        authority: 10,
-        code: 1
-    }
+        "code": 200,
+        "message": "OK",
+        "data": {
+          "role": [
+            {
+              "id": 1,
+              "roleName": "approval",
+              "description": "图片审批"
+            },
+            {
+              "id": 2,
+              "roleName": "score",
+              "description": "打分"
+            }
+          ],
+          "stage": {
+            "stage3": 1564502400000,
+            "stage2": 1563638400000,
+            "stage5": 1566403200000,
+            "stage4": 1565020800000,
+            "stage1": 1563120000000
+          },
+          "user": {
+            "userNo": 4035,
+            "userNm": "Wu Yiyan,Ian",
+            "pwd": null,
+            "jobTitle": "Assistant IT Operation Maintenance Engineer",
+            "department": "General Affairs Department",
+            "location": "NX",
+            "division": "Information Technology",
+            "emailAddrs": "ian.wu@airmacau.com.mo",
+            "busnPhone": "8396 6691",
+            "updateDt": "2019-05-13T15:00:01.000+0000",
+            "birthDay": null,
+            "userStatus": null
+          }
+        }
+      }
 }
 
 const userLogin = function () {

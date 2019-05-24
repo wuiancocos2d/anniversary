@@ -20,6 +20,7 @@ export default async function http(options) {
     .then((response) => {
       return response
     }).catch((error) => {
+      console.log('error',error)
       return error
     })
 }

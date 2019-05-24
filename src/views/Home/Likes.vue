@@ -63,7 +63,7 @@ export default {
       group: 0,
       imgUrl: "",
       imgTitle: "",
-      imgStatus: 1,
+      imgStatus: 3,
       modalOpen: false,
       ableRate: true,
       discription: "",
@@ -86,7 +86,6 @@ export default {
       this.like = value.like;
     },
     handleLike: function(id){
-      console.log('id',id)
         this.hasLike = true
         this.like++
     }

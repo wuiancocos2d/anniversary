@@ -1,40 +1,56 @@
 <template>
   <a-menu theme="light" :mode="mode" class="nav-header right">
-    <a-menu-item class="nav-item">
+    <a-menu-item key="home" class="nav-item">
       <router-link to="/">Home</router-link>
     </a-menu-item>
-    <a-menu-item class="nav-item">
-      <router-link :to="userInfo.userNm? '/plofile':'/login'">
-        <span v-if="userInfo.userNm">{{userInfo.userNm}}</span>
-        <span v-else>Login</span>
-      </router-link>
+    <a-menu-item v-if="userInfo.userNm" class="nav-item">
+      <router-link to="/Plofile">Plofile</router-link>
+    </a-menu-item>
+    <a-menu-item v-if="userInfo.userNm" class="nav-item">
+      <a class="nav-link" @click="userLogout">Logout</a>
+    </a-menu-item>
+    <a-menu-item  class="nav-item" v-else>
+      <router-link to="/login">Login</router-link>
     </a-menu-item>
   </a-menu>
 </template>
 <script>
-import { Menu } from "ant-design-vue"
-import { mapState } from "vuex";
+import { Menu } from "ant-design-vue";
+import { mapState,mapActions } from "vuex";
 export default {
   name: "Navigation",
-    components: {
+  components: {
     "a-menu": Menu,
-    "a-menu-item": Menu.Item,
+    "a-menu-item": Menu.Item
+    // "a-sub-menu": Menu.SubMenu
+  },
+  data() {
+    return {
+      current: ["home"]
+    };
   },
   props: {
-      mode: String
+    mode: [String]
   },
   computed: {
-    ...mapState(["userInfo"])
+    ...mapState(['userInfo'])
   },
   methods: {
-
+    ...mapActions(["logout"]),
+    userLogout(event) {
+      event.preventDefault()
+      this.logout()
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
- .nav-item {
+.nav-item {
+  line-height: 60px;
+  height: 100%;
+  .nav-link {
     line-height: 60px;
-    height: 100%;
   }
+}
 </style>
 
