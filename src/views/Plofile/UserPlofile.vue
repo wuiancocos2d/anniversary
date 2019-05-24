@@ -4,7 +4,7 @@
       <a-col :span="20" :offset="2">
         <div class="user-infor">
           <div class="user-name">
-            <p>{{user.name}}</p>
+            <p>{{userInfo.userNm}}</p>
           </div>
         </div>
         <div class="uploadBlock">
@@ -17,7 +17,8 @@
   </div>
 </template>
 <script>
-import { Icon, Row, Col, Modal, Card } from "ant-design-vue";
+import { Icon, Row, Col } from "ant-design-vue"
+import {mapState} from 'vuex'
 export default {
   name: "UserPlofile",
   components: {
@@ -25,11 +26,8 @@ export default {
     "a-row": Row,
     "a-col": Col
   },
-  props: {
-    user: {
-      type: Object,
-      required: true
-    }
+  computed: {
+    ...mapState(['userInfo'])
   }
 };
 </script>

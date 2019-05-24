@@ -1,19 +1,6 @@
 <template>
   <div class="plofile-container">
-    <a-row>
-      <a-col :span="20" :offset="2">
-        <div class="user-infor">
-          <div class="user-name">
-            <p>{{user.name}}</p>
-          </div>
-        </div>
-        <div class="uploadBlock">
-          <button @click="handleUploadBtn">
-            <a-icon type="plus"/>Click To Upload
-          </button>
-        </div>
-      </a-col>
-    </a-row>
+    <UserPlofile></UserPlofile>
     <a-row class="imgRow">
       <a-col v-for="item in userUpload" :key="item.id" :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
         <a-card hoverable @click="handleCardClick(item)">
@@ -37,15 +24,16 @@
   </div>
 </template>
 <script>
-import { Icon, Row, Col, Modal, Card } from "ant-design-vue";
-import UploadModal from "./UploadModal";
+import {  Row, Col, Modal, Card } from "ant-design-vue";
+import UploadModal from "./UploadModal"
+import UserPlofile from './UserPlofile'
 export default {
   name: "Plofile",
   components: {
-    "a-icon": Icon,
     "a-row": Row,
     "a-col": Col,
     UploadModal,
+    UserPlofile,
     "a-modal": Modal,
     "a-card": Card,
     "a-card-meta": Card.Meta

@@ -9,14 +9,14 @@
     <a-menu-item v-if="userInfo.userNm" class="nav-item">
       <a class="nav-link" @click="userLogout">Logout</a>
     </a-menu-item>
-    <a-menu-item  class="nav-item" v-else>
+    <a-menu-item class="nav-item" v-else>
       <router-link to="/login">Login</router-link>
     </a-menu-item>
   </a-menu>
 </template>
 <script>
 import { Menu } from "ant-design-vue";
-import { mapState,mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Navigation",
   components: {
@@ -33,13 +33,22 @@ export default {
     mode: [String]
   },
   computed: {
-    ...mapState(['userInfo'])
+    ...mapState(["userInfo"])
   },
   methods: {
     ...mapActions(["logout"]),
     userLogout(event) {
-      event.preventDefault()
-      this.logout()
+      event.preventDefault();
+      const that = this
+      this.$modal.confirm({
+        title: "Are you sure to logout?",
+        onOk() {
+          that.logout();
+        },
+        onCancel() {
+          return
+        }
+      })
     }
   }
 };
