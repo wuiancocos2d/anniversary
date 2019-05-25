@@ -1,0 +1,146 @@
+<template>
+  <div class="userPlofile">
+    <div class="user-infor">
+      <div class="user-name">
+        <a-card title="User Information" class="infoCard">
+          <a-row>
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+              <p>
+                User Name:
+                <span v-if="userInfo.user" class="userName">{{userInfo.user.userNm}}</span>
+              </p>
+              <p>
+                Department:
+                <span  v-if="userInfo.user">{{userInfo.user.department}}</span>
+              </p>
+              <p>
+                Division:
+                <span  v-if="userInfo.user">{{userInfo.user.division}}</span>
+              </p>
+              <p>
+                Email:
+                <span  v-if="userInfo.user">{{userInfo.user.emailAddrs}}</span>
+              </p>
+            </a-col>
+            <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+              <div class="thumbsGrp">
+                <a-row>
+                  <a-col span="12">
+                    <div class="fun-btn-item heart-item">
+                      <a-badge class="icon heart-icon-block" :count="5" :offset="[-10,20]">
+                        <a-icon class="heart" type="heart"/>
+                      </a-badge>
+                      <div class="description">
+                        <h3>Like</h3>
+                      </div>
+                    </div>
+                  </a-col>
+                  <a-col span="12">
+                    <div class="fun-btn-item">
+                      <div class="icon add" @click="handleUploadBtn">
+                        <a-icon
+                          class="addBtnIcon"
+                          theme="filled"
+                          fill="'#fafafa'"
+                          type="plus-circle"
+                        />
+                        <h2 class="hint">Upload</h2>
+                      </div>
+                    </div>
+                  </a-col>
+                </a-row>
+              </div>
+            </a-col>
+          </a-row>
+        </a-card>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import { Icon, Row, Col, Card, Badge } from "ant-design-vue";
+import { mapState } from "vuex";
+export default {
+  name: "UserProfile",
+  components: {
+    "a-icon": Icon,
+    "a-row": Row,
+    "a-col": Col,
+    "a-card": Card,
+    "a-badge": Badge
+  },
+  data() {
+    return {
+      iconAddStyle: {}
+    };
+  },
+  computed: {
+    ...mapState(["userInfo"])
+  },
+  methods: {
+    handleUploadBtn: function() {
+      this.$emit("listenOpenUploadModal");
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.userPlofile {
+  .infoCard {
+    p {
+      line-height: 18px;
+      font-size: 15px;
+    }
+    span {
+      padding: 0 15px;
+      font-weight: 500;
+      &.userName {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+    }
+  }
+  .fun-btn-item {
+    padding: 0 15px;
+    .icon {
+      &.add {
+        display: block;
+        cursor: pointer;
+        background: rgb(68, 73, 194);
+        background: linear-gradient(
+          90deg,
+          rgba(68, 73, 194, 1) 44%,
+          rgba(66, 125, 215, 1) 100%
+        );
+        text-align: center;
+        .addBtnIcon {
+          cursor: pointer;
+          line-height: 95px;
+          font-size: 45px;
+          color: #fafafa;
+          text-align: center;
+        }
+        .hint {
+          color: #fafafa;
+        }
+      }
+
+      &.heart-icon-block {
+        text-align: center;
+        .heart {
+          display: block;
+          line-height: 95px;
+          font-size: 45px;
+        }
+        .description {
+          text-align: center;
+        }
+      }
+    }
+    &.heart-item {
+      text-align: center;
+    }
+  }
+}
+</style>

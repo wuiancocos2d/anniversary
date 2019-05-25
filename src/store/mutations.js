@@ -23,7 +23,11 @@ export const mutations = {
         removeStore('userId')
         state.loginStatus.status = false
         state.userInfo = {}
+    },
+    [types.USER_UPLOAD] (state,resourceObj) {
+        state.userInfo.resource.push(resourceObj)
     }
+
 }
 
 export default mutations

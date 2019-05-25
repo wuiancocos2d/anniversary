@@ -5,7 +5,7 @@
         <VHeader></VHeader>
       </a-layout-header>
       <a-layout :style="{height: layoutHeight}">
-        <a-layout-content :style="{backgroundColor: contentBk,height:layoutHeight}">
+        <a-layout-content :style="{backgroundColor: contentBk,height:layoutHeight,overflow:'auto'}">
           <router-view/>
         </a-layout-content>
       </a-layout>
@@ -34,7 +34,7 @@ export default {
   methods: {
     ...mapActions(["getUserInfo"]),
     getUser: function() {
-      this.getUserInfo();
+      this.getUserInfo()
     }
   },
   created: function() {

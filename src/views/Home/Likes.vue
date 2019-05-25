@@ -85,7 +85,7 @@ export default {
       this.modalOpen = true;
       this.like = value.like;
     },
-    handleLike: function(id){
+    handleLike: function(){
         this.hasLike = true
         this.like++
     }

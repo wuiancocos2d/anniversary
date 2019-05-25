@@ -63,22 +63,22 @@ export const getImgModal = async function() {
 }
 
 export  const uploadImgData = async function(imgData) {
-  parseJsonToPostString(imgData)
   let res = await http({
     // url: config.USERUPLOAD_URL + parseJsonToPostString(imgData),
     url: config.USERUPLOAD_URL,
+    data: imgData,
     method: 'post'
   })
-  return res
+  return res.data
 }
 
 
 
-function parseJsonToPostString(obj)  {
-  var str = [];
-  for (var p in obj)
-    if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-    }
-  return str.join("&");
-}
+// function parseJsonToPostString(obj)  {
+//   var str = [];
+//   for (var p in obj)
+//     if (obj.hasOwnProperty(p)) {
+//       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+//     }
+//   return str.join("&");
+// }

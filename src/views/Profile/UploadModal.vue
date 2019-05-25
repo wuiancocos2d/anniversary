@@ -11,7 +11,7 @@
           @change="handleImgChange"
           :name="'image'"
         >
-          <img class="uploadShow" v-if="imageUrl" :src="imageUrl" alt="avatar">
+          <img class="uploadShow" v-if="imageModal" :src="imageModal.resourceUrl" alt="avatar">
           <div v-else>
             <a-icon class="plus" type="plus"/>
             <p class="hint">Please upload you image here</p>
@@ -22,29 +22,29 @@
         <a-input
           placeholder="Give it a title~"
           v-decorator="[
-                'title',
+                'resourceTitle',
                 {rules: [{required: true,message: 'Please give a title'}]}
             ]"
         ></a-input>
       </a-form-item>
-      <a-form-item label="description">
+      <a-form-item label="Description">
         <a-textarea
           class="description"
           placeholder="Would you like to Tell us what your Pic is about?"
           :autosize="true"
           v-decorator="[
-                'description',
-                {rules: [{required: true,message: 'Please fill description'},{max: 500,message: 'Oops,the description is getting long ,try cutting it down'}]}
+                'resourceContent',
+                {rules: [{required: true,message: 'Please fill some description'},{max: 500,message: 'Oops,the description is getting long ,try cutting it down'}]}
           ]"
         ></a-textarea>
       </a-form-item>
       <a-form-item>
         <a-button type="primary" html-type="submit" :loading="uploading" block>
-          <div v-if="pState==='upload'">Upload</div>
-          <div v-if="pState==='change'">Update</div>
+          <div v-if="imageModal == undefined">Upload</div>
+          <div v-if="imageModal">Update</div>
         </a-button>
         <a-button
-          v-if="pState==='change'"
+          v-if="imageModal"
           @click="handleDelet"
           :loading="uploading"
           type="danger"
@@ -74,7 +74,6 @@ export default {
     return {
       id: null,
       imgLoading: false,
-      imageUrl: "",
       form: this.$form.createForm(this),
       uploading: false,
       imgaeUploadUrl: config.IMGUPLOAD_URL
@@ -83,29 +82,28 @@ export default {
   props: {
     imageModal: {
       type: Object
-    },
-    pState: {
-      type: String
     }
   },
   mounted() {
     this.$nextTick(function() {
       const imageModal = this.imageModal;
       if (imageModal && imageModal.id !== undefined) {
-        this.form.setFieldsValue({ title: imageModal.title });
-        this.form.setFieldsValue({ description: imageModal.description });
+        this.form.setFieldsValue({ resourceTitle: imageModal.resourceTitle });
+        this.form.setFieldsValue({
+          resourceContent: imageModal.resourceContent
+        });
       }
     });
   },
   methods: {
     beforeUpload(file) {
-      const isJPG = file.type === "image/jpeg";
+      const isJPG = file.type === "image/jpeg" || file.type === "png";
       if (!isJPG) {
-        this.$message.error("You can only upload JPG file!");
+        this.$message.error("You can only upload JPG/PNG file!");
       }
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      const isLt2M = file.size / 1024 / 1024 < 5;
       if (!isLt2M) {
-        this.$message.error("Image must smaller than 2MB!");
+        this.$message.error("Image must smaller than 5MB!");
       }
       return isJPG && isLt2M;
     },
@@ -120,7 +118,7 @@ export default {
           this.imageUrl = res.data;
         } else {
           this.$message.error(
-            "Error code:" + res.code + "  message:" + res.data
+            "Error code:" + res.code + "  message:" + res.message
           );
         }
       }
@@ -129,7 +127,7 @@ export default {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (err) {
-          console.log("err");
+          console.log("err", err);
           return;
         } else {
           let formVl = values;
@@ -138,15 +136,45 @@ export default {
             formVl.resourceUrl = this.imageUrl;
             const res = await uploadImgData(formVl);
             this.uploading = false;
-            if (res.data) {
-              this.$emit("user-upload-event", res.data.data)
+            if (res.code === 200) {
+              formVl.id = res.data;
+              this.$emit("user-upload-event", formVl);
+            } else {
+              this.$message.error(res);
             }
           } else {
-            this.$message.error("Please upload your Pictrue")
+            this.$message.error("Please upload your Pictrue");
           }
         }
       });
     },
+
+    handleUpdate(e) {
+      e.preventDefault();
+      this.form.validateFields(async (err, values) => {
+        if (err) {
+          console.log("err", err);
+          return;
+        } else {
+          let formVl = values;
+          if (this.imageUrl.length > 0) {
+            this.uploading = true;
+            formVl.resourceUrl = this.imageUrl;
+            const res = await uploadImgData(formVl);
+            this.uploading = false;
+            if (res.code === 200) {
+              formVl.id = res.data;
+              this.$emit("user-upload-event", formVl);
+            } else {
+              this.$message.error(res);
+            }
+          } else {
+            this.$message.error("Please upload your Pictrue");
+          }
+        }
+      });
+    },
+
     handleDelet() {}
   }
 };

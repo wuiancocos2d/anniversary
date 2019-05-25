@@ -3,10 +3,10 @@
     <a-menu-item key="home" class="nav-item">
       <router-link to="/">Home</router-link>
     </a-menu-item>
-    <a-menu-item v-if="userInfo.userNm" class="nav-item">
-      <router-link to="/Plofile">Plofile</router-link>
+    <a-menu-item v-if="userInfo.user" class="nav-item">
+      <router-link to="/Profile">Plofile</router-link>
     </a-menu-item>
-    <a-menu-item v-if="userInfo.userNm" class="nav-item">
+    <a-menu-item v-if="userInfo.user" class="nav-item">
       <a class="nav-link" @click="userLogout">Logout</a>
     </a-menu-item>
     <a-menu-item class="nav-item" v-else>

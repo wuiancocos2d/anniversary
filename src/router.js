@@ -30,12 +30,12 @@ export const router = new Router({
       component: () => import(/* webpackChunkName: "login" */ './views/Login/LoginView.vue')
     },
     {
-      path: '/plofile',
-      name: 'plofile',
+      path: '/Profile',
+      name: 'Profile',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "plofile" */ './views/Plofile/Plofile.vue')
+      component: () => import(/* webpackChunkName: "plofile" */ './views/Profile/Profile.vue')
     },
 
     {
@@ -70,3 +70,4 @@ router.beforeEach((to,from, next)=> {
 
   next()
 })
+

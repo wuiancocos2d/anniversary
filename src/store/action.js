@@ -10,7 +10,7 @@ export default {
             res => {
                 if (res !== undefined && res.code === 200) {
                     commit(types.USER_LOGIN, {status:true,message:null})
-                    commit(types.RECORD_USERINFO,res.data.user)
+                    commit(types.RECORD_USERINFO,res.data)
                 }
             },
             error => {
