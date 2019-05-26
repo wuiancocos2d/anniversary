@@ -63,8 +63,12 @@ export default router
 router.beforeEach((to,from, next)=> {
   const publicPages = ['/login']
   const authRequired = !publicPages.includes(to.path)
-  const loggedIn = getStore('userId')
-  if(authRequired && !loggedIn) {
+  const userId = getStore('userId')
+  let isLogin = false
+  if(!(userId === 'undefined' || userId === null || userId === undefined)) {
+    isLogin = true
+  } 
+  if(authRequired && !isLogin) {
     return next('/login')
   }
 

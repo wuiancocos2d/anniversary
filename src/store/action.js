@@ -22,7 +22,6 @@ export default {
     async login({ commit }, user) {
         return userLogin(user).then(
             res => {
-                console.log(res.data)
                 if (res !== undefined && res.code === 200) {
                     commit(types.USER_LOGIN, {status:true,message:null})
                     commit(types.RECORD_USERINFO,res.data)

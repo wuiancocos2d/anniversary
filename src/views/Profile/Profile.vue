@@ -39,14 +39,15 @@ export default {
   methods: {
     openUploadModal: function() {
       if (this.userInfo.resource.length < 3) {
-        (this.imageModal = null), (this.modalVisible = true);
+        this.imageModal = null
+        this.modalVisible = true
       } else {
         this.outOfImages();
       }
     },
     openUpdateModal: function(imgModal) {
-      this.imageModal = imgModal;
-      this.modalVisible = true;
+      this.imageModal = imgModal
+      this.modalVisible = true
     },
     ...mapMutations(["USER_UPLOAD"]),
     handleUploadSuccess: function(data) {

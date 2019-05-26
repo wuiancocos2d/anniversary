@@ -88,8 +88,8 @@ const userInfor = function () {
                     "id": 6,
                     "userId": 5024,
                     "resourceUrl": "https://i.pinimg.com/564x/fc/43/9f/fc439ff6e50cba9028bc936f29ee64bf.jpg",
-                    "resourceTitle": "123123123",
-                    "resourceContent": "123123",
+                    "resourceTitle": "title 1",
+                    "resourceContent": "content 1",
                     "resourceStatus": null,
                     "resourceLike": 123123,
                     "resourcePoint": 123123,
@@ -105,8 +105,8 @@ const userInfor = function () {
                     "id": 7,
                     "userId": 5024,
                     "resourceUrl": "https://i.pinimg.com/564x/b5/f7/ce/b5f7cec6327a00929b5362e83347532f.jpg",
-                    "resourceTitle": "123123123",
-                    "resourceContent": "123123",
+                    "resourceTitle": "title 2",
+                    "resourceContent": "content 2",
                     "resourceStatus": null,
                     "resourceLike": 123123,
                     "resourcePoint": 123123,
@@ -139,21 +139,64 @@ const userInfor = function () {
 
 const userLogin = function () {
     return {
-        code: 200,
-        message: '',
-        data: {
-            "userNo": 4035,
-            "userNm": "Wu Yiyan,Ian",
-            "pwd": null,
-            "jobTitle": "Assistant IT Operation Maintenance Engineer",
-            "department": "General Affairs Department",
-            "location": "NX",
-            "division": "Information Technology",
-            "emailAddrs": "ian.wu@airmacau.com.mo",
-            "busnPhone": "8396 6691",
-            "updateDt": "2019-05-13T15:00:01.000+0000",
-            "birthDay": null,
-            "userStatus": null
+        "code": 200,
+        "message": "OK",
+        "data": {
+            "role": [],
+            "stage": {
+                "stageNo": 1,
+                "time": 1563120000000
+            },
+            "resource": [
+                {
+                    "id": 6,
+                    "userId": 5024,
+                    "resourceUrl": "https://i.pinimg.com/564x/fc/43/9f/fc439ff6e50cba9028bc936f29ee64bf.jpg",
+                    "resourceTitle": "title 1",
+                    "resourceContent": "content 1",
+                    "resourceStatus": null,
+                    "resourceLike": 123123,
+                    "resourcePoint": 123123,
+                    "pointTheme": 123123,
+                    "pointSkill": 123123,
+                    "pointMind": 123123,
+                    "resourceAward": "123123",
+                    "remark": "123123",
+                    "createTime": "2019-05-21T16:29:08.000+0000",
+                    "modifyTime": "2019-05-21T16:29:08.000+0000"
+                },
+                {
+                    "id": 7,
+                    "userId": 5024,
+                    "resourceUrl": "https://i.pinimg.com/564x/b5/f7/ce/b5f7cec6327a00929b5362e83347532f.jpg",
+                    "resourceTitle": "title 2",
+                    "resourceContent": "content 2",
+                    "resourceStatus": null,
+                    "resourceLike": 123123,
+                    "resourcePoint": 123123,
+                    "pointTheme": 123123,
+                    "pointSkill": 123123,
+                    "pointMind": 123123,
+                    "resourceAward": "123123",
+                    "remark": "123123",
+                    "createTime": "2019-05-21T16:29:09.000+0000",
+                    "modifyTime": "2019-05-21T16:29:09.000+0000"
+                }
+            ],
+            "user": {
+                "userNo": 4035,
+                "userNm": "Wu Yiyan,Ian",
+                "pwd": null,
+                "jobTitle": "Assistant IT Operation Maintenance Engineer",
+                "department": "General Affairs Department",
+                "location": "NX",
+                "division": "Information Technology",
+                "emailAddrs": "ian.wu@airmacau.com.mo",
+                "busnPhone": "8396 6691",
+                "updateDt": "2019-05-13T15:00:01.000+0000",
+                "birthDay": null,
+                "userStatus": null
+            }
         }
     }
 }

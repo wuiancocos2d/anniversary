@@ -10,8 +10,9 @@
           :beforeUpload="beforeUpload"
           @change="handleImgChange"
           :name="'image'"
+          :disabled="ableChangeImage"
         >
-          <img class="uploadShow" v-if="imageModal" :src="imageModal.resourceUrl" alt="avatar">
+          <img class="uploadShow" v-if="imageUrl" :src="imageUrl" alt="avatar">
           <div v-else>
             <a-icon class="plus" type="plus"/>
             <p class="hint">Please upload you image here</p>
@@ -72,11 +73,13 @@ export default {
   },
   data() {
     return {
-      id: null,
       imgLoading: false,
       form: this.$form.createForm(this),
       uploading: false,
-      imgaeUploadUrl: config.IMGUPLOAD_URL
+      imgaeUploadUrl: config.IMGUPLOAD_URL,
+      ableChangeImage: true,
+      imageUrl: null,
+      image: {}
     };
   },
   props: {
@@ -84,16 +87,39 @@ export default {
       type: Object
     }
   },
-  mounted() {
+  mounted: function() {
+    const data = this.imageModal
+    const that = this;
     this.$nextTick(function() {
-      const imageModal = this.imageModal;
-      if (imageModal && imageModal.id !== undefined) {
-        this.form.setFieldsValue({ resourceTitle: imageModal.resourceTitle });
-        this.form.setFieldsValue({
-          resourceContent: imageModal.resourceContent
-        });
-      }
+      this.imageUrl = data.resourceUrl
+      that.form.setFieldsValue({ resourceTitle: data.resourceTitle })
+      that.form.setFieldsValue({
+        resourceContent: data.resourceContent
+      });
     });
+  },
+  watch: {
+    imageModal: function(val) {
+      if (val !== null && val !== undefined) {
+        this.image.title = val.resourceTitle;
+        this.image.id = val.id;
+        this.image.content = val.resourceContent;
+        this.imageUrl = val.resourceUrl;
+        this.form.setFieldsValue({ resourceTitle: val.resourceTitle });
+        this.form.setFieldsValue({
+          resourceContent: val.resourceContent
+        });
+        this.ableChangeImage = true;
+      } else {
+        this.image = {};
+        this.imageUrl = null;
+        this.form.setFieldsValue({ resourceTitle: "" });
+        this.form.setFieldsValue({
+          resourceContent: ""
+        });
+        this.ableChangeImage = false;
+      }
+    }
   },
   methods: {
     beforeUpload(file) {
@@ -174,8 +200,9 @@ export default {
         }
       });
     },
-
-    handleDelet() {}
+    handleDelet(e) {
+      console.log(e);
+    }
   }
 };
 </script>

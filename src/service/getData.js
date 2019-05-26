@@ -1,52 +1,49 @@
 import http from '../config/http'
 import config from '../config/config'
-import {getStore} from '../config/mUtils'
+import { getStore } from '../config/mUtils'
 
-export const loadUserInfo= async function () {
+export const loadUserInfo = async function () {
+  const userId = getStore('userId')
+  if (userId !== 'undefined' && userId !== undefined && userId !== null && userId !== '') {
     let res = await http({
-      url: config.LOAD_USER_INFO,
+      url: config.LOAD_USER_INFO+userId,
       method: 'post',
-      data: {userId: getStore('userId')}
+      // data: { userId: getStore('userId') }
     })
     return res.data
+  }
+  else return 
 }
 
-export const loadUserInfoById = async function() {
-  const userId = getStore('userId')
-  let res = await http({
-    url: config.LOAD_USER_BY_ID,
-    method: 'post',
-    data: {'userNu': userId}
-  })
-  return res.data
-}
+
 
 export const userLogin = async function (user) {
   let res = await http({
-    url: config.USER_LOGIN,
+    // url: config.USER_LOGIN,
+    url: config.USER_LOGIN+parseJsonToPostString(user),
     method: 'post',
-    data: user
+    // data: user
   })
   return res.data
 }
 
 export const getImages = async function () {
-    let res = await http({
-      url:config.IMAGE_URL,
-      method: 'get',
-    })
-    return res.data
+  let res = await http({
+    url: config.IMAGE_URL,
+    method: 'get',
+  })
+  return res.data
 }
 
 export const getArticle = async function () {
-    let res = await http({
-        url: config.ARTICEL_URL,
-        method: 'get',
-    })
-    return res.data
+  let res = await http({
+    url: config.ARTICEL_URL,
+    method: 'get',
+  })
+  return res.data
 }
 
-export const getAuthoList = async function() {
+export const getAuthoList = async function () {
   let res = await http({
     url: config.AUTHORITYList_URL,
     method: 'get'
@@ -54,15 +51,15 @@ export const getAuthoList = async function() {
   return res.data
 }
 
-export const getImgModal = async function() {
-    let res = await http({
-        url: config.IMGMODAL_URL,
-        method: 'get'
-    })
-    return res.data
+export const getImgModal = async function () {
+  let res = await http({
+    url: config.IMGMODAL_URL,
+    method: 'get'
+  })
+  return res.data
 }
 
-export  const uploadImgData = async function(imgData) {
+export const uploadImgData = async function (imgData) {
   let res = await http({
     // url: config.USERUPLOAD_URL + parseJsonToPostString(imgData),
     url: config.USERUPLOAD_URL,
@@ -74,11 +71,11 @@ export  const uploadImgData = async function(imgData) {
 
 
 
-// function parseJsonToPostString(obj)  {
-//   var str = [];
-//   for (var p in obj)
-//     if (obj.hasOwnProperty(p)) {
-//       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-//     }
-//   return str.join("&");
-// }
+function parseJsonToPostString(obj)  {
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+}

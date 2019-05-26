@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
   css: {
     loaderOptions: {
@@ -5,5 +6,8 @@ module.exports = {
         javascriptEnabled: true
       }
     }
-  }
+  },
+
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  // assetsDir: './'
 }

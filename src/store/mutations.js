@@ -4,12 +4,12 @@ import { setStore ,removeStore} from '../config/mUtils'
 export const mutations = {
 
     [types.RECORD_USERID](state, userId) {
+        console.log(userId)
         setStore('userId', userId)
         state.userId = userId
     },
     [types.RECORD_USERINFO](state,userInfo) {
         state.userInfo = userInfo
-        setStore('userId', userInfo.userNo)
         state.loginStatus.status = true
     },
     [types.STAGE](state, stage) {

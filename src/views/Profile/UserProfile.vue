@@ -86,6 +86,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .userPlofile {
+  margin-bottom: 40px;
   .infoCard {
     p {
       line-height: 18px;

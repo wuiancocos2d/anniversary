@@ -32,9 +32,9 @@ export default {
   props: {
     mode: [String]
   },
-  computed: {
-    ...mapState(["userInfo"])
-  },
+  computed: mapState([
+    'userInfo'
+  ]),
   methods: {
     ...mapActions(["logout"]),
     userLogout(event) {

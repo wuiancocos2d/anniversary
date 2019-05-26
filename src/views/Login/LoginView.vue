@@ -89,7 +89,7 @@ export default {
         res => {
           if (res.code === 200) {
             setTimeout(loadingMessage, 0);
-            this.RECORD_USERID(res.data.userNo)
+            this.RECORD_USERID(res.data.user.userNo)
             this.RECORD_USERINFO(res.data)
             this.$message.success('Welcome to AirMacau 25th anniverary, Redircting...',2).then(
               ()=>{

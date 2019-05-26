@@ -1,6 +1,9 @@
 <template>
   <div class="navDrawer-contaienr">
-    <a-button class="drawer-handel" @click="showDrawer">Open</a-button>
+    <a class="drawer-handel" @click="showDrawer">
+      <a-icon v-if="fold" type="menu-unfold"/>
+      <a-icon v-else type="menu-unfold" />
+    </a>
     <a-drawer
       title="25th Anniversary"
       :visible="visible"
@@ -13,19 +16,20 @@
   </div>
 </template>
 <script>
-import { Button, Drawer } from "ant-design-vue";
+import { Drawer ,Icon} from "ant-design-vue";
 import Navigation from "./Nav";
 export default {
   name: "navDraw",
   components: {
-    "a-button": Button,
     "a-drawer": Drawer,
-    Navigation
+    Navigation,
+    "a-icon": Icon
   },
   data() {
     return {
       visible: false,
-      placement: "left"
+      placement: "left",
+      fold: true
     };
   },
   methods: {
@@ -39,15 +43,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 .navDrawer-contaienr {
-    height: 100%;
-    position: fixed;
+  height: 100%;
+  position: relative;
+  left: 0;
 }
 .drawer-handle {
-  position: absolute;
+  position: relative;
   top: 72px;
-  width: 41px;
+  width: 100%;
   height: 40px;
   cursor: pointer;
   z-index: 0;
@@ -58,7 +62,7 @@ export default {
   justify-content: center;
   align-items: center;
   background: #fff;
-
+  z-index: 10000;
   right: -40px;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
   border-radius: 0 4px 4px 0;
