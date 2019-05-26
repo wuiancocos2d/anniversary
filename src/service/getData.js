@@ -6,9 +6,9 @@ export const loadUserInfo = async function () {
   const userId = getStore('userId')
   if (userId !== 'undefined' && userId !== undefined && userId !== null && userId !== '') {
     let res = await http({
-      url: config.LOAD_USER_INFO+userId,
+      url: config.LOAD_USER_INFO,
       method: 'post',
-      // data: { userId: getStore('userId') }
+      ata: { userId: userId }
     })
     return res.data
   }
@@ -19,10 +19,10 @@ export const loadUserInfo = async function () {
 
 export const userLogin = async function (user) {
   let res = await http({
-    // url: config.USER_LOGIN,
-    url: config.USER_LOGIN+parseJsonToPostString(user),
+    url: config.USER_LOGIN,
+    // url: config.USER_LOGIN+parseJsonToPostString(user),
     method: 'post',
-    // data: user
+    data: user
   })
   return res.data
 }
