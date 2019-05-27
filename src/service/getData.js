@@ -6,8 +6,9 @@ export const loadUserInfo = async function () {
   const userId = getStore('userId')
   if (userId !== 'undefined' && userId !== undefined && userId !== null && userId !== '') {
     let res = await http({
-      url: config.LOAD_USER_INFO+userId,
+      url: config.LOAD_USER_INFO,
       method: 'post',
+      data: {userNm: userId}
     })
     return res.data
   }
@@ -18,6 +19,7 @@ export const userLogin = async function (user) {
   let res = await http({
     // url: config.USER_LOGIN,
     url: config.USER_LOGIN,
+
     method: 'post',
     data: user
   })
