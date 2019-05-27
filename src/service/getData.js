@@ -8,21 +8,18 @@ export const loadUserInfo = async function () {
     let res = await http({
       url: config.LOAD_USER_INFO+userId,
       method: 'post',
-      // data: { userId: getStore('userId') }
     })
     return res.data
   }
   else return 
 }
 
-
-
 export const userLogin = async function (user) {
   let res = await http({
     // url: config.USER_LOGIN,
-    url: config.USER_LOGIN+parseJsonToPostString(user),
+    url: config.USER_LOGIN,
     method: 'post',
-    // data: user
+    data: user
   })
   return res.data
 }
@@ -71,11 +68,11 @@ export const uploadImgData = async function (imgData) {
 
 
 
-function parseJsonToPostString(obj)  {
-  var str = [];
-  for (var p in obj)
-    if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-    }
-  return str.join("&");
-}
+// function parseJsonToPostString(obj)  {
+//   var str = [];
+//   for (var p in obj)
+//     if (obj.hasOwnProperty(p)) {
+//       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+//     }
+//   return str.join("&");
+// }

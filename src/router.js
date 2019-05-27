@@ -5,7 +5,7 @@ import {getStore} from './config/mUtils'
 Vue.use(Router)
 
 export const router = new Router({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
     {

@@ -4,7 +4,6 @@ import { setStore ,removeStore} from '../config/mUtils'
 export const mutations = {
 
     [types.RECORD_USERID](state, userId) {
-        console.log(userId)
         setStore('userId', userId)
         state.userId = userId
     },

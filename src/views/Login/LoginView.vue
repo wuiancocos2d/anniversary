@@ -47,9 +47,9 @@
   </div>
 </template>
 <script>
-import { Form, Button, Input, Icon, Row, Col } from "ant-design-vue"
-import { mapMutations } from "vuex"
-import { userLogin } from "../../service/getData"
+import { Form, Button, Input, Icon, Row, Col } from "ant-design-vue";
+import { mapMutations } from "vuex";
+import { userLogin } from "../../service/getData";
 export default {
   name: "login",
   data() {
@@ -71,7 +71,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["RECORD_USERID","RECORD_USERINFO"]),
+    ...mapMutations(["RECORD_USERID", "RECORD_USERINFO"]),
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
@@ -84,18 +84,26 @@ export default {
       });
     },
     login(user) {
-      const loadingMessage = this.$message.loading('Loging..', 0);
+      const loadingMessage = this.$message.loading("Loging..", 0);
       userLogin(user).then(
         res => {
+          setTimeout(loadingMessage, 0)
+          if(!res) {
+            this.$modal.error({ title: 'ERR_CONNECTION_REFUSED'})
+            return 
+          }
           if (res.code === 200) {
-            setTimeout(loadingMessage, 0);
-            this.RECORD_USERID(res.data.user.userNo)
-            this.RECORD_USERINFO(res.data)
-            this.$message.success('Welcome to AirMacau 25th anniverary, Redircting...',2).then(
-              ()=>{
-                this.$router.push('/')
-              }
-            )
+            this.RECORD_USERID(res.data.user.userNo);
+            this.RECORD_USERINFO(res.data);
+            this.$router.push("/");
+          } else if (res.code === 10003) {
+            const h = this.$createElement;
+            this.$modal.error({
+              tite: "Staff Number or Birthday Wrong",
+              content: h("div", {}, [
+                h("h3", "Staff Number or Birthday Wrong"),
+              ])
+            });
           }
         },
         error => {

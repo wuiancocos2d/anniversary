@@ -77,7 +77,7 @@ export default {
       form: this.$form.createForm(this),
       uploading: false,
       imgaeUploadUrl: config.IMGUPLOAD_URL,
-      ableChangeImage: true,
+      ableChangeImage: false,
       imageUrl: null,
       image: {}
     };
@@ -89,14 +89,16 @@ export default {
   },
   mounted: function() {
     const data = this.imageModal
-    const that = this;
-    this.$nextTick(function() {
-      this.imageUrl = data.resourceUrl
-      that.form.setFieldsValue({ resourceTitle: data.resourceTitle })
-      that.form.setFieldsValue({
-        resourceContent: data.resourceContent
-      });
-    });
+    const that = this
+    if (data) {
+      this.$nextTick(function() {
+        this.imageUrl = data.resourceUrl;
+        that.form.setFieldsValue({ resourceTitle: data.resourceTitle })
+        that.form.setFieldsValue({
+          resourceContent: data.resourceContent
+        })
+      })
+    }
   },
   watch: {
     imageModal: function(val) {
@@ -123,7 +125,7 @@ export default {
   },
   methods: {
     beforeUpload(file) {
-      const isJPG = file.type === "image/jpeg" || file.type === "png";
+      const isJPG = ["image/jpeg","image/png"].includes(file.type)
       if (!isJPG) {
         this.$message.error("You can only upload JPG/PNG file!");
       }

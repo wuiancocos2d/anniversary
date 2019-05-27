@@ -1,5 +1,5 @@
 const BASE_URL = '/'
-const BASE_URL_DEV = 'http://192.168.110.93:7777/'
+const BASE_URL_DEV = '/'
 
 export const devPath = {
     LOAD_USER_INFO: BASE_URL+'api/userInfo',//用户基本信息
@@ -10,7 +10,8 @@ export const devPath = {
     IMGMODAL_URL:  BASE_URL+'api/imgModal',
     IMGUPLOAD_URL:'http://192.168.110.93:7777/resource/submit?',
     USERUPLOAD_URL: 'http://192.168.110.93:7777/resource/submit?/*',
-    LOAD_USER_BY_ID: BASE_URL+'api/getUserById'
+    LOAD_USER_BY_ID: BASE_URL+'api/getUserById',
+    USER_DELET_IMAGE: BASE_URL_DEV+'api/delet'
 }
 
 export const production = {
@@ -22,7 +23,8 @@ export const production = {
     IMGMODAL_URL:  BASE_URL_DEV+'api/imgModal',
     IMGUPLOAD_URL:BASE_URL_DEV+'/resource/submit?',
     USERUPLOAD_URL: BASE_URL_DEV+'resource/submit?/*',
-    LOAD_USER_BY_ID: BASE_URL_DEV+'api/getUserById'
+    LOAD_USER_BY_ID: BASE_URL_DEV+'api/getUserById',
+    USER_DELET_IMAGE: BASE_URL_DEV+'api/delet'
 }
 
-export default production
+export default devPath
