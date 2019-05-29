@@ -1,5 +1,5 @@
 import * as types from './mutaions-types.js'
-import { loadUserInfo, userLogin } from '../service/getData'
+import { loadUserInfo, userLogin, getUserImages } from '../service/getData'
 import router from '../router'
 export default {
 
@@ -40,5 +40,19 @@ export default {
     logout ({commit}) {
         commit(types.USER_LOGOUT)
         router.push('/login')
+    },
+
+    async syncUserImages({commit}) {
+        return getUserImages().then(
+            res => {
+                if(res && res.data) {
+                    commit(types.USER_IMAGES, res.data)
+                } 
+            }
+        )
+    },
+
+    setStage({commit},stage) {
+        commit(types.STAGE,stage)
     }
 }

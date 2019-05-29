@@ -25,8 +25,28 @@ export const mutations = {
     },
     [types.USER_UPLOAD] (state,resourceObj) {
         state.userInfo.resource.push(resourceObj)
-    }
-
+    },
+    [types.USER_DELETE] (state,resourceId) {
+        const resource = state.userInfo.resource
+        for(let i = 0; i< resource.length; i++) {
+            if(resource[i].id === resourceId) {
+                state.userInfo.resource.splice(i,1)
+            }
+        }
+    },
+    [types.USER_UPDATE] (state,imgInfo) {
+        const resource = state.userInfo.resource
+        for(let i = 0; i< resource.length; i++) {
+            if(resource[i].id === imgInfo.id) {
+                const img = state.userInfo.resource[i]
+                img.resourceTitle = imgInfo.resourceTitle
+                img.resourceContent = imgInfo.resourceContent
+            }
+        }
+    },
+    [types.USER_IMAGES] (state, imgs) {
+        state.userUploads = imgs
+    },
 }
 
 export default mutations

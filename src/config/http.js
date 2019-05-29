@@ -12,9 +12,13 @@ const fetch = (options) => {
   data = JSON.stringify(data)
   switch (method.toLowerCase()) {
     case 'get':
-      return axios.get(url, data)
+      return axios.get(url,data)
     case 'post':
-      return axios.post(url, data,{crossDomain: true})
+      return axios.post(url,data)
+    case 'delet': 
+      return axios.delete(url,data) 
+    case 'put':
+      return axios.put(url,data)   
     default:
       return axios(options)
   }

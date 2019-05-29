@@ -1,33 +1,36 @@
 <template>
   <div class="waterfallContainer">
-    <div>
-      <button @click="showComponent = 'Rules'">Rules</button>
-      <button @click="showComponent = 'Likes'">Likes</button>
+    <div class="btns">
+      <a-button type="primary" v-for="(stageV,i) in stagesBtns" v-bind:key="i" @click="handleS(e,i)">
+        {{stageV}}
+      </a-button>
     </div>
-    <div class="componet-contnet">
-      <component :is="showComponent"></component>
-    </div>
+    <Hero v-if="stage === 0"></Hero>
+    <Likes v-else></Likes>
   </div>
 </template>
 <script>
-
-import Rules from "../../components/rules/Rules";
 import Likes from "./Likes";
+import Hero from "./Hero";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "home",
   components: {
-    Rules,
-    Likes
+    Likes,
+    Hero
   },
   data() {
-    return {
-      showOpts: ["Rules", "Likes"],
-      showComponent: "Rules"
-    };
+    stagesBtns: [0,1,2,3,4]
   },
-  methods: {},
-  created() {},
-  mounted() {}
+  computed: {
+    ...mapGetters(["stage"])
+  },
+  methods: {
+    ...mapActions(["setStage"]),
+    handleK: function(e,i) {
+      this.setStage(i)
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

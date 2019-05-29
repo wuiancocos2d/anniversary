@@ -7,12 +7,17 @@
       </a-col>
     </a-row>
     <a-modal title="Collect Image" v-model="modalVisible" :footer="null" :width="350">
-      <UploadModal :imageModal="imageModal" v-on:user-upload-event="handleUploadSuccess"></UploadModal>
+      <UploadModal
+        :imageModal="imageModal"
+        v-on:user-upload-event="handleUploadSuccess"
+        v-on:userDelete="deleteSuccess"
+        v-on:userUpdate="updateSuccess"
+      ></UploadModal>
     </a-modal>
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapActions } from "vuex";
 import { Row, Col, Modal } from "ant-design-vue";
 import UploadModal from "./UploadModal";
 import UserProfile from "./UserProfile";
@@ -33,28 +38,25 @@ export default {
       imageModal: null
     };
   },
+  mounted() {
+    this.syncUserImages()
+  },
   computed: {
-    ...mapState(["userInfo"])
+    ...mapState(["userUploads"])
   },
   methods: {
+    ...mapActions(["syncUserImages"]),
     openUploadModal: function() {
-      if (this.userInfo.resource.length < 3) {
-        this.imageModal = null
-        this.modalVisible = true
+      if (this.userUploads.length < 2) {
+        this.imageModal = null;
+        this.modalVisible = true;
       } else {
         this.outOfImages();
       }
     },
     openUpdateModal: function(imgModal) {
-      this.imageModal = imgModal
-      this.modalVisible = true
-    },
-    ...mapMutations(["USER_UPLOAD"]),
-    handleUploadSuccess: function(data) {
-      if (data) {
-        this.modalVisible = false;
-        this.USER_UPLOAD(data);
-      }
+      this.imageModal = imgModal;
+      this.modalVisible = true;
     },
     handleCardClick: function(item) {
       this.modalVisible = true;
@@ -70,6 +72,21 @@ export default {
         content: h("div", {}, [h("p", "You can only upload 2 photos")]),
         onOk() {}
       });
+    },
+    handleUploadSuccess: function(data) {
+      if (data) {
+        this.modalVisible = false;
+        this.syncUserImages();
+      }
+    },
+    deleteSuccess: function(imgId) {
+      this.modalVisible = false;
+      this.syncUserImages();
+    },
+    updateSuccess: function(imgInfo) {
+      this.$message.success("update successful");
+      this.modalVisible = false;
+      this.syncUserImages();
     }
   },
   created() {}

@@ -26,7 +26,8 @@
               </a-input>
             </a-form-item>
             <a-form-item>
-              <a-input
+              <a-input 
+              
                 v-decorator="[
           'birthday',
           { rules: [{ required: true, message: 'Please input your Birthday!(s:19901230)' }] }
@@ -84,15 +85,16 @@ export default {
       });
     },
     login(user) {
-      const loadingMessage = this.$message.loading("Loging..", 0);
+      const loadingMessage = this.$message.loading("Loading..", 0);
       userLogin(user).then(
         res => {
-          setTimeout(loadingMessage, 0)
-          if(!res) {
-            this.$modal.error({ title: 'ERR_CONNECTION_REFUSED'})
-            return 
+          setTimeout(loadingMessage, 0);
+          if (!res) {
+            this.$modal.error({ title: "ERR_CONNECTION_REFUSED" });
+            return;
           }
           if (res.code === 200) {
+            console.log('res',res)
             this.RECORD_USERID(res.data.user.userNo);
             this.RECORD_USERINFO(res.data);
             this.$router.push("/");
@@ -100,9 +102,7 @@ export default {
             const h = this.$createElement;
             this.$modal.error({
               tite: "Staff Number or Birthday Wrong",
-              content: h("div", {}, [
-                h("h3", "Staff Number or Birthday Wrong"),
-              ])
+              content: h("div", {}, [h("h3", "Staff Number or Birthday Wrong")])
             });
           }
         },

@@ -9,26 +9,14 @@ Vue.use(Vuex)
 
 
 const state = {
-	userInfo: {
-		"userNo": 0,
-		"userNm": "",
-		"pwd": null,
-		"jobTitle": "",
-		"department": "",
-		"location": "",
-		"division": "",
-		"emailAddrs": "",
-		"busnPhone": "",
-		"updateDt": "",
-		"birthDay": null,
-		"userStatus": null
-	},
+	userInfo: {},
 	stage: 0,
 	loginStatus: {
 		status: false,
 		message: null
 	},
-	userId: null
+	userId: null,
+	userUploads: []
 }
 
 export default new Vuex.Store({

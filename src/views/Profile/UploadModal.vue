@@ -3,13 +3,14 @@
     <a-form class="uploadForm" :layout="'horizontal'" :form="form" @submit="handleFormSubmit">
       <a-form-item label="Pic">
         <a-upload
+          :action="imageUploadUrl"
           class="img-block"
           listType="picture-card"
           :showUploadList="false"
-          :action="imgaeUploadUrl"
           :beforeUpload="beforeUpload"
           @change="handleImgChange"
           :name="'image'"
+          :withCredentials="true"
           :disabled="ableChangeImage"
         >
           <img class="uploadShow" v-if="imageUrl" :src="imageUrl" alt="avatar">
@@ -40,14 +41,16 @@
         ></a-textarea>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" :loading="uploading" block>
-          <div v-if="imageModal == undefined">Upload</div>
-          <div v-if="imageModal">Update</div>
+        <a-button v-if="!imageModal" type="primary" html-type="submit" :loading="uploading" block>
+          <span>Upload</span>
+        </a-button>
+        <a-button v-else type="primary" @click="handleUpdate" :loading="uploading" block>
+          <span>Update</span>
         </a-button>
         <a-button
           v-if="imageModal"
           @click="handleDelet"
-          :loading="uploading"
+          :loading="deleting"
           type="danger"
           class="deletBtn"
           block
@@ -58,7 +61,11 @@
 </template>
 <script>
 import { Icon, Upload, Form, Input, Button } from "ant-design-vue";
-import { uploadImgData } from "../../service/getData.js";
+import {
+  uploadImgData,
+  resourceDelete,
+  resourceUpdate
+} from "../../service/getData.js";
 import config from "../../config/config";
 export default {
   name: "UploadModal",
@@ -76,10 +83,12 @@ export default {
       imgLoading: false,
       form: this.$form.createForm(this),
       uploading: false,
-      imgaeUploadUrl: config.IMGUPLOAD_URL,
+      deleting: false,
+      imageUploadUrl: config.IMG_UPLOAD_URL,
       ableChangeImage: false,
       imageUrl: null,
-      image: {}
+      image: {},
+      file: null,
     };
   },
   props: {
@@ -88,16 +97,16 @@ export default {
     }
   },
   mounted: function() {
-    const data = this.imageModal
-    const that = this
+    const data = this.imageModal;
+    const that = this;
     if (data) {
       this.$nextTick(function() {
         this.imageUrl = data.resourceUrl;
-        that.form.setFieldsValue({ resourceTitle: data.resourceTitle })
+        that.form.setFieldsValue({ resourceTitle: data.resourceTitle });
         that.form.setFieldsValue({
           resourceContent: data.resourceContent
-        })
-      })
+        });
+      });
     }
   },
   watch: {
@@ -125,7 +134,7 @@ export default {
   },
   methods: {
     beforeUpload(file) {
-      const isJPG = ["image/jpeg","image/png"].includes(file.type)
+      const isJPG = ["image/jpeg", "image/png"].includes(file.type);
       if (!isJPG) {
         this.$message.error("You can only upload JPG/PNG file!");
       }
@@ -151,6 +160,9 @@ export default {
         }
       }
     },
+    async handleImgUpload(file) {
+      console.log(file);
+    },
     handleFormSubmit(e) {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
@@ -163,13 +175,13 @@ export default {
             this.uploading = true;
             formVl.resourceUrl = this.imageUrl;
             const res = await uploadImgData(formVl);
-            this.uploading = false;
             if (res.code === 200) {
               formVl.id = res.data;
               this.$emit("user-upload-event", formVl);
             } else {
               this.$message.error(res);
             }
+            this.uploading = false;
           } else {
             this.$message.error("Please upload your Pictrue");
           }
@@ -181,29 +193,38 @@ export default {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (err) {
-          console.log("err", err);
+          this.$message.error("err:", err);
           return;
         } else {
-          let formVl = values;
-          if (this.imageUrl.length > 0) {
-            this.uploading = true;
-            formVl.resourceUrl = this.imageUrl;
-            const res = await uploadImgData(formVl);
-            this.uploading = false;
-            if (res.code === 200) {
-              formVl.id = res.data;
-              this.$emit("user-upload-event", formVl);
-            } else {
-              this.$message.error(res);
-            }
-          } else {
-            this.$message.error("Please upload your Pictrue");
+          this.uploading = true;
+          values.id = this.imageModal.id;
+          const res = await resourceUpdate(values);
+          if (res && res.code === 200) {
+            this.$emit("userUpdate", values);
           }
+          this.uploading = false;
         }
       });
     },
-    handleDelet(e) {
-      console.log(e);
+    handleDelet() {
+      const that  = this
+      this.$modal.confirm({
+        title: "Do you want to delete this image",
+        onOk() {
+          that.deleting = true
+          resourceDelete(that.imageModal.id).then(
+            res=> {
+              if(res && res.code === 200) {
+                that.$message.success('deleted')
+                that.$emit("userDelete",that.imageModal.id)
+              }else {
+                that.$messge.error('failed' + res)
+              }
+              that.deleting = false
+            }
+          )
+        }
+      });
     }
   }
 };

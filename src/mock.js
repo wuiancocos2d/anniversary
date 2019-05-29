@@ -63,11 +63,11 @@ const postData = function () {
     for (let i = 0; i < images.length; i++) {
         let image = {
             id: i,
-            src: images[i].src,
-            like: Math.floor(Math.random() * (+1000 - +0)) + +0,
-            discription: "o values. The returned value is no lower than min or it is the next integer greater than min if min isn’t an integer.It i ",
-            title: "Asia markets and Dow futures fall as trade war fears persist",
-            status: Mock.mock({ "boolean|1-2": true }).boolean
+            resourceUrl: images[i].src,
+            resourceLike: Math.floor(Math.random() * (+1000 - +0)) + +0,
+            resourceContent: "o values. The returned value is no lower than min or it is the next integer greater than min if min isn’t an integer.It i ",
+            resourceTitle: "Asia markets and Dow futures fall as trade war fears persist",
+            resourceStatus: Mock.mock({ "boolean|1-2": true }).boolean
         }
         imagesData.push(image)
     }
@@ -78,60 +78,40 @@ const userInfor = function () {
         "code": 200,
         "message": "OK",
         "data": {
-            "role": [],
-            "stage": {
-                "stageNo": 1,
-                "time": 1563120000000
-            },
-            "resource": [
-                {
-                    "id": 6,
-                    "userId": 5024,
-                    "resourceUrl": "https://i.pinimg.com/564x/fc/43/9f/fc439ff6e50cba9028bc936f29ee64bf.jpg",
-                    "resourceTitle": "title 1",
-                    "resourceContent": "content 1",
-                    "resourceStatus": null,
-                    "resourceLike": 123123,
-                    "resourcePoint": 123123,
-                    "pointTheme": 123123,
-                    "pointSkill": 123123,
-                    "pointMind": 123123,
-                    "resourceAward": "123123",
-                    "remark": "123123",
-                    "createTime": "2019-05-21T16:29:08.000+0000",
-                    "modifyTime": "2019-05-21T16:29:08.000+0000"
+            "code": 200,
+            "message": "OK",
+            "data": {
+                "role": [
+                    {
+                        "id": 1,
+                        "roleName": "approval",
+                        "description": "图片审批"
+                    },
+                    {
+                        "id": 2,
+                        "roleName": "score",
+                        "description": "打分"
+                    }
+                ],
+                "stage": {
+                    "stageNo": 2,
+                    "time": 1563120000000
                 },
-                {
-                    "id": 7,
-                    "userId": 5024,
-                    "resourceUrl": "https://i.pinimg.com/564x/b5/f7/ce/b5f7cec6327a00929b5362e83347532f.jpg",
-                    "resourceTitle": "title 2",
-                    "resourceContent": "content 2",
-                    "resourceStatus": null,
-                    "resourceLike": 123123,
-                    "resourcePoint": 123123,
-                    "pointTheme": 123123,
-                    "pointSkill": 123123,
-                    "pointMind": 123123,
-                    "resourceAward": "123123",
-                    "remark": "123123",
-                    "createTime": "2019-05-21T16:29:09.000+0000",
-                    "modifyTime": "2019-05-21T16:29:09.000+0000"
+                "resource": [],
+                "user": {
+                    "userNo": 4035,
+                    "userNm": "Wu Yiyan,Ian",
+                    "pwd": null,
+                    "jobTitle": "Assistant IT Operation Maintenance Engineer",
+                    "department": "General Affairs Department",
+                    "location": "NX",
+                    "division": "Information Technology",
+                    "emailAddrs": "ian.wu@airmacau.com.mo",
+                    "busnPhone": "8396 6691",
+                    "updateDt": "2019-05-13T15:00:01.000+0000",
+                    "birthDay": null,
+                    "userStatus": null
                 }
-            ],
-            "user": {
-                "userNo": 4035,
-                "userNm": "Wu Yiyan,Ian",
-                "pwd": null,
-                "jobTitle": "Assistant IT Operation Maintenance Engineer",
-                "department": "General Affairs Department",
-                "location": "NX",
-                "division": "Information Technology",
-                "emailAddrs": "ian.wu@airmacau.com.mo",
-                "busnPhone": "8396 6691",
-                "updateDt": "2019-05-13T15:00:01.000+0000",
-                "birthDay": null,
-                "userStatus": null
             }
         }
     }
@@ -142,7 +122,18 @@ const userLogin = function () {
         "code": 200,
         "message": "OK",
         "data": {
-            "role": [],
+            "role": [
+                {
+                    "id": 1,
+                    "roleName": "approval",
+                    "description": "图片审批"
+                },
+                {
+                    "id": 2,
+                    "roleName": "score",
+                    "description": "打分"
+                }
+            ],
             "stage": {
                 "stageNo": 1,
                 "time": 1563120000000
@@ -220,6 +211,30 @@ const userUpload = function () {
 }
 
 
+const userDeletUpload = function () {
+    return {
+        code: 200,
+        message: "ok",
+        data: ''
+    }
+}
+
+
+const userUpdate = function () {
+    return {
+        code: 200,
+        message: "ok",
+        data: ''
+    }
+}
+
+const resourceCheck = function() {
+    return {
+        code: 200,
+        message: "ok",
+        data: ''
+    }
+}
 
 
 Mock.mock(devPath.IMAGE_URL, 'get', postData())
@@ -227,3 +242,6 @@ Mock.mock(devPath.USER_LOGIN, 'post', userLogin())
 Mock.mock(devPath.LOAD_USER_INFO, 'post', userInfor())
 Mock.mock(devPath.IMGUPLOAD_URL, 'post', imageUpload())
 Mock.mock(devPath.USERUPLOAD_URL, 'post', userUpload())
+Mock.mock(devPath.USER_DELET_IMAGE, 'delete', userDeletUpload())
+Mock.mock(devPath.USER_UPDATE, 'put', userUpdate())
+Mock.mock(devPath.RESOURCE_CHECK, 'put',resourceCheck())

@@ -37,15 +37,6 @@ export const router = new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "plofile" */ './views/Profile/Profile.vue')
     },
-
-    {
-      path: '/article',
-      name: 'article',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "Article" */ './views/Article.vue')
-    },
     {
       path: '/edit',
       name: 'edit',

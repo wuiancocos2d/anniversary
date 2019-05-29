@@ -5,7 +5,8 @@ import router from './router'
 import store from './store/'
 import {Message, Modal} from 'ant-design-vue'
 import {setCookie,getCookie,delCookie} from './config/mUtils'
-import "./mock" 
+import {stageCode} from './config/config'
+// import "./mock" 
 import FastClick from 'fastclick'
 
 if ('addEventListener' in document) {
@@ -24,6 +25,8 @@ Vue.prototype.$modal = Modal
 Vue.prototype.setCookie = setCookie
 Vue.prototype.getCookie = getCookie
 Vue.prototype.delCookie = delCookie
+
+Vue.prototype.$stageCode = stageCode
 
 
 new Vue({

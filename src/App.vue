@@ -61,8 +61,10 @@ export default {
         // Do something with response error
         return Promise.reject(error);
       }
-    );
-    this.getUser();
+    )
+  },
+  mounted () {
+    this.getUser()
   }
 };
 </script>

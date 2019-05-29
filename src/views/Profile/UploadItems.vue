@@ -3,7 +3,7 @@
     <a-card title="The photos you uploaded">
       <a-row :gutter="16">
         <a-col
-          v-for="photoItem in userInfo.resource"
+          v-for="photoItem in userUploads"
           v-bind:key="photoItem.id"
           :xs="24"
           :sm="24"
@@ -38,7 +38,7 @@ export default {
     "a-col": Col
   },
   computed: {
-    ...mapState(["userInfo"])
+    ...mapState(["userUploads"])
   },
   methods: {
     handleImgClick(id, title, url,resourceContent) {

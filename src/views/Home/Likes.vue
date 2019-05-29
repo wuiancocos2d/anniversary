@@ -5,41 +5,36 @@
       @scrollReachBottom="getData"
       :imgWidth="220"
       :maxCols="8"
+      srcKey="resourceUrl"
       @click="openModal"
     >
       <div class="hero" slot="waterfall-head">
         <Hero></Hero>
       </div>
       <div class="img-info" slot-scope="props">
-        <div class="like">
+        <div class="like" v-if="stage > 1">
           <a-icon class="likeIcon" type="heart"/>
-          <span class="likeNum">{{props.value.like}}</span>
+          <span class="likeNum">{{props.value.resourceLike}}</span>
         </div>
         <div class="title">
-          <p class="title-text">{{props.value.title}}</p>
+          <p class="title-text">{{props.value.resourceTitle}}</p>
         </div>
       </div>
+      <div slot="waterfall-over">
+        <h3>...No More Images...</h3>
+      </div>
     </vue-waterfall-easy>
-    <a-modal :title="imgTitle" v-model="modalOpen" :footer="null" :centered="true" :width="420">
-      <ImageModal
-        :id="id"
-        :status="imgStatus"
-        :imgUrl="imgUrl"
-        :title="imgTitle"
-        :ableRate="ableRate"
-        :showDiscription="true"
-        :like="like"
-        :hasLike="hasLike"
-        v-on:listenLikeEvent="handleLike"
-      ></ImageModal>
+    <a-modal :title="imgTitle" v-model="modalOpen" :footer="null" :centered="true" :width="350">
+      <ImageModal :imageItem="imageItem"></ImageModal>
     </a-modal>
   </div>
 </template>
 <script>
 import vueWaterfallEasy from "vue-waterfall-easy";
 import { Icon, Modal } from "ant-design-vue";
-import { getImages } from "../../service/getData.js";
+import { getHomepageImage } from "../../service/getData.js";
 import ImageModal from "../../components/imgModal/ImageModal";
+import { mapGetters } from "vuex";
 import Hero from "./Hero";
 export default {
   name: "Likes",
@@ -50,48 +45,44 @@ export default {
     "a-modal": Modal,
     ImageModal
   },
-  props: {
-    state: {
-      type: Number,
-      default: 0
-    }
+  computed: {
+    ...mapGetters(["stage"]),
   },
   data() {
     return {
       id: 0,
       imgsArr: [],
-      group: 0,
-      imgUrl: "",
+      page: 1,
       imgTitle: "",
-      imgStatus: 3,
       modalOpen: false,
-      ableRate: true,
-      discription: "",
-      like: 0,
-      hasLike: false
+      hasLike: false,
+      imageItem: {}
     };
+  },
+  watch: {
+    stage: function() {
+      this.imgsArr = []
+      this.getData()
+    }
   },
   methods: {
     async getData() {
-      let imgs = await getImages();
-      this.imgsArr = this.imgsArr.concat(imgs);
-      this.group++;
+      const res = await getHomepageImage(this.page)
+      if(res.code === 200) {
+        this.imgsArr.concat(res.data)
+        this.page++
+      }else {
+        this.$message.error('error request images:',res.message)
+      }
     },
     openModal(event, { value }) {
-      this.id = value.id;
-      this.imgUrl = value.src;
-      this.imgTitle = value.title;
-      this.discription = value.discription;
+      this.imageItem = value;
+      this.imgTitle = value.resourceTitle;
       this.modalOpen = true;
-      this.like = value.like;
-    },
-    handleLike: function(){
-        this.hasLike = true
-        this.like++
     }
-  }, 
+  },
   created() {
-    this.getData();
+    if (this.stage !== 0) this.getData();
   }
 };
 </script>
