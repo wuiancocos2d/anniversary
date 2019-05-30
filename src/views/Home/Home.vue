@@ -1,35 +1,43 @@
 <template>
   <div class="waterfallContainer">
     <div class="btns">
-      <a-button type="primary" v-for="(stageV,i) in stagesBtns" v-bind:key="i" @click="handleS(e,i)">
-        {{stageV}}
-      </a-button>
+      <a-button
+        type="primary"
+        v-for="(stageV,i) in stagesBtns"
+        v-bind:key="i"
+        @click="handleS(i)"
+      >{{stageV}}</a-button>
+      {{userStage}}
     </div>
-    <Hero v-if="stage === 0"></Hero>
+    <Hero v-if="userStage === 1"></Hero>
     <Likes v-else></Likes>
   </div>
 </template>
 <script>
 import Likes from "./Likes";
 import Hero from "./Hero";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
+import { Button } from 'ant-design-vue';
 export default {
   name: "home",
   components: {
     Likes,
-    Hero
+    Hero,
+    "a-button": Button
   },
   data() {
-    stagesBtns: [0,1,2,3,4]
+    return {
+      stagesBtns: [1, 2, 3, 4, 5]
+    };
   },
   computed: {
-    ...mapGetters(["stage"])
+    ...mapState(["userStage"])
   },
   methods: {
-    ...mapActions(["setStage"]),
-    handleK: function(e,i) {
-      this.setStage(i)
-    }
+    ...mapActions(["setUserStage"]),
+    handleS: function(i) {
+      this.setUserStage(i+1);
+    },
   }
 };
 </script>

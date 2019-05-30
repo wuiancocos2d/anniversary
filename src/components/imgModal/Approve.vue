@@ -24,44 +24,46 @@ export default {
       id: Number
   },
   methods: {
-      handlePassClick() {
-          if(this.Offing || !this.id ||this.passing) return
+    
+      handlePassClick:function(){
+          const that = this
           this.$modal.confirm({
               title: 'Do you want to set Image public',
               content: 'If image is made pbulic,it will be visible to everyone',
               onOk() {
-                  this.passing = true,
-                  resourceCheck(this.id).then(res => {
+                  that.passing = true,
+                  resourceCheck(that.id).then(res => {
                       if(res.code === 200) {
-                          this.$message.success('public success')
+                          that.$message.success('public success')
                       }
-                      this.passing = false
-                      this.$emmit("changedone")
+                      that.passing = false
+                      that.$emmit("changedone")
                   },err=> {
-                      this.passing = false
-                      this.$message.error('failed: connecion' + err)
+                      that.passing = false
+                      that.$message.error('failed: connecion' + err)
                   })
               }
           })
       },
-      handleOffClick() {
+      handleOffClick: function(){
          if(this.Offing || !this.id ||this.passing) return
+         const that = this
           this.$modal.confirm({
               title: 'Do you want to set Image Off',
               content: 'If image is made Off,it will not be visible',
               onOk() {
-                  this.passing = true,
-                  resourceUnCheck(this.id).then(res => {
+                  that.passing = true,
+                  resourceUnCheck(that.id).then(res => {
                       if(res.code === 200) {
-                          this.$message.success('deleted success')
+                          that.$message.success('deleted success')
                       }else {
-                          this.$message.error('deleted failed')
+                          that.$message.error('deleted failed')
                       }
-                      this.passing = false
-                      this.$emmit("changedone")
+                      that.passing = false
+                      that.$emmit("changedone")
                   },err=> {
-                      this.passing = false
-                      this.$message.error('failed: something wrong with your connection'+ err)
+                      that.passing = false
+                      that.$message.error('failed: something wrong with your connection'+ err)
                   })
               }
           })

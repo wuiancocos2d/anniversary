@@ -1,5 +1,5 @@
 <template>
-  <div class="like-container" v-if="status===2">
+  <div class="add-like-container" v-if="status===2">
     <a-icon class="like-icon" type="heart" @click="handleLikeClick"/>
     <span class="like-num">{{like}}</span>
   </div>
@@ -7,7 +7,7 @@
 <script>
 import {Icon} from 'ant-design-vue'
 export default {
-  name: "Like",
+  name: "AddLike",
   components: {
       "a-icon": Icon
   },

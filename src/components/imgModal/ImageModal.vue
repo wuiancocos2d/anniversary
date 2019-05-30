@@ -7,8 +7,8 @@
           <div class="disciption">
             <span>{{imageItem.resourceContent}}</span>
           </div>
-          <Like v-if="stageComponent === 2" :imgeItem="imageItem"></Like>
-          <Approve v-if="stageComponent === 1"></Approve>
+          <AddLike v-if="stageComponent === 2" :imgeItem="imageItem"></AddLike>
+          <Approve v-if="stageComponent === 1" :id="imageItem.id"></Approve>
           <Rate v-if="stageComponent === 3"></Rate>
         </template>
       </a-card-meta>
@@ -17,7 +17,7 @@
 </template>
 <script>
 import { Card } from "ant-design-vue";
-import Like from "./Like";
+import AddLike from "./AddLike";
 import Approve from "./Approve";
 import Rate from "./Rate";
 export default {
@@ -26,7 +26,7 @@ export default {
     "a-card": Card,
     "a-card-meta": Card.Meta,
     Approve,
-    Like,
+    AddLike,
     Rate
   },
   props: {

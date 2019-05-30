@@ -34,25 +34,14 @@ export default {
   methods: {
     ...mapActions(["getUserInfo"]),
     getUser: function() {
-      this.getUserInfo()
+      this.getUserInfo();
     }
   },
   created: function() {
     axios.interceptors.response.use(
       response => {
         if (response && response.data && response.data.code === 10000) {
-          const h = this.$createElement;
-          const that = this
-          this.$info({
-            title: "This is a notification message",
-            content: h("div", {}, [
-              h("p", "Login overtime, please login again"),
-              h("p", "登陆超时，请重新登陆")
-            ]),
-            onOk() {
-              that.$store.dispatch("logout");
-            }
-          });
+          this.$store.dispatch("logout");
         } else {
           return response;
         }
@@ -61,10 +50,10 @@ export default {
         // Do something with response error
         return Promise.reject(error);
       }
-    )
+    );
   },
-  mounted () {
-    this.getUser()
+  mounted() {
+    this.getUser();
   }
 };
 </script>

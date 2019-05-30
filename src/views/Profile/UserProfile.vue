@@ -69,11 +69,6 @@ export default {
     "a-card": Card,
     "a-badge": Badge
   },
-  data() {
-    return {
-      iconAddStyle: {}
-    };
-  },
   computed: {
     ...mapState(["userInfo"])
   },

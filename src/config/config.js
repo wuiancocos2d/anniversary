@@ -31,12 +31,16 @@ export const production = {
     RESOURCE_UPDATE: '/resource/update?',
     LOAD_USER_BY_ID: BASE_URL_DEV + 'api/getUserById',
     USER_DELET_IMAGE: BASE_URL_DEV + 'resource/delete/',
-    GET_CHECK_IMAGES: BASE_URL_DEV + 'resource/check/',
     GET_IMAGE_BY_TIME: BASE_URL_DEV + 'resource/check/',
     RESOURCE_CHECK: BASE_URL_DEV + 'resource/status/check?id=',
     RESOURCE_UNCHECK: BASE_URL_DEV + 'resource/status/check?id=',
     USER_IMAGES: BASE_URL_DEV+ 'resource/uid/',
+    //主页图片相关
     GET_UNCHECK_IMAGES: BASE_URL + 'resource/unchecked/',
+    GET_CHECK_IMAGES: BASE_URL_DEV + 'resource/check/',
+    GET_CANDIDATE_IMAGES: BASE_URL_DEV + 'resource/candiate/',
+    GET_WINNERS_IMAGES: BASE_URL_DEV + 'resource/winners/'
+    
 }
 
 export const stageCode = {
@@ -46,5 +50,7 @@ export const stageCode = {
     "rate": 3,
     "end": 4
 }
+
+export const env = 'production'
 
 export default production

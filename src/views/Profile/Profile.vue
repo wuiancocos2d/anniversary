@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       modalVisible: false,
-      imageModal: null
+      imageModal: {}
     };
   },
   mounted() {
@@ -79,11 +79,11 @@ export default {
         this.syncUserImages();
       }
     },
-    deleteSuccess: function(imgId) {
+    deleteSuccess: function() {
       this.modalVisible = false;
       this.syncUserImages();
     },
-    updateSuccess: function(imgInfo) {
+    updateSuccess: function() {
       this.$message.success("update successful");
       this.modalVisible = false;
       this.syncUserImages();

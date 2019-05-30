@@ -67,6 +67,7 @@ import {
   resourceUpdate
 } from "../../service/getData.js";
 import config from "../../config/config";
+
 export default {
   name: "UploadModal",
   components: {
@@ -85,10 +86,10 @@ export default {
       uploading: false,
       deleting: false,
       imageUploadUrl: config.IMG_UPLOAD_URL,
-      ableChangeImage: false,
+      disableChangeImage: true,
       imageUrl: null,
       image: {},
-      file: null,
+      file: null
     };
   },
   props: {
@@ -99,9 +100,10 @@ export default {
   mounted: function() {
     const data = this.imageModal;
     const that = this;
-    if (data) {
+    if (data && data.id) {
+      this.disableChangeImage = true
       this.$nextTick(function() {
-        this.imageUrl = data.resourceUrl;
+        this.imageUrl = data.resourceUrl
         that.form.setFieldsValue({ resourceTitle: data.resourceTitle });
         that.form.setFieldsValue({
           resourceContent: data.resourceContent
@@ -110,8 +112,8 @@ export default {
     }
   },
   watch: {
-    imageModal: function(val) {
-      if (val !== null && val !== undefined) {
+    imageModal: function(val){
+      if (val && val.id) {
         this.image.title = val.resourceTitle;
         this.image.id = val.id;
         this.image.content = val.resourceContent;
@@ -120,7 +122,8 @@ export default {
         this.form.setFieldsValue({
           resourceContent: val.resourceContent
         });
-        this.ableChangeImage = true;
+        this.disableChangeImage = true;
+        console.log("disableChangeImage",this.disableChangeImage);
       } else {
         this.image = {};
         this.imageUrl = null;
@@ -129,6 +132,7 @@ export default {
           resourceContent: ""
         });
         this.ableChangeImage = false;
+        console.log("disableChangeImage", this.ableChangeImage);
       }
     }
   },
@@ -207,22 +211,20 @@ export default {
       });
     },
     handleDelet() {
-      const that  = this
+      const that = this;
       this.$modal.confirm({
         title: "Do you want to delete this image",
         onOk() {
-          that.deleting = true
-          resourceDelete(that.imageModal.id).then(
-            res=> {
-              if(res && res.code === 200) {
-                that.$message.success('deleted')
-                that.$emit("userDelete",that.imageModal.id)
-              }else {
-                that.$messge.error('failed' + res)
-              }
-              that.deleting = false
+          that.deleting = true;
+          resourceDelete(that.imageModal.id).then(res => {
+            if (res && res.code === 200) {
+              that.$message.success("deleted");
+              that.$emit("userDelete", that.imageModal.id);
+            } else {
+              that.$messge.error("failed" + res);
             }
-          )
+            that.deleting = false;
+          });
         }
       });
     }

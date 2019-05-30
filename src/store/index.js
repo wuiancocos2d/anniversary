@@ -16,7 +16,9 @@ const state = {
 		message: null
 	},
 	userId: null,
-	userUploads: []
+	userStage: 1,
+	userUploads: [],
+	uesrLikeList: []
 }
 
 export default new Vuex.Store({

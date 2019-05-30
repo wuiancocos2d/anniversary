@@ -85,7 +85,7 @@ export default {
       });
     },
     login(user) {
-      const loadingMessage = this.$message.loading("Loading..", 0);
+      const loadingMessage = this.$message.loading("Loading..", 0)
       userLogin(user).then(
         res => {
           setTimeout(loadingMessage, 0);
@@ -94,7 +94,6 @@ export default {
             return;
           }
           if (res.code === 200) {
-            console.log('res',res)
             this.RECORD_USERID(res.data.user.userNo);
             this.RECORD_USERINFO(res.data);
             this.$router.push("/");

@@ -2,7 +2,8 @@ import http from '../config/http'
 import config from '../config/config'
 import { getStore } from '../config/mUtils'
 import store from '../store/index'
-const env = 'production'
+
+const env = 'produnction'
 const userId = getStore('userId')
 
 export const loadUserInfo = async function () {
@@ -31,7 +32,6 @@ export const userLogin = async function (user) {
     url: env === 'dev' ? config.USER_LOGIN : config.USER_LOGIN + parseJsonToPostString(user),
     method: 'post',
   })
-
   return res.data
 }
 
@@ -104,7 +104,7 @@ export const resourceUnCheck = async function (itemId) {
 
 export const getUserImages = async function () {
   let res = await http({
-    url: env === 'dev' ? config.USER_IMAGES : config.USER_IMAGES + userId,
+    url: env === 'dev' ? config.USER_IMAGES : config.USER_IMAGES + store.state.userId,
     method: 'get'
   })
   return res.data
@@ -113,19 +113,19 @@ export const getUserImages = async function () {
 
 // 主页 图片
 export const getHomepageImage = async function (page) {
-  const stage = store.getters.stage
+  const userStage = store.state.userStage
   let url
-  switch (stage) {
-    case 1:
+  switch (userStage) {
+    case 2:
       url = config.GET_UNCHECK_IMAGES
       break;
-    case 2: 
+    case 3: 
       url = config.GET_CHECK_IMAGES
       break
-    case 3: 
+    case 4: 
       url = config.GET_CANDIDATE_IMAGES
       break
-    case 4:
+    case 5:
       url = config.GET_WINNERS_IMAGES
       break    
     default:
@@ -134,7 +134,7 @@ export const getHomepageImage = async function (page) {
   }
   if(url === '') return null
   let res = await http({
-      url: url + page + '/12',
+      url: env === 'dev' ? url : url + page + '/12',
       method: 'get'
   })
   return res.data

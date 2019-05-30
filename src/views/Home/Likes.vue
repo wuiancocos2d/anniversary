@@ -12,7 +12,7 @@
         <Hero></Hero>
       </div>
       <div class="img-info" slot-scope="props">
-        <div class="like" v-if="stage > 1">
+        <div class="like" v-if="userStage > 1">
           <a-icon class="likeIcon" type="heart"/>
           <span class="likeNum">{{props.value.resourceLike}}</span>
         </div>
@@ -34,7 +34,7 @@ import vueWaterfallEasy from "vue-waterfall-easy";
 import { Icon, Modal } from "ant-design-vue";
 import { getHomepageImage } from "../../service/getData.js";
 import ImageModal from "../../components/imgModal/ImageModal";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import Hero from "./Hero";
 export default {
   name: "Likes",
@@ -46,7 +46,7 @@ export default {
     ImageModal
   },
   computed: {
-    ...mapGetters(["stage"]),
+    ...mapState(["userStage"]),
   },
   data() {
     return {
@@ -59,21 +59,21 @@ export default {
       imageItem: {}
     };
   },
-  watch: {
-    stage: function() {
-      this.imgsArr = []
-      this.getData()
-    }
-  },
   methods: {
-    async getData() {
-      const res = await getHomepageImage(this.page)
-      if(res.code === 200) {
-        this.imgsArr.concat(res.data)
-        this.page++
-      }else {
-        this.$message.error('error request images:',res.message)
-      }
+    getData() {
+      getHomepageImage(this.page).then(
+        res => {
+          if(res && res.code === 200) {
+            this.imgsArr = this.imgsArr.concat(res.data)
+            this.page++
+          }else {
+            this.$message.error('connect error')
+          }
+        },
+        err => {
+          this.$message.error('err',err)
+        }
+      )
     },
     openModal(event, { value }) {
       this.imageItem = value;

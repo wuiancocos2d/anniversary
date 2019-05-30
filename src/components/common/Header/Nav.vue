@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link>
     </a-menu-item>
     <a-menu-item v-if="userInfo.user" class="nav-item">
-      <router-link to="/Profile">Plofile</router-link>
+      <router-link to="/Profile">Profile</router-link>
     </a-menu-item>
     <a-menu-item v-if="userInfo.user" class="nav-item">
       <a class="nav-link" @click="userLogout">Logout</a>

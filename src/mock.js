@@ -236,6 +236,31 @@ const resourceCheck = function() {
     }
 }
 
+const getUncheck = function () {
+    return {
+        "code": 200,
+        "message": "OK",
+        "data": [
+          {
+            "id": 18,
+            "userId": 4035,
+            "resourceUrl": "http://localhost:7777/images/1559108367220.jpg",
+            "resourceTitle": null,
+            "resourceContent": "lufei",
+            "resourceStatus": "0",
+            "resourceLike": null,
+            "resourcePoint": null,
+            "pointTheme": null,
+            "pointSkill": null,
+            "pointMind": null,
+            "resourceAward": null,
+            "remark": null,
+            "createTime": "2019-05-29T05:39:33.000+0000",
+            "modifyTime": "2019-05-29T05:39:33.000+0000"
+          }
+        ]
+      }
+}
 
 Mock.mock(devPath.IMAGE_URL, 'get', postData())
 Mock.mock(devPath.USER_LOGIN, 'post', userLogin())
@@ -245,3 +270,4 @@ Mock.mock(devPath.USERUPLOAD_URL, 'post', userUpload())
 Mock.mock(devPath.USER_DELET_IMAGE, 'delete', userDeletUpload())
 Mock.mock(devPath.USER_UPDATE, 'put', userUpdate())
 Mock.mock(devPath.RESOURCE_CHECK, 'put',resourceCheck())
+Mock.mock(devPath.GET_UNCHECK_IMAGES, 'get',getUncheck())
