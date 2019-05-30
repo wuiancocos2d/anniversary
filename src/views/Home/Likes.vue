@@ -34,7 +34,7 @@ import vueWaterfallEasy from "vue-waterfall-easy";
 import { Icon, Modal } from "ant-design-vue";
 import { getHomepageImage } from "../../service/getData.js";
 import ImageModal from "../../components/imgModal/ImageModal";
-import { mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 import Hero from "./Hero";
 export default {
   name: "Likes",
