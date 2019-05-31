@@ -3,6 +3,9 @@
     <a-menu-item key="home" class="nav-item">
       <router-link to="/">Home</router-link>
     </a-menu-item>
+    <a-menu-item key="userStage" class="nav-item">
+      <router-link to="/">{{userStage}}</router-link>
+    </a-menu-item>
     <a-menu-item v-if="userInfo.user" class="nav-item">
       <router-link to="/Profile">Profile</router-link>
     </a-menu-item>
@@ -33,7 +36,8 @@ export default {
     mode: [String]
   },
   computed: mapState([
-    'userInfo'
+    'userInfo',
+    'userStage'
   ]),
   methods: {
     ...mapActions(["logout"]),

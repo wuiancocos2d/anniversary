@@ -1,9 +1,10 @@
 import http from '../config/http'
 import config from '../config/config'
 import { getStore } from '../config/mUtils'
+import { stageCode } from '../config/config'
 import store from '../store/index'
+import { env } from '../config/config'
 
-const env = 'produnction'
 const userId = getStore('userId')
 
 export const loadUserInfo = async function () {
@@ -43,9 +44,6 @@ export const getImages = async function (opt) {
   return res.data
 }
 
-
-
-
 export const getAuthoList = async function () {
   let res = await http({
     url: config.AUTHORITYList_URL,
@@ -61,6 +59,9 @@ export const getImgModal = async function () {
   })
   return res.data
 }
+
+
+// 图片控制
 
 export const uploadImgData = async function (imgData) {
   let res = await http({
@@ -102,6 +103,14 @@ export const resourceUnCheck = async function (itemId) {
   return res.data
 }
 
+export const likeImage = async function (imageId, uId) {
+  let res = await http({
+    url: env === 'dev' ? config.ADD_LIKE_IMAGE : config.ADD_LIKE_IMAGE + imageId + '/' + uId,
+    method: 'post'
+  })
+  return res.data
+}
+
 export const getUserImages = async function () {
   let res = await http({
     url: env === 'dev' ? config.USER_IMAGES : config.USER_IMAGES + store.state.userId,
@@ -116,29 +125,32 @@ export const getHomepageImage = async function (page) {
   const userStage = store.state.userStage
   let url
   switch (userStage) {
-    case 2:
+    case stageCode.approve:
       url = config.GET_UNCHECK_IMAGES
       break;
-    case 3: 
+    case stageCode.like:
+    case stageCode.stopLike:
       url = config.GET_CHECK_IMAGES
       break
-    case 4: 
+    case stageCode.rate:
       url = config.GET_CANDIDATE_IMAGES
       break
-    case 5:
+    case stageCode.end:
       url = config.GET_WINNERS_IMAGES
-      break    
+      break
     default:
       url = ''
       break;
   }
-  if(url === '') return null
+  if (url === '') return null
   let res = await http({
-      url: env === 'dev' ? url : url + page + '/12',
-      method: 'get'
+    url: env === 'dev' ? url : url + page + '/12',
+    method: 'get'
   })
   return res.data
 }
+
+
 
 
 

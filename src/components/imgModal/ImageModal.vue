@@ -7,19 +7,21 @@
           <div class="disciption">
             <span>{{imageItem.resourceContent}}</span>
           </div>
-          <AddLike v-if="stageComponent === 2" :imgeItem="imageItem"></AddLike>
-          <Approve v-if="stageComponent === 1" :id="imageItem.id"></Approve>
-          <Rate v-if="stageComponent === 3"></Rate>
+          <AddLike v-if="userStage > stageCode.approve" :imgeItem="imageItem"></AddLike>
+          <Approve v-if="userStage === stageCode.approve" :id="imageItem.id"></Approve>
+          <Rate v-if="userStage === stageCode.rate"></Rate>
         </template>
       </a-card-meta>
     </a-card>
   </div>
 </template>
 <script>
-import { Card } from "ant-design-vue";
-import AddLike from "./AddLike";
-import Approve from "./Approve";
-import Rate from "./Rate";
+import { Card } from "ant-design-vue"
+import AddLike from "./AddLike"
+import Approve from "./Approve"
+import Rate from "./Rate"
+import {stageCode} from '../../config/config'
+import {mapState} from 'vuex'
 export default {
   name: "ImageModal",
   components: {
@@ -29,13 +31,16 @@ export default {
     AddLike,
     Rate
   },
+  data() {
+    return {
+      stageCode: stageCode
+    }
+  },
   props: {
     imageItem: Object
   },
   computed: {
-    stageComponent: function() {
-      return this.$store.getters.stage;
-    }
+    ...mapState(['userStage'])
   },
   methods: {}
 };

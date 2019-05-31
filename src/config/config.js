@@ -1,5 +1,6 @@
 const BASE_URL = '/'
 const BASE_URL_DEV = '/'
+export const env = 'production'
 
 export const devPath = {
     LOAD_USER_INFO: BASE_URL + 'api/userInfo/',//用户基本信息
@@ -17,7 +18,9 @@ export const devPath = {
     GET_IMAGE_BY_TIME: BASE_URL_DEV + 'api/check/',
     RESOURCE_CHECK: BASE_URL_DEV + 'resource/status/check',
     USER_IMAGES: BASE_URL_DEV+ 'api/uid/',
-    GET_UNCHECK_IMAGES: 'api/getUncheck/'
+    GET_UNCHECK_IMAGES: 'api/getUncheck/',
+    ADD_LIKE_IMAGE: 'api/like/',
+    POINT_IMAGE: '/api/point/'
 }
 
 export const production = {
@@ -38,19 +41,29 @@ export const production = {
     //主页图片相关
     GET_UNCHECK_IMAGES: BASE_URL + 'resource/unchecked/',
     GET_CHECK_IMAGES: BASE_URL_DEV + 'resource/check/',
-    GET_CANDIDATE_IMAGES: BASE_URL_DEV + 'resource/candiate/',
-    GET_WINNERS_IMAGES: BASE_URL_DEV + 'resource/winners/'
+    GET_CANDIDATE_IMAGES: BASE_URL_DEV + 'resource/candiate/30',
+    GET_WINNERS_IMAGES: BASE_URL_DEV + 'resource/winners/',
+    ADD_LIKE_IMAGE: 'like/add/',
+    POINT_IMAGE: '/resource/point?'
     
 }
 
 export const stageCode = {
-    "upload": 0,
-    "approve": 1,
-    "like": 2,
-    "rate": 3,
-    "end": 4
+    "upload": 1,
+    "stopuload": 2,
+    "approve": 3,
+    "like": 4,
+    "stopLike": 5,
+    "rate": 6,
+    "end": 7
 }
 
-export const env = 'production'
+export const userCode = {
+    "normalUser": 0,
+    "approver": 1,
+    "rater": 2,
+    "supperUser": 3
+}
 
-export default production
+
+export default env === 'dev' ? devPath : production

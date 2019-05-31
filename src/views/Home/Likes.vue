@@ -12,7 +12,7 @@
         <Hero></Hero>
       </div>
       <div class="img-info" slot-scope="props">
-        <div class="like" v-if="userStage > 1">
+        <div class="like" v-if="userStage > stageCode.approve">
           <a-icon class="likeIcon" type="heart"/>
           <span class="likeNum">{{props.value.resourceLike}}</span>
         </div>
@@ -30,12 +30,14 @@
   </div>
 </template>
 <script>
-import vueWaterfallEasy from "vue-waterfall-easy";
-import { Icon, Modal } from "ant-design-vue";
-import { getHomepageImage } from "../../service/getData.js";
-import ImageModal from "../../components/imgModal/ImageModal";
-import { mapState } from "vuex";
-import Hero from "./Hero";
+import vueWaterfallEasy from "vue-waterfall-easy"
+import { Icon, Modal } from "ant-design-vue"
+import { getHomepageImage } from "../../service/getData.js"
+import ImageModal from "../../components/imgModal/ImageModal"
+import { mapState } from "vuex"
+import {stageCode} from '../../config/config'
+
+import Hero from "./Hero"
 export default {
   name: "Likes",
   components: {
@@ -56,7 +58,8 @@ export default {
       imgTitle: "",
       modalOpen: false,
       hasLike: false,
-      imageItem: {}
+      imageItem: {},
+      stageCode: stageCode
     };
   },
   methods: {
@@ -76,6 +79,7 @@ export default {
       )
     },
     openModal(event, { value }) {
+      console.log('value',value)
       this.imageItem = value;
       this.imgTitle = value.resourceTitle;
       this.modalOpen = true;

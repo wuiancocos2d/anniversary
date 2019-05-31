@@ -1,5 +1,6 @@
 import * as types from './mutaions-types'
 import Vue from 'vue'
+import {stageCode,userCode} from '../config/config'
 import { setStore ,removeStore} from '../config/mUtils'
 
 export const mutations = {
@@ -51,33 +52,45 @@ export const mutations = {
     [types.USER_LIKE_LIST] (state, imgs) {
         state.uesrLikeList = imgs
     },
-    [types.USER_STAGE] (state, stage, role) {
+    [types.USER_STAGE] (state, {stage,role}) {
+        console.log('stage',stage,'role',role)
         if(!stage || !role) return 
         let userLevelCode,userStage 
+        //user code
         if(role.length > 2) {
-            userLevelCode = 3
+            userLevelCode = userCode.supperUser
         }else if(role.length === 1) {
-            userLevelCode = role[0]['id'] === 2 ? 2:1 
+            userLevelCode = role[0]['id'] === 2 ? userCode.rater:userCode.approver 
         }else {
-            userLevelCode = 0
+            userLevelCode = userCode.normalUser
         }
+        //user stage
+        //上传
         if(stage === 1) {
-            userStage = 1
+            userStage = stageCode.upload
         }else if(stage === 2 ){
-            if(userLevelCode === 1 || userLevelCode === 3) {
-                userStage = 2
+            //审批
+            if(userLevelCode === userCode.approver || userLevelCode === userCode.supperUser) {
+                userStage = stageCode.approve
             }else {
-                userStage = 1
+                userStage = stageCode.stopuload
             }
+            
         }else if(stage === 3) {
-            userStage = 3
+            //点赞
+            userStage = stageCode.like
         }else if(stage === 4) {
-            if(userLevelCode === 2 || userLevelCode === 3) {
-                userStage = 3
+            //打分
+            if(userLevelCode === userLevelCode.rater || userLevelCode === userCode.supperUser) {
+                userStage = stageCode.rate
+            }else {
+                userStage = stageCode.stopLike
             }
         }else if(stage === 5) {
-            userStage = 5
+            //结束
+            userStage = stageCode.end
         }
+        console.log('userStage',userStage)
         state.userStage = userStage
     },
     [types.SET_USER_STAGE] (state,userStage) {

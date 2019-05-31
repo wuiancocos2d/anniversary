@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import mutations from './mutations'
 import actions from './action'
 import getters from './getters'
-
+import {stageCode} from '../config/config'
 Vue.use(Vuex)
 
 
@@ -16,7 +16,7 @@ const state = {
 		message: null
 	},
 	userId: null,
-	userStage: 1,
+	userStage: stageCode.stopuload,
 	userUploads: [],
 	uesrLikeList: []
 }

@@ -9,15 +9,16 @@
       >{{stageV}}</a-button>
       {{userStage}}
     </div>
-    <Hero v-if="userStage === 1"></Hero>
+    <Hero v-if="userStage < stageCode.approve"></Hero>
     <Likes v-else></Likes>
   </div>
 </template>
 <script>
-import Likes from "./Likes";
-import Hero from "./Hero";
-import { mapActions, mapState } from "vuex";
-import { Button } from 'ant-design-vue';
+import Likes from "./Likes"
+import Hero from "./Hero"
+import { mapActions, mapState } from "vuex"
+import { Button } from "ant-design-vue"
+import {stageCode} from '../../config/config'
 export default {
   name: "home",
   components: {
@@ -27,8 +28,9 @@ export default {
   },
   data() {
     return {
-      stagesBtns: [1, 2, 3, 4, 5]
-    };
+      stagesBtns: [1, 2, 3, 4, 5, 6, 7],
+      stageCode: stageCode
+    }
   },
   computed: {
     ...mapState(["userStage"])
@@ -36,8 +38,8 @@ export default {
   methods: {
     ...mapActions(["setUserStage"]),
     handleS: function(i) {
-      this.setUserStage(i+1);
-    },
+      this.setUserStage(i + 1);
+    }
   }
 };
 </script>
