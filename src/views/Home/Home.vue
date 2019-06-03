@@ -7,7 +7,6 @@
         v-bind:key="i"
         @click="handleS(i)"
       >{{stageString[stageV -1 ]}}</a-button>
-      {{userStage}}
     </div>
     <Hero v-if="userStage < stageCode.approve"></Hero>
     <Likes v-else></Likes>
@@ -39,7 +38,7 @@ export default {
   methods: {
     ...mapActions(["setUserStage"]),
     handleS: function(i) {
-      this.setUserStage(i + 1);
+      this.setUserStage(i + 1)
     }
   }
 };

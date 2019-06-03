@@ -5,7 +5,7 @@
         <VHeader></VHeader>
       </a-layout-header>
       <a-layout :style="{height: layoutHeight}">
-        <a-layout-content :style="{backgroundColor: contentBk,height:layoutHeight,overflow:'auto'}">
+        <a-layout-content :style="{backgroundColor: contentBk,height:layoutHeight}">
           <router-view/>
         </a-layout-content>
       </a-layout>

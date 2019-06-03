@@ -1,19 +1,21 @@
 <template>
   <div class="plofile-container">
-    <a-row>
-      <a-col :span="20" :offset="2">
-        <UserProfile v-on:listenOpenUploadModal="openUploadModal"></UserProfile>
-        <UploadItems v-on:listenUpdateImage="openUpdateModal"></UploadItems>
-      </a-col>
-    </a-row>
-    <a-modal title="Collect Image" v-model="modalVisible" :footer="null" :width="350">
-      <UploadModal
-        :imageModal="imageModal"
-        v-on:user-upload-event="handleUploadSuccess"
-        v-on:userDelete="deleteSuccess"
-        v-on:userUpdate="updateSuccess"
-      ></UploadModal>
-    </a-modal>
+    <div class="fixed-container">
+      <a-row>
+        <a-col :span="20" :offset="2">
+          <UserProfile v-on:listenOpenUploadModal="openUploadModal"></UserProfile>
+          <UploadItems v-on:listenUpdateImage="openUpdateModal"></UploadItems>
+        </a-col>
+      </a-row>
+      <a-modal title="Collect Image" v-model="modalVisible" :footer="null" :width="350">
+        <UploadModal
+          :imageModal="imageModal"
+          v-on:user-upload-event="handleUploadSuccess"
+          v-on:userDelete="deleteSuccess"
+          v-on:userUpdate="updateSuccess"
+        ></UploadModal>
+      </a-modal>
+    </div>
   </div>
 </template>
 <script>
@@ -39,7 +41,7 @@ export default {
     };
   },
   mounted() {
-    this.syncUserImages()
+    this.syncUserImages();
   },
   computed: {
     ...mapState(["userUploads"])
@@ -47,9 +49,9 @@ export default {
   methods: {
     ...mapActions(["syncUserImages"]),
     openUploadModal: function() {
+      this.imageModal = false
       if (this.userUploads.length < 2) {
-        this.imageModal = null
-        this.modalVisible = true
+        this.modalVisible = true;
       } else {
         this.outOfImages();
       }
@@ -74,32 +76,36 @@ export default {
       });
     },
     handleUploadSuccess: function(data) {
-      if (data) {
-        this.imageModal = null
-        this.modalVisible = false
-        this.syncUserImages();
-      }
+      this.imageModal = null;
+      this.modalVisible = false;
+      this.syncUserImages();
     },
     deleteSuccess: function(imgId) {
-      this.modalVisible = false
-      this.syncUserImages()
+      this.modalVisible = false;
+      this.syncUserImages();
     },
     updateSuccess: function(imgInfo) {
       this.$message.success("update successful");
       this.modalVisible = false;
       this.syncUserImages();
     }
-  },
+  }
 };
 </script>
 <style lang="scss">
 .plofile-container {
-  max-width: 1200px;
+  width: 100%;
   text-align: left;
   margin: 0 auto;
   padding-top: 50px;
   display: block;
   height: 100%;
+  overflow-y: auto;
+  .fixed-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: block;
+  }
   .imgRow {
     margin-top: 30px;
   }

@@ -94,9 +94,7 @@ export default {
     };
   },
   props: {
-    imageModal: {
-      type: Object
-    }
+    imageModal: Object
   },
   computed: {
     ...mapState(['userStage']),
@@ -105,8 +103,8 @@ export default {
     }
   },
   mounted: function() {
-    const data = this.imageModal;
-    const that = this;
+    const data = this.imageModal
+    const that = this
     if (data && data.id) {
       this.disableChangeImage = true
       this.$nextTick(function() {
@@ -115,32 +113,9 @@ export default {
         that.form.setFieldsValue({
           resourceContent: data.resourceContent
         });
-      });
-    }
-  },
-  watch: {
-    imageModal: function(val){
-      if (val && val.id) {
-        this.image.title = val.resourceTitle;
-        this.image.id = val.id;
-        this.image.content = val.resourceContent;
-        this.imageUrl = val.resourceUrl;
-        this.form.setFieldsValue({ resourceTitle: val.resourceTitle });
-        this.form.setFieldsValue({
-          resourceContent: val.resourceContent
-        });
-        this.disableChangeImage = true;
-        console.log("disableChangeImage",this.disableChangeImage);
-      } else {
-        this.image = {};
-        this.imageUrl = null;
-        this.form.setFieldsValue({ resourceTitle: "" });
-        this.form.setFieldsValue({
-          resourceContent: ""
-        });
-        this.ableChangeImage = false;
-        console.log("disableChangeImage", this.ableChangeImage);
-      }
+      })
+    }else {
+      console.log('else')
     }
   },
   methods: {
@@ -171,9 +146,7 @@ export default {
         }
       }
     },
-    async handleImgUpload(file) {
-      console.log(file);
-    },
+   
     handleFormSubmit(e) {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {

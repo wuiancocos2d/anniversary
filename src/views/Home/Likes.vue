@@ -89,6 +89,7 @@ export default {
   watch: {
     userStage: function() {
       this.imgsArr = [],
+      this.page = 1,
       this.getData()
     }
   },
@@ -140,6 +141,7 @@ export default {
   height: 100%;
   width: 100%;
   padding: 0 2px;
+  overflow-y: auto;
   .img-info {
     .like {
       margin-top: 15px;

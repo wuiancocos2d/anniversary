@@ -27,7 +27,7 @@
                 <a-row>
                   <a-col span="12">
                     <div class="fun-btn-item heart-item">
-                      <a-badge class="icon heart-icon-block" :count="5" :offset="[-10,20]">
+                      <a-badge class="icon heart-icon-block" :count="likeTimes" :offset="[-10,20]">
                         <a-icon class="heart" type="heart"/>
                       </a-badge>
                       <div class="description">
@@ -70,8 +70,18 @@ export default {
     "a-card": Card,
     "a-badge": Badge
   },
+  data(){
+    return {
+      likeTimes: 0
+    }
+  },
   computed: {
-    ...mapState(["userInfo", "userStage"])
+    ...mapState(["userInfo", "userStage","uesrLikeList"])
+  },
+  watch: {
+    uesrLikeList: function(){
+      this.likeTimes = this.uesrLikeList.length
+    }
   },
   methods: {
     handleUploadBtn: function() {

@@ -8,7 +8,7 @@
       <span class="ant-rate-text">Beauty: {{pointTheme}} point</span>
       <a-rate :count="10" v-model="pointTheme"></a-rate>
     </div>
-    <a-button type="primary" :loading="rating">Update Rate</a-button>
+    <a-button type="primary" :loading="rating" @click="handleRate">Update Rate</a-button>
   </div>
 </template>
 <script>
@@ -31,20 +31,32 @@ export default {
       rating: false
     };
   },
+  watch: {
+    id: function() {
+      this.pointMind= 0
+      this.pointSkill= 0
+      this.pointTheme= 0,
+      this.rating = false
+    }
+  },
   methods: {
     handleRate: function() {
-      this.rating = true;
+      if(this.rating === true) return
+      this.rating = true
+      console.log('id',this.id)
       const imageRateData = {
         id: this.id,
         pointMind: this.pointMind,
         pointSkill: this.pointSkill,
-        pointTheme: this.pointTheme
-      };
+        pointTheme: this.pointTheme,
+      }
       rateImage(imageRateData).then(
         res => {
           if (res.code === 200) {
             this.$message.success("Rate successful");
             this.$emit("rateSuccess");
+          }else {
+            this.$message.error("Rate faild:" + res.message)
           }
         },
         err => {

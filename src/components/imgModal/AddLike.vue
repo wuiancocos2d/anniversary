@@ -8,7 +8,7 @@
       twoToneColor="#eb2f96"
       @click="handleLikedClick"
     />
-    <a-icon v-else class="like-icon" type="heart" @click="handleLikeClick"/>
+    <a-icon v-else class="like-icon" type="heart" @click="handleLikeClick" :spin="iconSpin"/>
     <span class="like-num">{{likeTimes}}</span>
   </div>
 </template>
@@ -24,7 +24,6 @@ export default {
   },
   data() {
     return {
-      liking: false,
       stageCode: stageCode,
       iconSpin: false,
       likeTimes: 0,
@@ -36,28 +35,19 @@ export default {
     id: Number
   },
   computed: {
-    ...mapState(["userStage", "userId", "uesrLikeList"])
+    ...mapState(["userStage", "userId"])
   },
   mounted: function() {
-    if (this.id) {
-      const that = this;
-      getImageLikeListById(this.id).then(res => {
-        if (res.code === 200) {
-          that.likeTimes = res.data.length;
-          for (let i = 0; i < this.userLikeList.length; i++) {
-            if (this.userLikeList[i]["id"] === this.id) {
-              this.liked = true;
-            }
-          }
-        }
-      });
-    }
+    this.liked = false
+    this.ifLike()
   },
+  
   methods: {
     handleLikeClick() {
       if (this.userStage === this.stageCode.like) {
         this.iconSpin = true;
         likeImage(this.id).then(res => {
+          this.iconSpin = false;
           if (res.code === 200) {
             this.liked = true;
             this.likeTimes = this.likeTimes + 1;
@@ -86,6 +76,22 @@ export default {
           h("p", "不能重复点赞或取消点赞")
         ])
       });
+    },
+    ifLike() {
+      if (this.id) {
+        const that = this;
+        getImageLikeListById(this.id).then(res => {
+          if (res.code === 200) {
+            const list = res.data
+            that.likeTimes = list.length
+            for (let i = 0; i < list.length; i++) {
+              (function(uid) {
+                if (uid === that.userId) that.liked = true;
+              })(list[i]['uid'])
+            }
+          }
+        });
+      }
     }
   }
 };

@@ -9,7 +9,7 @@
           </div>
           <AddLike v-if="userStage > stageCode.approve" :id="imageItem.id"  v-on:likeSuccess="handleLikeSuccess"></AddLike>
           <Approve v-if="userStage === stageCode.approve" :id="imageItem.id"></Approve>
-          <Rate v-if="userStage === stageCode.rate" v-on:rateSuccess="handleRateSuccuess"></Rate>
+          <Rate v-if="userStage === stageCode.rate" :id = "imageItem.id" v-on:rateSuccess="handleRateSuccuess"></Rate>
         </template>
       </a-card-meta>
     </a-card>
@@ -42,9 +42,7 @@ export default {
   computed: {
     ...mapState(['userStage','userId'])
   },
-  mounted: function(){
-    console.log('this moudle',this.imageItem)
-  },
+ 
   methods: {
     handleLikeSuccess: function() {
       this.imageItem.resourceLike = this.imageItem.resourceLike++
