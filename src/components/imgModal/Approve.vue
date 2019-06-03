@@ -37,7 +37,7 @@ export default {
                           that.$message.success('public success')
                       }
                       that.passing = false
-                      that.$emmit("changedone")
+                      that.$emit("changedone")
                   },err=> {
                       that.passing = false
                       that.$message.error('failed: connecion' + err)

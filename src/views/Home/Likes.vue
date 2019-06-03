@@ -1,6 +1,7 @@
 <template>
   <div class="like-container">
     <vue-waterfall-easy
+      ref="waterfall"
       :imgsArr="imgsArr"
       @scrollReachBottom="getData"
       :imgWidth="220"
@@ -11,33 +12,41 @@
       <div class="hero" slot="waterfall-head">
         <Hero></Hero>
       </div>
-      <div class="img-info" slot-scope="props">
+      <!-- <div class="img-info" slot-scope="props">
         <div class="like" v-if="userStage > stageCode.approve">
-          <a-icon class="likeIcon" type="heart"/>
+          <a-icon v-if="props.value.liked" type="heart" theme="twoTone" twoToneColor="#eb2f96"/>
+          <a-icon v-else class="likeIcon" type="heart"/>
           <span class="likeNum">{{props.value.resourceLike}}</span>
         </div>
         <div class="title">
           <p class="title-text">{{props.value.resourceTitle}}</p>
         </div>
-      </div>
+      </div>-->
       <div slot="waterfall-over">
         <h3>...No More Images...</h3>
       </div>
     </vue-waterfall-easy>
-    <a-modal :title="imgTitle" v-model="modalOpen" :footer="null" :centered="true" :width="350">
+    <a-modal
+      :title="imgTitle"
+      v-model="modalOpen"
+      :footer="null"
+      :centered="true"
+      :width="350"
+      v-on:operationDone="closeModal"
+    >
       <ImageModal :imageItem="imageItem"></ImageModal>
     </a-modal>
   </div>
 </template>
 <script>
-import vueWaterfallEasy from "vue-waterfall-easy"
-import { Icon, Modal } from "ant-design-vue"
-import { getHomepageImage } from "../../service/getData.js"
-import ImageModal from "../../components/imgModal/ImageModal"
-import { mapState } from "vuex"
-import {stageCode} from '../../config/config'
+import vueWaterfallEasy from "vue-waterfall-easy";
+import { Icon, Modal } from "ant-design-vue";
+import { getHomepageImage } from "../../service/getData.js";
+import ImageModal from "../../components/imgModal/ImageModal";
+import { mapState, mapActions } from "vuex";
+import { stageCode } from "../../config/config";
 
-import Hero from "./Hero"
+import Hero from "./Hero";
 export default {
   name: "Likes",
   components: {
@@ -48,7 +57,7 @@ export default {
     ImageModal
   },
   computed: {
-    ...mapState(["userStage"]),
+    ...mapState(["userStage"])
   },
   data() {
     return {
@@ -58,35 +67,70 @@ export default {
       imgTitle: "",
       modalOpen: false,
       hasLike: false,
-      imageItem: {},
+      imageItem: {
+        id: 0,
+        pointMind: 0,
+        pointSkill: 0,
+        pointTheme: 0,
+        resourceAward: "string",
+        resourceContent: "string",
+        resourceLike: 0,
+        resourcePoint: 0,
+        resourceStatus: "string",
+        resourceTitle: "string",
+        resourceUrl: "string",
+        userId: 0,
+        liked: false
+      },
       stageCode: stageCode
     };
   },
+  //测试用
+  watch: {
+    userStage: function() {
+      this.imgsArr = [],
+      this.getData()
+    }
+  },
   methods: {
+    ...mapActions(["syncUserImages"]),
     getData() {
+      let hasLike = this.hasLike;
       getHomepageImage(this.page).then(
         res => {
-          if(res && res.code === 200) {
-            this.imgsArr = this.imgsArr.concat(res.data)
-            this.page++
-          }else {
-            this.$message.error('connect error')
+          if (res && res.code === 200) {
+            if (this.userStage < this.stageCode.rate) {
+              this.imgsArr = this.imgsArr.concat(res.data);
+              this.page++;
+            } else if (this.userStage === this.stageCode.rate) {
+              for (let i = 0; i < res.data.length; i++) {
+                this.imgsArr.push(res.data[i]["resource"]);
+              }
+            }
+          } else {
+            this.$message.error("connect error");
           }
         },
         err => {
-          this.$message.error('err',err)
+          this.$message.error("err", err);
         }
-      )
+      );
     },
     openModal(event, { value }) {
-      console.log('value',value)
       this.imageItem = value;
       this.imgTitle = value.resourceTitle;
       this.modalOpen = true;
+    },
+    closeModal() {
+      this.modalOpen = false;
+      this.imageItem = null;
     }
   },
   created() {
-    if (this.stage !== 0) this.getData();
+    if (this.userStage > this.$stageCode.upload) {
+      this.getData();
+      this.syncUserImages();
+    }
   }
 };
 </script>
@@ -114,7 +158,7 @@ export default {
       line-height: 20px;
       .title-text {
         margin: 0;
-        font-size: 16px;
+        font-size: 18px;
         color: #5a5a5a;
         text-align: left;
         white-space: normal;

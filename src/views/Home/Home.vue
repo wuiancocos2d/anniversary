@@ -6,7 +6,7 @@
         v-for="(stageV,i) in stagesBtns"
         v-bind:key="i"
         @click="handleS(i)"
-      >{{stageV}}</a-button>
+      >{{stageString[stageV -1 ]}}</a-button>
       {{userStage}}
     </div>
     <Hero v-if="userStage < stageCode.approve"></Hero>
@@ -28,7 +28,8 @@ export default {
   },
   data() {
     return {
-      stagesBtns: [1, 2, 3, 4, 5, 6, 7],
+      stagesBtns: [1, 2, 3, 4, 5, 6],
+      stageString: ["开始上传","停止上传","开始审核","开始投票","停止投票","开始打分"],
       stageCode: stageCode
     }
   },

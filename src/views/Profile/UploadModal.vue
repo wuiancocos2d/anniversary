@@ -44,11 +44,11 @@
         <a-button v-if="!imageModal" type="primary" html-type="submit" :loading="uploading" block>
           <span>Upload</span>
         </a-button>
-        <a-button v-else type="primary" @click="handleUpdate" :loading="uploading" block>
+        <a-button v-if="imageModal && canEdit" type="primary" @click="handleUpdate" :loading="uploading" block>
           <span>Update</span>
         </a-button>
         <a-button
-          v-if="imageModal"
+          v-if="imageModal && canEdit"
           @click="handleDelet"
           :loading="deleting"
           type="danger"
@@ -60,13 +60,14 @@
   </div>
 </template>
 <script>
-import { Icon, Upload, Form, Input, Button } from "ant-design-vue";
+import { Icon, Upload, Form, Input, Button } from "ant-design-vue"
 import {
   uploadImgData,
   resourceDelete,
   resourceUpdate
-} from "../../service/getData.js";
-import config from "../../config/config";
+} from "../../service/getData.js"
+import config from "../../config/config"
+import {mapState} from 'vuex'
 
 export default {
   name: "UploadModal",
@@ -89,12 +90,18 @@ export default {
       disableChangeImage: true,
       imageUrl: null,
       image: {},
-      file: null
+      file: null,
     };
   },
   props: {
     imageModal: {
       type: Object
+    }
+  },
+  computed: {
+    ...mapState(['userStage']),
+    canEdit: function(){
+      return this.$stageCode.upload === this.userStage
     }
   },
   mounted: function() {

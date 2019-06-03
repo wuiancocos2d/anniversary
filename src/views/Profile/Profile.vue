@@ -48,8 +48,8 @@ export default {
     ...mapActions(["syncUserImages"]),
     openUploadModal: function() {
       if (this.userUploads.length < 2) {
-        this.imageModal = null;
-        this.modalVisible = true;
+        this.imageModal = null
+        this.modalVisible = true
       } else {
         this.outOfImages();
       }
@@ -75,21 +75,21 @@ export default {
     },
     handleUploadSuccess: function(data) {
       if (data) {
-        this.modalVisible = false;
+        this.imageModal = null
+        this.modalVisible = false
         this.syncUserImages();
       }
     },
-    deleteSuccess: function() {
-      this.modalVisible = false;
-      this.syncUserImages();
+    deleteSuccess: function(imgId) {
+      this.modalVisible = false
+      this.syncUserImages()
     },
-    updateSuccess: function() {
+    updateSuccess: function(imgInfo) {
       this.$message.success("update successful");
       this.modalVisible = false;
       this.syncUserImages();
     }
   },
-  created() {}
 };
 </script>
 <style lang="scss">

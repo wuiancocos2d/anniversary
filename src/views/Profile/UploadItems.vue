@@ -30,6 +30,7 @@
 <script>
 import { Row, Col, Card } from "ant-design-vue";
 import { mapState } from "vuex";
+
 export default {
   name: "UploadItems",
   components: {
@@ -37,18 +38,19 @@ export default {
     "a-row": Row,
     "a-col": Col
   },
+  
   computed: {
     ...mapState(["userUploads"])
   },
   methods: {
-    handleImgClick(id, title, url,resourceContent) {
+    handleImgClick(id, title, url, resourceContent) {
       const imgData = {
         id: id,
         resourceTitle: title,
         resourceUrl: url,
         resourceContent: resourceContent
-      }
-      this.$emit('listenUpdateImage',imgData)
+      };
+      this.$emit("listenUpdateImage", imgData);
     }
   }
 };

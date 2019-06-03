@@ -11,15 +11,15 @@
               </p>
               <p>
                 Department:
-                <span  v-if="userInfo.user">{{userInfo.user.department}}</span>
+                <span v-if="userInfo.user">{{userInfo.user.department}}</span>
               </p>
               <p>
                 Division:
-                <span  v-if="userInfo.user">{{userInfo.user.division}}</span>
+                <span v-if="userInfo.user">{{userInfo.user.division}}</span>
               </p>
               <p>
                 Email:
-                <span  v-if="userInfo.user">{{userInfo.user.emailAddrs}}</span>
+                <span v-if="userInfo.user">{{userInfo.user.emailAddrs}}</span>
               </p>
             </a-col>
             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
@@ -60,6 +60,7 @@
 <script>
 import { Icon, Row, Col, Card, Badge } from "ant-design-vue";
 import { mapState } from "vuex";
+import { stageCode } from "../../config/config";
 export default {
   name: "UserProfile",
   components: {
@@ -70,11 +71,23 @@ export default {
     "a-badge": Badge
   },
   computed: {
-    ...mapState(["userInfo"])
+    ...mapState(["userInfo", "userStage"])
   },
   methods: {
     handleUploadBtn: function() {
-      this.$emit("listenOpenUploadModal");
+      if (this.userStage !== stageCode.upload) {
+        const h = this.$createElement;
+        this.$info({
+          title: "The uploaded time has passed",
+          content: h("div", {}, [
+            h("p", "the uploaded time is 6/15 - 7/15"),
+            h("p", "可以上传的时间为 6/15 -7/15")
+          ]),
+          onOk() {}
+        });
+      } else {
+        this.$emit("listenOpenUploadModal");
+      }
     }
   }
 };

@@ -20,7 +20,8 @@ export const devPath = {
     USER_IMAGES: BASE_URL_DEV+ 'api/uid/',
     GET_UNCHECK_IMAGES: 'api/getUncheck/',
     ADD_LIKE_IMAGE: 'api/like/',
-    POINT_IMAGE: '/api/point/'
+    POINT_IMAGE: '/api/point/',
+    GET_IMAGE_LIKE_LIST: 'api/like_list/info/'
 }
 
 export const production = {
@@ -30,7 +31,7 @@ export const production = {
     ARTICEL_URL: BASE_URL_DEV + 'api/article',
     AUTHORITYList_URL: BASE_URL_DEV + 'api/authoList',
     IMG_UPLOAD_URL: 'http://localhost:7777/resource/image',
-    USERUPLOAD_URL: BASE_URL_DEV + 'resource/submit?/*',
+    USERUPLOAD_URL: BASE_URL_DEV + 'resource/submit?',
     RESOURCE_UPDATE: '/resource/update?',
     LOAD_USER_BY_ID: BASE_URL_DEV + 'api/getUserById',
     USER_DELET_IMAGE: BASE_URL_DEV + 'resource/delete/',
@@ -41,11 +42,11 @@ export const production = {
     //主页图片相关
     GET_UNCHECK_IMAGES: BASE_URL + 'resource/unchecked/',
     GET_CHECK_IMAGES: BASE_URL_DEV + 'resource/check/',
-    GET_CANDIDATE_IMAGES: BASE_URL_DEV + 'resource/candiate/30',
+    GET_CANDIDATE_IMAGES: BASE_URL_DEV + 'like/count/30/',
     GET_WINNERS_IMAGES: BASE_URL_DEV + 'resource/winners/',
-    ADD_LIKE_IMAGE: 'like/add/',
-    POINT_IMAGE: '/resource/point?'
-    
+    ADD_LIKE_IMAGE: BASE_URL_DEV+'like/add/',
+    POINT_IMAGE: BASE_URL_DEV+ 'resource/point?',
+    GET_IMAGE_LIKE_LIST: BASE_URL_DEV +'like/info/'
 }
 
 export const stageCode = {

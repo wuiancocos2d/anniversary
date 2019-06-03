@@ -102,15 +102,22 @@ export const resourceUnCheck = async function (itemId) {
   })
   return res.data
 }
-
-export const likeImage = async function (imageId, uId) {
+//点赞
+export const likeImage = async function (imageId) {
   let res = await http({
-    url: env === 'dev' ? config.ADD_LIKE_IMAGE : config.ADD_LIKE_IMAGE + imageId + '/' + uId,
+    url: env === 'dev' ? config.ADD_LIKE_IMAGE : config.ADD_LIKE_IMAGE + imageId + '/' + store.state.userId,
     method: 'post'
   })
   return res.data
 }
-
+//打分
+export const rateImage = async function(imageItem) {
+  let res = await http({
+    url: env === 'dev' ? config.POINT_IMAGE : config.POINT_IMAGE + parseJsonToPostString(imageItem),
+    method: 'post'
+  })
+  return res.data
+}
 export const getUserImages = async function () {
   let res = await http({
     url: env === 'dev' ? config.USER_IMAGES : config.USER_IMAGES + store.state.userId,
@@ -119,6 +126,15 @@ export const getUserImages = async function () {
   return res.data
 }
 
+//根据图片ID获取图片点赞列表
+export const getImageLikeListById = async function(imgId) {
+  let res = await http({
+    url: env === 'dev' ? config.GET_IMAGE_LIKE_LIST : config.GET_IMAGE_LIKE_LIST + imgId,
+    method: 'get'
+  })
+  console.log('url',config.GET_IMAGE_LIKE_LIST + imgId)
+  return res.data
+}
 
 // 主页 图片
 export const getHomepageImage = async function (page) {
@@ -126,14 +142,14 @@ export const getHomepageImage = async function (page) {
   let url
   switch (userStage) {
     case stageCode.approve:
-      url = config.GET_UNCHECK_IMAGES
+      url =  env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_UNCHECK_IMAGES + page + '/12'
       break;
     case stageCode.like:
     case stageCode.stopLike:
-      url = config.GET_CHECK_IMAGES
+      url = env === 'dev' ? config.GET_CHECK_IMAGES : config.GET_CHECK_IMAGES + page + '/12'
       break
     case stageCode.rate:
-      url = config.GET_CANDIDATE_IMAGES
+      url =  config.GET_CANDIDATE_IMAGES 
       break
     case stageCode.end:
       url = config.GET_WINNERS_IMAGES
@@ -144,7 +160,7 @@ export const getHomepageImage = async function (page) {
   }
   if (url === '') return null
   let res = await http({
-    url: env === 'dev' ? url : url + page + '/12',
+    url: url ,
     method: 'get'
   })
   return res.data
