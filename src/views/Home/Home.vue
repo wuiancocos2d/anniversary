@@ -8,29 +8,41 @@
         @click="handleS(i)"
       >{{stageString[stageV -1 ]}}</a-button>
     </div>
-    <Hero v-if="userStage < stageCode.approve"></Hero>
+    <div v-if="userStage < stageCode.approve" class="rule-container">
+      <Hero></Hero>
+      <Rules></Rules>
+    </div>
     <Likes v-else></Likes>
   </div>
 </template>
 <script>
 import Likes from "./Likes"
 import Hero from "./Hero"
+import Rules from '../../components/rules/Rules'
 import { mapActions, mapState } from "vuex"
 import { Button } from "ant-design-vue"
-import {stageCode} from '../../config/config'
+import { stageCode } from "../../config/config"
 export default {
   name: "home",
   components: {
     Likes,
     Hero,
+    Rules,
     "a-button": Button
   },
   data() {
     return {
       stagesBtns: [1, 2, 3, 4, 5, 6],
-      stageString: ["开始上传","停止上传","开始审核","开始投票","停止投票","开始打分"],
+      stageString: [
+        "开始上传",
+        "停止上传",
+        "开始审核",
+        "开始投票",
+        "停止投票",
+        "开始打分"
+      ],
       stageCode: stageCode
-    }
+    };
   },
   computed: {
     ...mapState(["userStage"])
@@ -38,7 +50,7 @@ export default {
   methods: {
     ...mapActions(["setUserStage"]),
     handleS: function(i) {
-      this.setUserStage(i + 1)
+      this.setUserStage(i + 1);
     }
   }
 };

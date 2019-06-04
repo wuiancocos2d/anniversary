@@ -46,7 +46,7 @@ import ImageModal from "../../components/imgModal/ImageModal";
 import { mapState, mapActions } from "vuex";
 import { stageCode } from "../../config/config";
 
-import Hero from "./Hero";
+import Hero from "../../components/Hero/Hero";
 export default {
   name: "Likes",
   components: {

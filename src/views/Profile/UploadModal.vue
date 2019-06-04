@@ -44,7 +44,13 @@
         <a-button v-if="!imageModal" type="primary" html-type="submit" :loading="uploading" block>
           <span>Upload</span>
         </a-button>
-        <a-button v-if="imageModal && canEdit" type="primary" @click="handleUpdate" :loading="uploading" block>
+        <a-button
+          v-if="imageModal && canEdit"
+          type="primary"
+          @click="handleUpdate"
+          :loading="uploading"
+          block
+        >
           <span>Update</span>
         </a-button>
         <a-button
@@ -60,14 +66,14 @@
   </div>
 </template>
 <script>
-import { Icon, Upload, Form, Input, Button } from "ant-design-vue"
+import { Icon, Upload, Form, Input, Button } from "ant-design-vue";
 import {
   uploadImgData,
   resourceDelete,
   resourceUpdate
-} from "../../service/getData.js"
-import config from "../../config/config"
-import {mapState} from 'vuex'
+} from "../../service/getData.js";
+import config from "../../config/config";
+import { mapState } from "vuex";
 
 export default {
   name: "UploadModal",
@@ -90,33 +96,27 @@ export default {
       disableChangeImage: true,
       imageUrl: null,
       image: {},
-      file: null,
+      file: null
     };
   },
   props: {
     imageModal: Object
   },
   computed: {
-    ...mapState(['userStage']),
-    canEdit: function(){
-      return this.$stageCode.upload === this.userStage
+    ...mapState(["userStage"]),
+    canEdit: function() {
+      return this.$stageCode.upload === this.userStage;
+    }
+  },
+  watch: {
+    imageModal: function(val) {
+      console.log('imagemodal watch',val)
+      this.setForm(val);
     }
   },
   mounted: function() {
-    const data = this.imageModal
-    const that = this
-    if (data && data.id) {
-      this.disableChangeImage = true
-      this.$nextTick(function() {
-        this.imageUrl = data.resourceUrl
-        that.form.setFieldsValue({ resourceTitle: data.resourceTitle });
-        that.form.setFieldsValue({
-          resourceContent: data.resourceContent
-        });
-      })
-    }else {
-      console.log('else')
-    }
+    console.log('imagemodal mount',this.imageModal)
+    if (this.imageModal) this.setForm(this.imageModal);
   },
   methods: {
     beforeUpload(file) {
@@ -146,7 +146,7 @@ export default {
         }
       }
     },
-   
+
     handleFormSubmit(e) {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
@@ -207,6 +207,27 @@ export default {
           });
         }
       });
+    },
+    setForm(data) {
+      if (data && data.id) {
+        console.log('this data',data)
+        this.disableChangeImage = true;
+        this.$nextTick(function() {
+          this.imageUrl = data.resourceUrl;
+          this.form.setFieldsValue({ resourceTitle: data.resourceTitle })
+          this.form.setFieldsValue({
+            resourceContent: data.resourceContent
+          })
+        });
+      } else {
+        console.log('disable false')
+        this.disableChangeImage = false;
+        this.imageUrl = null;
+        this.form.setFieldsValue({ resourceTitle: '' })
+          this.form.setFieldsValue({
+            resourceContent: ''
+          });
+      }
     }
   }
 };
