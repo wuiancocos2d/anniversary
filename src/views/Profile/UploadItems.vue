@@ -38,7 +38,6 @@ export default {
     "a-row": Row,
     "a-col": Col
   },
-  
   computed: {
     ...mapState(["userUploads"])
   },
@@ -58,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 .uploadItems {
   margin-top: 30px;
+  background-color: #fff;
   .uploadImg {
     border-radius: 8px;
     border: none;

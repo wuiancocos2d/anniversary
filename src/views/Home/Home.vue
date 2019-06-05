@@ -1,5 +1,5 @@
 <template>
-  <div class="waterfallContainer">
+  <div class="waterfallContainer" v-bind:class="{scroll: this.userStage < stageCode.approve}">
     <div class="btns">
       <a-button
         type="primary"
@@ -9,7 +9,6 @@
       >{{stageString[stageV -1 ]}}</a-button>
     </div>
     <div v-if="userStage < stageCode.approve" class="rule-container">
-      <Hero></Hero>
       <Rules></Rules>
     </div>
     <Likes v-else></Likes>
@@ -17,7 +16,6 @@
 </template>
 <script>
 import Likes from "./Likes"
-import Hero from "./Hero"
 import Rules from '../../components/rules/Rules'
 import { mapActions, mapState } from "vuex"
 import { Button } from "ant-design-vue"
@@ -26,7 +24,6 @@ export default {
   name: "home",
   components: {
     Likes,
-    Hero,
     Rules,
     "a-button": Button
   },
@@ -60,6 +57,11 @@ export default {
   display: block;
   height: 100%;
   width: 100%;
+  background-color: #EFF3F5;
+  &.scroll {
+    overflow-y: auto;
+  }
+
 }
 .componet-contnet {
   display: block;

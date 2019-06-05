@@ -4,7 +4,7 @@
       <a-layout-header id="header">
         <VHeader></VHeader>
       </a-layout-header>
-      <a-layout :style="{height: layoutHeight}">
+      <a-layout :style="{height: layoutHeight, backgroundColor: 'EFF3F5'}">
         <a-layout-content :style="{backgroundColor: contentBk,height:layoutHeight}">
           <router-view/>
         </a-layout-content>

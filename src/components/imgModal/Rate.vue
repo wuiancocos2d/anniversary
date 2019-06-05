@@ -60,7 +60,7 @@ export default {
           }
         },
         err => {
-          this.$message.error("Rate error:" + res.message);
+          this.$message.error("Rate error:" + err + err.message);
         }
       );
     }

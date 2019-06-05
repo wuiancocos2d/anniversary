@@ -31,7 +31,7 @@
                         <a-icon class="heart" type="heart"/>
                       </a-badge>
                       <div class="description">
-                        <h3>Like</h3>
+                        <h3>Get {{likeTimes}} Like</h3>
                       </div>
                     </div>
                   </a-col>
@@ -105,6 +105,7 @@ export default {
 <style lang="scss" scoped>
 .userPlofile {
   margin-bottom: 40px;
+  background-color: #fff;
   .infoCard {
     p {
       line-height: 18px;

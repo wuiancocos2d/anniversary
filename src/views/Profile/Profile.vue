@@ -49,7 +49,7 @@ export default {
   methods: {
     ...mapActions(["syncUserImages"]),
     openUploadModal: function() {
-      this.imageModal = null
+      this.imageModal = false;
       if (this.userUploads.length < 2) {
         this.modalVisible = true;
       } else {
@@ -76,17 +76,18 @@ export default {
       });
     },
     handleUploadSuccess: function(data) {
-      this.imageModal = null;
-      this.modalVisible = false;
       this.syncUserImages();
+      this.imageModal = data;
+      this.modalVisible = false;
     },
-    deleteSuccess: function(imgId) {
+    deleteSuccess: function() {
       this.modalVisible = false;
       this.syncUserImages();
     },
     updateSuccess: function(imgInfo) {
-      this.$message.success("update successful");
-      this.modalVisible = false;
+      this.$message.success("update successful")
+      this.modalVisible = false
+      this.imageModal = imgInfo
       this.syncUserImages();
     }
   }
@@ -100,6 +101,7 @@ export default {
   padding-top: 50px;
   display: block;
   height: 100%;
+  background-color: #EFF3F5;
   overflow-y: auto;
   .fixed-container {
     max-width: 1200px;

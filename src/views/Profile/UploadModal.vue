@@ -110,19 +110,18 @@ export default {
   },
   watch: {
     imageModal: function(val) {
-      console.log('imagemodal watch',val)
       this.setForm(val);
     }
   },
   mounted: function() {
-    console.log('imagemodal mount',this.imageModal)
     if (this.imageModal) this.setForm(this.imageModal);
   },
   methods: {
     beforeUpload(file) {
-      const isJPG = ["image/jpeg", "image/png"].includes(file.type);
+      console.log(file)
+      const isJPG = ["image/jpeg", "image/png"].includes(file.type)
       if (!isJPG) {
-        this.$message.error("You can only upload JPG/PNG file!");
+        this.$message.error("You can only upload JPG/JPGE/PNG file!")
       }
       const isLt2M = file.size / 1024 / 1024 < 5;
       if (!isLt2M) {
@@ -210,7 +209,6 @@ export default {
     },
     setForm(data) {
       if (data && data.id) {
-        console.log('this data',data)
         this.disableChangeImage = true;
         this.$nextTick(function() {
           this.imageUrl = data.resourceUrl;
@@ -220,7 +218,6 @@ export default {
           })
         });
       } else {
-        console.log('disable false')
         this.disableChangeImage = false;
         this.imageUrl = null;
         this.form.setFieldsValue({ resourceTitle: '' })

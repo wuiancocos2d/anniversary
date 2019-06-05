@@ -4,24 +4,25 @@
       ref="waterfall"
       :imgsArr="imgsArr"
       @scrollReachBottom="getData"
-      :imgWidth="220"
-      :maxCols="8"
+      :imgWidth="imgWidth"
+      :gap="16"
+      :maxCols="4"
       srcKey="resourceUrl"
       @click="openModal"
     >
       <div class="hero" slot="waterfall-head">
         <Hero></Hero>
       </div>
-      <!-- <div class="img-info" slot-scope="props">
-        <div class="like" v-if="userStage > stageCode.approve">
+      <div class="img-info" slot-scope="props">
+        <!-- <div class="like" v-if="userStage > stageCode.approve">
           <a-icon v-if="props.value.liked" type="heart" theme="twoTone" twoToneColor="#eb2f96"/>
           <a-icon v-else class="likeIcon" type="heart"/>
           <span class="likeNum">{{props.value.resourceLike}}</span>
-        </div>
+        </div>-->
         <div class="title">
           <p class="title-text">{{props.value.resourceTitle}}</p>
         </div>
-      </div>-->
+      </div>
       <div slot="waterfall-over">
         <h3>...No More Images...</h3>
       </div>
@@ -40,19 +41,17 @@
 </template>
 <script>
 import vueWaterfallEasy from "vue-waterfall-easy";
-import { Icon, Modal } from "ant-design-vue";
+import { Modal } from "ant-design-vue";
 import { getHomepageImage } from "../../service/getData.js";
 import ImageModal from "../../components/imgModal/ImageModal";
 import { mapState, mapActions } from "vuex";
 import { stageCode } from "../../config/config";
-
 import Hero from "../../components/Hero/Hero";
 export default {
   name: "Likes",
   components: {
     "vue-waterfall-easy": vueWaterfallEasy,
     Hero,
-    "a-icon": Icon,
     "a-modal": Modal,
     ImageModal
   },
@@ -66,7 +65,6 @@ export default {
       page: 1,
       imgTitle: "",
       modalOpen: false,
-      hasLike: false,
       imageItem: {
         id: 0,
         pointMind: 0,
@@ -82,24 +80,32 @@ export default {
         userId: 0,
         liked: false
       },
-      stageCode: stageCode
+      stageCode: stageCode,
+      //默认图片宽度
+      imgWidth: 236
     };
   },
   //测试用
   watch: {
     userStage: function() {
-      this.imgsArr = [],
-      this.page = 1,
-      this.getData()
+      (this.imgsArr = []), (this.page = 1), this.getData();
     }
+  },
+  mounted:function(){
+    console.log('window',window,'inner',window.innerWidth)
+    if(window.innerWidth < 500) {
+      this.imgWidth = 189
+    }
+    console.log(this.imgWidth)
   },
   methods: {
     ...mapActions(["syncUserImages"]),
     getData() {
-      let hasLike = this.hasLike;
       getHomepageImage(this.page).then(
         res => {
           if (res && res.code === 200) {
+            if (res.data && res.data.length === 0)
+              this.$refs.waterfall.waterfallOver();
             if (this.userStage < this.stageCode.rate) {
               this.imgsArr = this.imgsArr.concat(res.data);
               this.page++;
@@ -146,6 +152,7 @@ export default {
     .like {
       margin-top: 15px;
       line-height: 28px;
+      background-color: #fff;
       .likeIcon {
         font-size: 16px;
         padding: 0 5px;

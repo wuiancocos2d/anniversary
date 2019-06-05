@@ -15,7 +15,7 @@
             @submit="handleSubmit"
           >
             <a-form-item>
-              <a-input
+              <a-input class="an-ipt"
                 v-decorator="[
           'staffNo',
           { rules: [{ required: true, message: 'Please input your Staff number!(s:04035)' }] }
@@ -26,14 +26,13 @@
               </a-input>
             </a-form-item>
             <a-form-item>
-              <a-input 
-              
+              <a-input class="an-ipt"
                 v-decorator="[
           'birthday',
           { rules: [{ required: true, message: 'Please input your Birthday!(s:19901230)' }] }
         ]"
                 type="password"
-                placeholder="Birthday"
+                placeholder="Birthday(s:19901230)"
               >
                 <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
               </a-input>
@@ -85,17 +84,17 @@ export default {
       });
     },
     login(user) {
-      const loadingMessage = this.$message.loading("Loading..", 0)
+      const loadingMessage = this.$message.loading("Loading..", 0);
       userLogin(user).then(
         res => {
           setTimeout(loadingMessage, 0);
           if (!res) {
-            this.$modal.error({ title: "ERR_CONNECTION_REFUSED" })
-            return
+            this.$modal.error({ title: "ERR_CONNECTION_REFUSED" });
+            return;
           }
           if (res.code === 200) {
-            this.recordUser(res)
-            this.$router.push("/")
+            this.recordUser(res);
+            this.$router.push("/");
           } else if (res.code === 10003) {
             const h = this.$createElement;
             this.$modal.error({
@@ -137,6 +136,10 @@ export default {
     min-width: 300px;
     margin-top: 65px;
     height: 100%;
+    .an-ipt {
+      line-height: 18px;
+
+    }
   }
 
   #components-form-demo-normal-login {

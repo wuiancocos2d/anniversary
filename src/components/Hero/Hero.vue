@@ -13,6 +13,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.content{background-color: #f9f9f9}
 .content {  border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 100}
 .content .title{text-align: center; color: #333333; padding:35px 0 50px;}
 .content .title h5{font-size: 18px; color: #878787;}
