@@ -57,7 +57,7 @@ export default {
   display: block;
   height: 100%;
   width: 100%;
-  background-color: #EFF3F5;
+  background-color: transparent;
   &.scroll {
     overflow-y: auto;
   }
@@ -69,6 +69,11 @@ export default {
   width: 100%;
   margin-top: 10px;
   position: absolute;
+}
+.btns {
+  position: absolute;
+  top: 10px;
+  background-color: #fff;
 }
 </style>
 

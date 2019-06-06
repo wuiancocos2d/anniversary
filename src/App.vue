@@ -4,17 +4,20 @@
       <a-layout-header id="header">
         <VHeader></VHeader>
       </a-layout-header>
-      <a-layout :style="{height: layoutHeight, backgroundColor: 'EFF3F5'}">
-        <a-layout-content :style="{backgroundColor: contentBk,height:layoutHeight}">
-          <router-view/>
-        </a-layout-content>
-      </a-layout>
+      <a-layout-content
+        :style="{height: layoutHeight,backgroundColor: contentBk}">
+        <router-view/>
+      </a-layout-content>
+      <a-layout-footer :style="{position: 'relative'}">
+        <VFooter></VFooter>
+      </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
 <script>
 import VHeader from "./components/common/Header/Header";
+import VFooter from "./components/common/VFooter";
 import { Layout } from "ant-design-vue";
 import { mapActions } from "vuex";
 import axios from "axios";
@@ -27,6 +30,7 @@ export default {
   },
   components: {
     VHeader,
+    VFooter,
     "a-layout": Layout,
     "a-layout-header": Layout.Header,
     "a-layout-content": Layout.Content

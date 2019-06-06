@@ -2,10 +2,14 @@
   <div class="rules-container">
     <Hero></Hero>
     <TimeTravel></TimeTravel>
+    <Rewards></Rewards>
+    <RequireMent></RequireMent>
   </div>
 </template>
 <script>
 import TimeTravel from './TimeTravel'
+import Rewards from './Rewards'
+import RequireMent from './RequireMent'
 import Hero from '../Hero/Hero'
 import { mapState } from "vuex"
 export default {
@@ -18,7 +22,9 @@ export default {
   },
   components: {
     TimeTravel,
-    Hero
+    Hero,
+    Rewards,
+    RequireMent
   }
 };
 </script>
