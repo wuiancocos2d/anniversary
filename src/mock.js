@@ -78,40 +78,54 @@ const userInfor = function () {
         "code": 200,
         "message": "OK",
         "data": {
-            "code": 200,
-            "message": "OK",
-            "data": {
-                "role": [
-                    {
-                        "id": 1,
-                        "roleName": "approval",
-                        "description": "图片审批"
-                    },
-                    {
-                        "id": 2,
-                        "roleName": "score",
-                        "description": "打分"
-                    }
-                ],
-                "stage": {
-                    "stageNo": 2,
-                    "time": 1563120000000
+            "role": [
+                {
+                    "id": 1,
+                    "roleName": "approval",
+                    "description": "图片审批"
                 },
-                "resource": [],
-                "user": {
-                    "userNo": 4035,
-                    "userNm": "Wu Yiyan,Ian",
-                    "pwd": null,
-                    "jobTitle": "Assistant IT Operation Maintenance Engineer",
-                    "department": "General Affairs Department",
-                    "location": "NX",
-                    "division": "Information Technology",
-                    "emailAddrs": "ian.wu@airmacau.com.mo",
-                    "busnPhone": "8396 6691",
-                    "updateDt": "2019-05-13T15:00:01.000+0000",
-                    "birthDay": null,
-                    "userStatus": null
+                {
+                    "id": 2,
+                    "roleName": "score",
+                    "description": "打分"
                 }
+            ],
+            "stage": {
+                "stageNo": 1,
+                "time": 1563120000000
+            },
+            "resource": [
+                {
+                    "id": 68,
+                    "userId": 4035,
+                    "resourceUrl": "https://i.pinimg.com/564x/0f/5a/35/0f5a353b81318e0bb1ea69d52cf0e244.jpg",
+                    "resourceTitle": "sky",
+                    "resourceContent": "skey clooud",
+                    "resourceStatus": "1",
+                    "resourceLike": null,
+                    "resourcePoint": null,
+                    "pointTheme": null,
+                    "pointSkill": null,
+                    "pointMind": null,
+                    "resourceAward": null,
+                    "remark": null,
+                    "createTime": "2019-06-05T08:37:10.000+0000",
+                    "modifyTime": "2019-06-05T08:37:10.000+0000"
+                }
+            ],
+            "user": {
+                "userNo": 4035,
+                "userNm": "Wu Yiyan,Ian",
+                "pwd": null,
+                "jobTitle": "Assistant IT Operation Maintenance Engineer",
+                "department": "General Affairs Department",
+                "location": "NX",
+                "division": "Information Technology",
+                "emailAddrs": "ian.wu@airmacau.com.mo",
+                "busnPhone": "8396 6691",
+                "updateDt": "2019-05-13T15:00:01.000+0000",
+                "birthDay": null,
+                "userStatus": null
             }
         }
     }
@@ -192,6 +206,42 @@ const userLogin = function () {
     }
 }
 
+const userResource = function () {
+    return {
+        "code": 200,
+        "message": "OK",
+        "data": {
+            "resourceList": [
+                {
+                    "id": 68,
+                    "userId": 4035,
+                    "resourceUrl": "https://i.pinimg.com/236x/0f/5a/35/0f5a353b81318e0bb1ea69d52cf0e244.jpg",
+                    "resourceTitle": "sky",
+                    "resourceContent": "skey clooud",
+                    "resourceStatus": "1",
+                    "resourceLike": null,
+                    "resourcePoint": null,
+                    "pointTheme": null,
+                    "pointSkill": null,
+                    "pointMind": null,
+                    "resourceAward": null,
+                    "remark": null,
+                    "createTime": "2019-06-05T08:37:10.000+0000",
+                    "modifyTime": "2019-06-05T08:37:10.000+0000"
+                }
+            ],
+            "likeList": [
+                {
+                    "id": 61,
+                    "uid": 4035,
+                    "rid": 68,
+                    "likeTime": "2019-06-06T01:25:06.000+0000"
+                }
+            ]
+        }
+    }
+}
+
 const imageUpload = function () {
 
     return {
@@ -228,7 +278,7 @@ const userUpdate = function () {
     }
 }
 
-const resourceCheck = function() {
+const resourceCheck = function () {
     return {
         code: 200,
         message: "ok",
@@ -236,30 +286,64 @@ const resourceCheck = function() {
     }
 }
 
-const getUncheck = function () {
+const sampleImages = function () {
+    const imgs =
+        [
+            {
+                "resourceUrl": "https://i.pinimg.com/236x/e5/ef/d6/e5efd6d377d2741725f02104e03583c7.jpg",
+
+            },
+            {
+                "resourceUrl": "https://i.pinimg.com/236x/fc/ee/3b/fcee3be08224842c4ec28ac7ab7c7a8e.jpg",
+
+            },
+            {
+                "resourceUrl": "https://i.pinimg.com/236x/91/d0/47/91d047ce4106802238fd19b7e911e524.jpg",
+            },
+            {
+                "resourceUrl": "https://i.pinimg.com/236x/fe/3c/47/fe3c47532fd9604c176c8aad8eeee05b.jpg",
+            }
+        ]
+    let returnData = function () {
+        let data = []
+        for (let i = 0; i < imgs.length; i++) {
+            const obj = {
+                "resourceUrl": imgs[i]["resourceUrl"],
+                "resourceTitle": Mock.mock('@title(3,5)'),
+                "resourceContent": Mock.mock('@cparagraph')
+            }
+            data.push(obj)
+        }
+        return data
+    }
     return {
         "code": 200,
         "message": "OK",
-        "data": [
-          {
-            "id": 18,
-            "userId": 4035,
-            "resourceUrl": "http://localhost:7777/images/1559108367220.jpg",
-            "resourceTitle": null,
-            "resourceContent": "lufei",
-            "resourceStatus": "0",
-            "resourceLike": null,
-            "resourcePoint": null,
-            "pointTheme": null,
-            "pointSkill": null,
-            "pointMind": null,
-            "resourceAward": null,
-            "remark": null,
-            "createTime": "2019-05-29T05:39:33.000+0000",
-            "modifyTime": "2019-05-29T05:39:33.000+0000"
-          }
-        ]
-      }
+        "data": returnData()
+    }
+}
+
+const rateSource = function () {
+    const sample = sampleImages()
+    let rateResources = {
+        "code": 200,
+        "message": "OK",
+        "data": []
+    }
+    for (let i = 0; i < sample.data.length; i++) {
+        let rateResource = {
+            "like": Mock.mock({
+                "number|1-100": 100
+            }),
+            "resource": {
+                "resourceUrl": sample.data[i]["resourceUrl"],
+                "resourceTitle": Mock.mock('@title(3,5)'),
+                "resourceContent": Mock.mock('@cparagraph')
+            }
+        }
+        rateResources["data"].push(rateResource)
+    }
+    return rateResources
 }
 
 Mock.mock(devPath.IMAGE_URL, 'get', postData())
@@ -269,5 +353,8 @@ Mock.mock(devPath.IMGUPLOAD_URL, 'post', imageUpload())
 Mock.mock(devPath.USERUPLOAD_URL, 'post', userUpload())
 Mock.mock(devPath.USER_DELET_IMAGE, 'delete', userDeletUpload())
 Mock.mock(devPath.USER_UPDATE, 'put', userUpdate())
-Mock.mock(devPath.RESOURCE_CHECK, 'put',resourceCheck())
-Mock.mock(devPath.GET_UNCHECK_IMAGES, 'get',getUncheck())
+Mock.mock(devPath.RESOURCE_CHECK, 'put', resourceCheck())
+Mock.mock(devPath.GET_UNCHECK_IMAGES, 'get', sampleImages())
+Mock.mock(devPath.GET_CHECK_IMAGES, 'get', sampleImages())
+Mock.mock(devPath.USER_IMAGES, 'get', userResource())
+Mock.mock(devPath.GET_CANDIDATE_IMAGES, 'get', rateSource())

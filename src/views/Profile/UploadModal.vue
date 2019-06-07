@@ -11,7 +11,7 @@
           @change="handleImgChange"
           :name="'image'"
           :withCredentials="true"
-          :disabled="ableChangeImage"
+          :disabled="disableChangeImage"
         >
           <img class="uploadShow" v-if="imageUrl" :src="imageUrl" alt="avatar">
           <div v-else>
@@ -41,7 +41,7 @@
         ></a-textarea>
       </a-form-item>
       <a-form-item>
-        <a-button v-if="!imageModal" type="primary" html-type="submit" :loading="uploading" block>
+        <a-button v-if="!imageModal.id" type="primary" html-type="submit" :loading="uploading" block>
           <span>Upload</span>
         </a-button>
         <a-button
@@ -114,7 +114,7 @@ export default {
     }
   },
   mounted: function() {
-    if (this.imageModal) this.setForm(this.imageModal);
+    if (this.imageModal.id) this.setForm(this.imageModal);
   },
   methods: {
     beforeUpload(file) {

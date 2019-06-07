@@ -4,11 +4,10 @@
       <a-layout-header id="header">
         <VHeader></VHeader>
       </a-layout-header>
-      <a-layout-content
-        :style="{height: layoutHeight,backgroundColor: contentBk}">
+      <a-layout-content :style="{height: layoutHeight}">
         <router-view/>
       </a-layout-content>
-      <a-layout-footer :style="{position: 'relative'}">
+      <a-layout-footer :style="footerStyle">
         <VFooter></VFooter>
       </a-layout-footer>
     </a-layout>
@@ -25,7 +24,9 @@ export default {
   data() {
     return {
       layoutHeight: "100%",
-      contentBk: "#fff"
+      footerStyle: {
+        "padding": 0,
+      }
     };
   },
   components: {
@@ -33,7 +34,8 @@ export default {
     VFooter,
     "a-layout": Layout,
     "a-layout-header": Layout.Header,
-    "a-layout-content": Layout.Content
+    "a-layout-content": Layout.Content,
+    "a-layout-footer": Layout.Footer
   },
   methods: {
     ...mapActions(["getUserInfo"]),

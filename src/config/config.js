@@ -1,6 +1,6 @@
 const BASE_URL = '/'
 const BASE_URL_DEV = '/'
-export const env = 'production'
+export const env = 'dev'
 
 export const devPath = {
     LOAD_USER_INFO: BASE_URL + 'api/userInfo/',//用户基本信息
@@ -21,7 +21,8 @@ export const devPath = {
     GET_UNCHECK_IMAGES: 'api/getUncheck/',
     ADD_LIKE_IMAGE: 'api/like/',
     POINT_IMAGE: '/api/point/',
-    GET_IMAGE_LIKE_LIST: 'api/like_list/info/'
+    GET_IMAGE_LIKE_LIST: 'api/like_list/info/',
+    GET_CANDIDATE_IMAGES: 'api/candidate/'
 }
 
 export const production = {

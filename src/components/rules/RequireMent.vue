@@ -3,16 +3,14 @@
     <div class="requirement-container">
       <a-card :bordered="false">
         <div class="title" slot="title">
-          <h3>Requirement</h3>
+          <h3 class="title-txt">Requirement</h3>
         </div>
         <div class="requireds">
           <ul class="list">
-              <li class="item" v-for="item in requires" :key="item.key">
-                  <p class="en">
-                      {{item.en}}
-                  </p>
-                  <p class="cn">{{item.cn}}</p>
-              </li>
+            <li class="item" v-for="item in requires" :key="item.key">
+              <p class="en">{{item.en}}</p>
+              <p class="cn">{{item.cn}}</p>
+            </li>
           </ul>
         </div>
       </a-card>
@@ -82,25 +80,43 @@ export default {
 </script>
 <style lang="scss" scoped>
 .requireMent {
-    max-width: 894px;
-    width: 100%;
-    margin: 0 auto;
-    .requireds {
-        .list {
-            margin: 0;
-            text-align: left;
-            .item{
-                list-style-type: none;
-                .en{
-                    font-size: 16px;
-                    color: #677786;
-                }
-                .cn{
-                    font-size: 13px;
-                    color: #8098C1;
-                }
-            }
-        }
+  max-width: 894px;
+  width: 100%;
+  margin: 40px auto 30px;
+  
+  .title {
+    .title-txt {
+      font-size: 48px;
+      color: #202124;
+      line-height: 60px;
     }
+  }
+  .requireds {
+    .list {
+      margin: 0;
+      text-align: left;
+      counter-reset: my-awesome-counter;
+
+      .item {
+        counter-increment: my-awesome-counter;
+        list-style-type: none;
+        &:before {
+          content: counter(my-awesome-counter) ".  ";
+          color: #202124;
+          font-weight: bold;
+          font-size: 18px;
+        }
+        .en {
+          font-size: 16px;
+          color: #3C4043;
+        }
+        .cn {
+          font-size: 13px;
+          color: #34495E;
+        }
+        
+      }
+    }
+  }
 }
 </style>

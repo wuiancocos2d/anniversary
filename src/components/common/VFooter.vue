@@ -13,15 +13,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .footer {
-    height: 98px;
+  padding-top: 10px;
+    height: 68px;
     background: url("~@/assets/footer.png") repeat-x;
     .footer-container {
       .copyRight{
-        line-height: 58px;
+        padding-top: 5px;
+        line-height: 18px;
         font-weight: 600;
       }
       .copyRightCn {
-        line-height: 40px;
+        font-size: 13px;
+        line-height: 15px;
       }
     }
 }

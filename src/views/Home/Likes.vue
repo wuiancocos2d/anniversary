@@ -103,6 +103,7 @@ export default {
     getData() {
       getHomepageImage(this.page).then(
         res => {
+          console.log('like',res)
           if (res && res.code === 200) {
             if (res.data && res.data.length === 0)
               this.$refs.waterfall.waterfallOver();
@@ -165,6 +166,7 @@ export default {
       border-top: 1px solid #e0dede;
       padding: 15px 10px;
       line-height: 20px;
+      background-color: #fff;
       .title-text {
         margin: 0;
         font-size: 18px;

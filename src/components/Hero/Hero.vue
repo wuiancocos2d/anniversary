@@ -5,8 +5,8 @@
       <h3>厚载文化 用心飞翔</h3>
       <h4>To become an airline rooted in Macau, serving Asia Pacific and furnishing first-class services.</h4>
     </div>
-    <button class="hero-btn">
-      <router-link class="txt"  v-if="displayBtn" to="/Profile">Upload</router-link>
+    <button class="hero-btn" v-if="displayBtn">
+      <router-link class="txt"   to="/Profile">Upload</router-link>
     </button>
   </div>
 </template>
@@ -24,9 +24,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.content {
-  background-color: #fff;
-}
 .content .hero-btn {
   width: 220px;
   height: 60px;
@@ -37,6 +34,8 @@ export default {
   margin-bottom: 40px;
   border: none;
   cursor: pointer;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
   background: linear-gradient(
     90deg,
     rgba(56, 33, 154, 1) 39%,
@@ -54,12 +53,17 @@ export default {
 }
 .content .hero-btn .txt {
   color: #fff;
+  display: block;
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
 }
 .content .hero-btn:hover .txt {
   color: #38219a;
 }
 .content {
   background: url("~@/assets/hero.png") repeat-x;
+  background-color: #fff;
 }
 .content {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);

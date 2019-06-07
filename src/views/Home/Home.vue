@@ -71,7 +71,7 @@ export default {
   position: absolute;
 }
 .btns {
-  position: absolute;
+  position: relative;
   top: 10px;
   background-color: #fff;
 }

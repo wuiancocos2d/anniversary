@@ -49,7 +49,7 @@ export default {
   methods: {
     ...mapActions(["syncUserImages"]),
     openUploadModal: function() {
-      this.imageModal = false;
+      this.imageModal = {};
       if (this.userUploads.length < 2) {
         this.modalVisible = true;
       } else {
