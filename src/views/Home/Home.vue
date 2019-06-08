@@ -12,6 +12,7 @@
       <Rules></Rules>
     </div>
     <Likes v-else></Likes>
+    <VFooter></VFooter>
   </div>
 </template>
 <script>
@@ -20,12 +21,14 @@ import Rules from '../../components/rules/Rules'
 import { mapActions, mapState } from "vuex"
 import { Button } from "ant-design-vue"
 import { stageCode } from "../../config/config"
+import VFooter from '../../components/common/VFooter'
 export default {
   name: "home",
   components: {
     Likes,
     Rules,
-    "a-button": Button
+    "a-button": Button,
+    VFooter
   },
   data() {
     return {

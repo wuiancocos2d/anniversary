@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <a-row>
+    <a-row class="login-row">
       <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <div class="banner">
           <img class="banner" src="../../../public/imgs/banner1200_400.png" alt>
@@ -15,7 +15,8 @@
             @submit="handleSubmit"
           >
             <a-form-item>
-              <a-input class="an-ipt"
+              <a-input
+                class="an-ipt"
                 v-decorator="[
           'staffNo',
           { rules: [{ required: true, message: 'Please input your Staff number!(s:04035)' }] }
@@ -26,7 +27,8 @@
               </a-input>
             </a-form-item>
             <a-form-item>
-              <a-input class="an-ipt"
+              <a-input
+                class="an-ipt"
                 v-decorator="[
           'birthday',
           { rules: [{ required: true, message: 'Please input your Birthday!(s:19901230)' }] }
@@ -44,12 +46,16 @@
         </div>
       </a-col>
     </a-row>
+    <div class="footer">
+      <VFooter></VFooter>
+    </div>
   </div>
 </template>
 <script>
 import { Form, Button, Input, Icon, Row, Col } from "ant-design-vue";
 import { mapActions } from "vuex";
 import { userLogin } from "../../service/getData";
+import VFooter from "../../components/common/VFooter";
 export default {
   name: "login",
   data() {
@@ -67,7 +73,8 @@ export default {
     "a-form-item": Form.Item,
     "a-icon": Icon,
     "a-row": Row,
-    "a-col": Col
+    "a-col": Col,
+    VFooter
   },
 
   methods: {
@@ -116,12 +123,25 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   overflow: hidden;
   background-color: #fff;
+
+  .login-row {
+    margin-top: 40px;
+    min-height: 500px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
   .banner {
-    margin: 30px auto 0;
+    margin: 15px auto 0;
     height: 240px;
   }
   @media only screen and (max-width: 600px) {
@@ -139,7 +159,6 @@ export default {
     height: 100%;
     .an-ipt {
       line-height: 18px;
-
     }
   }
 

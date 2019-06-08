@@ -1,6 +1,6 @@
 const BASE_URL = '/'
 const BASE_URL_DEV = '/'
-export const env = 'production'
+export const env = 'dev'
 
 export const devPath = {
     LOAD_USER_INFO: BASE_URL + 'api/userInfo/',//用户基本信息

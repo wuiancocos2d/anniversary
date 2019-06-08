@@ -15,8 +15,10 @@ export default {
 .footer {
   padding-top: 10px;
     height: 68px;
+    position: relative;
     background: url("~@/assets/footer.png") repeat-x;
     .footer-container {
+      text-align: center;
       .copyRight{
         padding-top: 5px;
         line-height: 18px;

@@ -16,6 +16,7 @@
         ></UploadModal>
       </a-modal>
     </div>
+    <VFooter></VFooter>
   </div>
 </template>
 <script>
@@ -24,6 +25,7 @@ import { Row, Col, Modal } from "ant-design-vue";
 import UploadModal from "./UploadModal";
 import UserProfile from "./UserProfile";
 import UploadItems from "./UploadItems";
+import VFooter from '../../components/common/VFooter'
 export default {
   name: "Plofile",
   components: {
@@ -32,7 +34,8 @@ export default {
     "a-modal": Modal,
     UploadModal,
     UserProfile,
-    UploadItems
+    UploadItems,
+    VFooter
   },
   data() {
     return {
@@ -106,6 +109,7 @@ export default {
   .fixed-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding-bottom: 60px;
     display: block;
   }
   .imgRow {
