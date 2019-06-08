@@ -132,7 +132,6 @@ export const getImageLikeListById = async function(imgId) {
     url: env === 'dev' ? config.GET_IMAGE_LIKE_LIST : config.GET_IMAGE_LIKE_LIST + imgId,
     method: 'get'
   })
-  console.log('url',config.GET_IMAGE_LIKE_LIST + imgId)
   return res.data
 }
 

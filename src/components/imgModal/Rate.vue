@@ -43,7 +43,6 @@ export default {
     handleRate: function() {
       if(this.rating === true) return
       this.rating = true
-      console.log('id',this.id)
       const imageRateData = {
         id: this.id,
         pointMind: this.pointMind,
@@ -52,6 +51,7 @@ export default {
       }
       rateImage(imageRateData).then(
         res => {
+          this.rating = false
           if (res.code === 200) {
             this.$message.success("Rate successful");
             this.$emit("rateSuccess");
@@ -68,5 +68,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.ant-rate-text {
+  padding-top: 5px;
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
 </style>
 

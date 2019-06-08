@@ -7,16 +7,16 @@
       <a-layout-content :style="{height: layoutHeight}">
         <router-view/>
       </a-layout-content>
-      <a-layout-footer :style="footerStyle">
+      <!-- <a-layout-footer :style="footerStyle">
         <VFooter></VFooter>
-      </a-layout-footer>
+      </a-layout-footer> -->
     </a-layout>
   </div>
 </template>
 
 <script>
 import VHeader from "./components/common/Header/Header";
-import VFooter from "./components/common/VFooter";
+// import VFooter from "./components/common/VFooter";
 import { Layout } from "ant-design-vue";
 import { mapActions } from "vuex";
 import axios from "axios";
@@ -31,11 +31,11 @@ export default {
   },
   components: {
     VHeader,
-    VFooter,
+    // VFooter,
     "a-layout": Layout,
     "a-layout-header": Layout.Header,
     "a-layout-content": Layout.Content,
-    "a-layout-footer": Layout.Footer
+    // "a-layout-footer": Layout.Footer
   },
   methods: {
     ...mapActions(["getUserInfo"]),

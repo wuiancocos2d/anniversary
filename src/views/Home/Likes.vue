@@ -5,7 +5,7 @@
       :imgsArr="imgsArr"
       @scrollReachBottom="getData"
       :imgWidth="imgWidth"
-      :gap="16"
+      :gap="8"
       :maxCols="4"
       srcKey="resourceUrl"
       @click="openModal"
@@ -32,7 +32,7 @@
       v-model="modalOpen"
       :footer="null"
       :centered="true"
-      :width="350"
+      :width="modalWidth"
       v-on:operationDone="closeModal"
     >
       <ImageModal :imageItem="imageItem"></ImageModal>
@@ -82,7 +82,9 @@ export default {
       },
       stageCode: stageCode,
       //默认图片宽度
-      imgWidth: 236
+      imgWidth: 236,
+      modalWidth: 350,
+      windowSize: 0
     };
   },
   //测试用
@@ -91,19 +93,18 @@ export default {
       (this.imgsArr = []), (this.page = 1), this.getData();
     }
   },
-  mounted:function(){
-    console.log('window',window,'inner',window.innerWidth)
-    if(window.innerWidth < 500) {
-      this.imgWidth = 189
-    }
-    console.log(this.imgWidth)
+  mounted: function() {
+    const that = this;
+    this.$nextTick(() => {
+      this.handleSize()
+      window.addEventListener("resize", that.handleSize);
+    });
   },
   methods: {
     ...mapActions(["syncUserImages"]),
     getData() {
       getHomepageImage(this.page).then(
         res => {
-          console.log('like',res)
           if (res && res.code === 200) {
             if (res.data && res.data.length === 0)
               this.$refs.waterfall.waterfallOver();
@@ -132,6 +133,16 @@ export default {
     closeModal() {
       this.modalOpen = false;
       this.imageItem = null;
+    },
+    handleSize() {
+      if (window.innerWidth < 576) {
+        this.imgWidth = 189;
+        this.modalWidth = 350;
+      } else if (window.innerWidth > 768) {
+        this.modalWidth = 700;
+      } else {
+        this.modalWidth = 500;
+      }
     }
   },
   created() {
@@ -169,7 +180,7 @@ export default {
       background-color: #fff;
       .title-text {
         margin: 0;
-        font-size: 18px;
+        font-size: 15px;
         color: #5a5a5a;
         text-align: left;
         white-space: normal;

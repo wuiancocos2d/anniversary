@@ -290,18 +290,36 @@ const sampleImages = function () {
     const imgs =
         [
             {
-                "resourceUrl": "https://i.pinimg.com/236x/e5/ef/d6/e5efd6d377d2741725f02104e03583c7.jpg",
+                "resourceUrl": "https://hbimg.huabanimg.com/8082a3002d9adc47b78d708424803af4f90bc527298bc-HvuBBx_fw658",
 
             },
             {
-                "resourceUrl": "https://i.pinimg.com/236x/fc/ee/3b/fcee3be08224842c4ec28ac7ab7c7a8e.jpg",
+                "resourceUrl": "https://hbimg.huabanimg.com/de85425b672982521456a430da539c6de48b05a11b651-XTQbTk_fw658",
 
             },
             {
-                "resourceUrl": "https://i.pinimg.com/236x/91/d0/47/91d047ce4106802238fd19b7e911e524.jpg",
+                "resourceUrl": "https://hbimg.huabanimg.com/1f37003b4a81e930a4b2943aa58eba62828b5f00680aa-g9zetf_fw658",
             },
             {
-                "resourceUrl": "https://i.pinimg.com/236x/fe/3c/47/fe3c47532fd9604c176c8aad8eeee05b.jpg",
+                "resourceUrl": "https://hbimg.huabanimg.com/e06c0e4a61c59c4f323225451e8a5a6a32cdff4dc1121-skVlPg_fw658",
+            },
+            {
+                "resourceUrl": "https://hbimg.huabanimg.com/8e5a829d5a54815a34a8f933e03450e41d1cd1a3111d3-VeXcEP_fw658"
+            },
+            {
+                "resourceUrl": "https://hbimg.huabanimg.com/6c6c7fcb5d88acfb7f77b673d7167f5b75dd157e1dbc03-yVhMgc_fw658"
+            },
+            {
+                "resourceUrl": "https://hbimg.huabanimg.com/fdf2b0870867c25012c2cd8dfa6b91a4a9bef47eb0557-EXkcqN_fw658"
+            },
+            {
+                "resourceUrl": "https://hbimg.huabanimg.com/bd76479619deed55f8e2266ec32d8c72e8a0b07a109d3-madb3h_fw658"
+            },
+            {
+                "resourceUrl": "https://hbimg.huabanimg.com/a956989d5cef85032f572b5597fc8c8033389d7c8d578-8ziblz_fw658"
+            },
+            {
+                "resourceUrl": "https://hbimg.huabanimg.com/b610fd3ab007913108b03c1dad11b298ba25a441235013-56vTkx_fw658"
             }
         ]
     let returnData = function () {
@@ -336,6 +354,7 @@ const rateSource = function () {
                 "number|1-100": 100
             }),
             "resource": {
+                "id": Mock.mock('@increment'),
                 "resourceUrl": sample.data[i]["resourceUrl"],
                 "resourceTitle": Mock.mock('@title(3,5)'),
                 "resourceContent": Mock.mock('@cparagraph')

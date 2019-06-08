@@ -1,64 +1,86 @@
 <template>
   <div class="modal-container">
     <a-card :bordered="false">
-      <img :src="imageItem.resourceUrl" alt slot="cover">
-      <a-card-meta :title="imageItem.resourceTitle">
-        <template slot="description">
-          <div class="disciption">
-            <span>{{imageItem.resourceContent}}</span>
+      <a-row>
+        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+          <img class="imageSource" :src="imageItem.resourceUrl" alt="imageItem.resourceTitle">
+        </a-col>
+        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+          <div class="txt-container">
+            <h2>{{imageItem.resourceTitle}}</h2>
+            <div class="disciption">
+              <span>{{imageItem.resourceContent}}</span>
+            </div>
+            <AddLike
+              v-if="userStage > stageCode.approve && userStage < stageCode.rate"
+              :id="imageItem.id"
+              v-on:likeSuccess="handleLikeSuccess"
+            ></AddLike>
+            <Approve v-if="userStage === stageCode.approve" :id="imageItem.id"></Approve>
+            <Rate
+              v-if="userStage === stageCode.rate"
+              :id="imageItem.id"
+              v-on:rateSuccess="handleRateSuccuess"
+            ></Rate>
           </div>
-          <AddLike v-if="userStage > stageCode.approve" :id="imageItem.id"  v-on:likeSuccess="handleLikeSuccess"></AddLike>
-          <Approve v-if="userStage === stageCode.approve" :id="imageItem.id"></Approve>
-          <Rate v-if="userStage === stageCode.rate" :id = "imageItem.id" v-on:rateSuccess="handleRateSuccuess"></Rate>
-        </template>
-      </a-card-meta>
+        </a-col>
+      </a-row>
     </a-card>
   </div>
 </template>
 <script>
-import { Card } from "ant-design-vue"
-import AddLike from "./AddLike"
-import Approve from "./Approve"
-import Rate from "./Rate"
-import {stageCode} from '../../config/config'
-import {mapState} from 'vuex'
+import { Card, Row, Col } from "ant-design-vue";
+import AddLike from "./AddLike";
+import Approve from "./Approve";
+import Rate from "./Rate";
+import { stageCode } from "../../config/config";
+import { mapState } from "vuex";
+
 export default {
   name: "ImageModal",
   components: {
     "a-card": Card,
-    "a-card-meta": Card.Meta,
+    "a-row": Row,
+    "a-col": Col,
     Approve,
     AddLike,
     Rate
   },
   data() {
     return {
-      stageCode: stageCode,
-    }
+      stageCode: stageCode
+    };
   },
   props: {
     imageItem: Object
   },
   computed: {
-    ...mapState(['userStage','userId'])
+    ...mapState(["userStage", "userId"])
   },
- 
+
   methods: {
     handleLikeSuccess: function() {
-      this.imageItem.resourceLike = this.imageItem.resourceLike++
+      this.imageItem.resourceLike = this.imageItem.resourceLike++;
     },
     handleRateSuccuess: function() {
-      this.$emit('operationDone')
+      this.$emit("operationDone");
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .modal-container {
-  .discription {
-    font-size: 16px;
-    white-space: normal;
+  .imageSource {
+    width: 100%;
   }
+  .txt-container {
+    padding: 0 5px 0 15px;
+    .discription {
+      font-size: 16px;
+      white-space: normal;
+    }
+  }
+
   .control-btn {
     margin-top: 15px;
   }

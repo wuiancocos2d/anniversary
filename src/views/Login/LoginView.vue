@@ -119,6 +119,7 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   overflow: hidden;
+  background-color: #fff;
   .banner {
     margin: 30px auto 0;
     height: 240px;
