@@ -12,7 +12,8 @@
           :xl="8"
         >
           <a-card
-            :hoverable="true"
+          class="uploadItem"
+            hoverable="true"
             @click="handleImgClick(photoItem.id,photoItem.resourceTitle,photoItem.resourceUrl,photoItem.resourceContent)"
           >
             <img
@@ -58,6 +59,15 @@ export default {
 .uploadItems {
   margin-top: 30px;
   background-color: #fff;
+  .uploadItem {
+    animation-duration: 0.15s;
+    outline: none;
+    border: none;
+    &:hover {
+      box-shadow: 0 8px 14px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+  }
   .uploadImg {
     border-radius: 8px;
     border: none;

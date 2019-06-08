@@ -1,6 +1,6 @@
 const BASE_URL = '/'
 const BASE_URL_DEV = '/'
-export const env = 'dev'
+export const env = 'production'
 
 export const devPath = {
     LOAD_USER_INFO: BASE_URL + 'api/userInfo/',//用户基本信息
@@ -31,7 +31,7 @@ export const production = {
     IMAGE_URL: BASE_URL_DEV + 'mock/',
     ARTICEL_URL: BASE_URL_DEV + 'api/article',
     AUTHORITYList_URL: BASE_URL_DEV + 'api/authoList',
-    IMG_UPLOAD_URL: 'http://localhost:7777/resource/image',
+    IMG_UPLOAD_URL: '/resource/image',
     USERUPLOAD_URL: BASE_URL_DEV + 'resource/submit?',
     RESOURCE_UPDATE: '/resource/update?',
     LOAD_USER_BY_ID: BASE_URL_DEV + 'api/getUserById',

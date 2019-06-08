@@ -290,36 +290,36 @@ const sampleImages = function () {
     const imgs =
         [
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/8082a3002d9adc47b78d708424803af4f90bc527298bc-HvuBBx_fw658",
+                "resourceUrl": "http://arenaillustration.com/news/wp-content/uploads/2018/10/dqbed1hxcaawdst-582x827.jpg",
 
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/de85425b672982521456a430da539c6de48b05a11b651-XTQbTk_fw658",
+                "resourceUrl": "http://arenaillustration.com/news/wp-content/uploads/2018/11/alex-t-smith-how-winston-powerpoint-09.jpg",
 
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/1f37003b4a81e930a4b2943aa58eba62828b5f00680aa-g9zetf_fw658",
+                "resourceUrl": "http://arenaillustration.com/news/wp-content/uploads/2018/11/alex-t-smith-how-winston-powerpoint-10.jpg",
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/e06c0e4a61c59c4f323225451e8a5a6a32cdff4dc1121-skVlPg_fw658",
+                "resourceUrl": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/66590962179295.5a875ef232bf3.jpg",
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/8e5a829d5a54815a34a8f933e03450e41d1cd1a3111d3-VeXcEP_fw658"
+                "resourceUrl": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/850c1574280331.5c29fdbaead23.jpg"
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/6c6c7fcb5d88acfb7f77b673d7167f5b75dd157e1dbc03-yVhMgc_fw658"
+                "resourceUrl": "https://img.zcool.cn/community/01cc465bc81ba2a801213dea1a1ae4.jpg@1280w_1l_2o_100sh.jpg"
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/fdf2b0870867c25012c2cd8dfa6b91a4a9bef47eb0557-EXkcqN_fw658"
+                "resourceUrl": "https://img.zcool.cn/community/01529e5bc81bbaa8012099c8a32f1c.jpg@1280w_1l_2o_100sh.jpg"
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/bd76479619deed55f8e2266ec32d8c72e8a0b07a109d3-madb3h_fw658"
+                "resourceUrl": "https://img.zcool.cn/community/0171195bc81bbaa801213dea6746d6.jpg@1280w_1l_2o_100sh.jpg"
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/a956989d5cef85032f572b5597fc8c8033389d7c8d578-8ziblz_fw658"
+                "resourceUrl": "https://img.zcool.cn/community/01bc925a0123efa801216a4bd45ba9.jpg@1280w_1l_2o_100sh.jpg"
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/b610fd3ab007913108b03c1dad11b298ba25a441235013-56vTkx_fw658"
+                "resourceUrl": "https://img.zcool.cn/community/01cd955a0123dea801216a4baea703.jpg@1280w_1l_2o_100sh.jpg"
             }
         ]
     let returnData = function () {

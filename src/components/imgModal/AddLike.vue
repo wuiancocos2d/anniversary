@@ -18,10 +18,10 @@
   </div>
 </template>
 <script>
-import { Icon } from "ant-design-vue";
-import { mapState } from "vuex";
-import { stageCode } from "../../config/config";
-import { likeImage, getImageLikeListById } from "../../service/getData";
+import { Icon } from "ant-design-vue"
+import { mapState } from "vuex"
+import { stageCode } from "../../config/config"
+import { likeImage, getImageLikeListById } from "../../service/getData"
 export default {
   name: "AddLike",
   components: {
@@ -43,7 +43,7 @@ export default {
     id: Number
   },
   computed: {
-    ...mapState(["userStage", "userId", "user"])
+    ...mapState(["userStage", "userId", "uesrLikeList"])
   },
   mounted: function() {
     this.ifLike();
@@ -55,6 +55,24 @@ export default {
   },
   methods: {
     handleLikeClick() {
+      console.log(this.uesrLikeList)
+      if (this.uesrLikeList.length >= 10) {
+        this.$modal.warning({
+          title: "The number of votes cannot exceed 10",
+          content: (
+            <div>
+              <p>
+                The number of votes cannot exceed 10 and cannot be withdrawn.
+              </p>
+              <p>
+                只有10次點贊機會，且不能撤回
+              </p>
+            </div>
+          )
+        });
+        return 
+      }
+
       if (this.userStage === this.stageCode.like) {
         this.$modal.confirm({
           title: "Are you sure you want to vote for this photo?"
@@ -98,18 +116,17 @@ export default {
         const that = this;
         getImageLikeListById(this.id).then(res => {
           if (res.code === 200) {
-            this.loadInfoSuccess = true
-            const list = res.data
-            that.likeTimes = list.length
-            this.liked = false
+            this.loadInfoSuccess = true;
+            const list = res.data;
+            that.likeTimes = list.length;
+            this.liked = false;
             for (let i = 0; i < list.length; i++) {
               (function(uid) {
                 if (uid === that.userId) that.liked = true;
               })(list[i]["uid"]);
             }
-          }else {
-              this.loadInfoSuccess = true,
-              this.loadMessage = res.message
+          } else {
+            (this.loadInfoSuccess = true), (this.loadMessage = res.message);
           }
         });
       }

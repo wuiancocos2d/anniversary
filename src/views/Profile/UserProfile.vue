@@ -70,17 +70,17 @@ export default {
     "a-card": Card,
     "a-badge": Badge
   },
-  data(){
+  data() {
     return {
       likeTimes: 0
-    }
+    };
   },
   computed: {
-    ...mapState(["userInfo", "userStage","uesrLikeList"])
+    ...mapState(["userInfo", "userStage", "uesrLikeList"])
   },
   watch: {
-    uesrLikeList: function(){
-      this.likeTimes = this.uesrLikeList.length
+    uesrLikeList: function() {
+      this.likeTimes = this.uesrLikeList.length;
     }
   },
   methods: {
@@ -107,6 +107,7 @@ export default {
   margin-bottom: 40px;
   background-color: #fff;
   .infoCard {
+    height: 250px;
     p {
       line-height: 18px;
       font-size: 15px;
@@ -134,6 +135,11 @@ export default {
           rgba(66, 125, 215, 1) 100%
         );
         text-align: center;
+        animation-duration: 0.15s;
+        &:hover {
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),
+            0 5px 5px rgba(0, 0, 0, 0.22);
+        }
         .addBtnIcon {
           cursor: pointer;
           line-height: 95px;

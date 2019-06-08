@@ -45,7 +45,7 @@
           <span>Upload</span>
         </a-button>
         <a-button
-          v-if="imageModal && canEdit"
+          v-if="imageModal.id && canEdit"
           type="primary"
           @click="handleUpdate"
           :loading="uploading"
@@ -54,7 +54,7 @@
           <span>Update</span>
         </a-button>
         <a-button
-          v-if="imageModal && canEdit"
+          v-if="imageModal.id && canEdit"
           @click="handleDelet"
           :loading="deleting"
           type="danger"
@@ -93,7 +93,7 @@ export default {
       uploading: false,
       deleting: false,
       imageUploadUrl: config.IMG_UPLOAD_URL,
-      disableChangeImage: true,
+      disableChangeImage: false,
       imageUrl: null,
       image: {},
       file: null

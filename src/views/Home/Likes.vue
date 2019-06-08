@@ -5,7 +5,7 @@
       :imgsArr="imgsArr"
       @scrollReachBottom="getData"
       :imgWidth="imgWidth"
-      :gap="8"
+      :gap="12"
       :maxCols="4"
       srcKey="resourceUrl"
       @click="openModal"
@@ -82,7 +82,7 @@ export default {
       },
       stageCode: stageCode,
       //默认图片宽度
-      imgWidth: 236,
+      imgWidth: 220,
       modalWidth: 350,
       windowSize: 0
     };
@@ -96,7 +96,7 @@ export default {
   mounted: function() {
     const that = this;
     this.$nextTick(() => {
-      this.handleSize()
+      this.handleSize();
       window.addEventListener("resize", that.handleSize);
     });
   },
@@ -153,7 +153,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 .like-container {
   display: block;
   height: 100%;
@@ -186,6 +186,22 @@ export default {
         white-space: normal;
       }
     }
+  }
+  .img-box.default-card-animation .alink.img-inner-box {
+    border-radius: 3px;
+    overflow: hidden;
+    -webkit-transition: transform 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.02);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02),
+      0 4px 8px rgba(0, 0, 0, 0.02);
+      transition-duration: 0.15s;
+  }
+  .img-box.default-card-animation .alink.img-inner-box:hover {
+    margin-top: -2px;
+    opacity: 0.9;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
 }
 </style>
