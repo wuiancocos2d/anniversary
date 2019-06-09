@@ -1,5 +1,8 @@
 # anniversary
 
+## Online Preview
+[Demo](https://wuiancocos2d.github.io/anniversary/#/)
+
 ## Project setup
 ```
 yarn install
