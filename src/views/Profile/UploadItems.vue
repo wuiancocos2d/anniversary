@@ -13,7 +13,7 @@
         >
           <a-card
           class="uploadItem"
-            hoverable="true"
+            :hoverable="true"
             @click="handleImgClick(photoItem.id,photoItem.resourceTitle,photoItem.resourceUrl,photoItem.resourceContent)"
           >
             <img

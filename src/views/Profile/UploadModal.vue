@@ -118,7 +118,6 @@ export default {
   },
   methods: {
     beforeUpload(file) {
-      console.log(file)
       const isJPG = ["image/jpeg", "image/png"].includes(file.type)
       if (!isJPG) {
         this.$message.error("You can only upload JPG/JPGE/PNG file!")
@@ -150,7 +149,7 @@ export default {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (err) {
-          console.log("err", err);
+          this.$info.error(err)
           return;
         } else {
           let formVl = values;
