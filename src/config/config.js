@@ -38,7 +38,7 @@ export const production = {
     USER_DELET_IMAGE: BASE_URL_DEV + 'resource/delete/',
     GET_IMAGE_BY_TIME: BASE_URL_DEV + 'resource/check/',
     RESOURCE_CHECK: BASE_URL_DEV + 'resource/status/check?id=',
-    RESOURCE_UNCHECK: BASE_URL_DEV + 'resource/status/check?id=',
+    RESOURCE_UNCHECK: BASE_URL_DEV + 'resource/status/uncheck?id=',
     USER_IMAGES: BASE_URL_DEV+ 'resource/uid/',
     //主页图片相关
     GET_UNCHECK_IMAGES: BASE_URL + 'resource/unchecked/',

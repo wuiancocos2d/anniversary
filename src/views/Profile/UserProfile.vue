@@ -107,7 +107,7 @@ export default {
   margin-bottom: 40px;
   background-color: #fff;
   .infoCard {
-    height: 250px;
+    min-height: 250px;
     p {
       line-height: 18px;
       font-size: 15px;

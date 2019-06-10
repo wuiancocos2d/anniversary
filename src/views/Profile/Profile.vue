@@ -7,7 +7,7 @@
           <UploadItems v-on:listenUpdateImage="openUpdateModal"></UploadItems>
         </a-col>
       </a-row>
-      <a-modal title="Collect Image" v-model="modalVisible" :footer="null" :width="350">
+      <a-modal title="Collect Image" v-model="modalVisible" :footer="null" :width="350" >
         <UploadModal
           :imageModal="imageModal"
           v-on:user-upload-event="handleUploadSuccess"

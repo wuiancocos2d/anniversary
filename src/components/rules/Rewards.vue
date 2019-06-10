@@ -48,19 +48,19 @@ export default {
         {
           key: 0,
           title: "Gold",
-          image: require("@/assets/GOLD.png"),
+          image: require("@/assets/GOLDb.png"),
           details: ["One winner", "Dyson supersonic - Hair dryer (MOP$3086)"]
         },
         {
           key: 1,
           title: "Silver",
-          image: require("@/assets/SILVER.png"),
-          details: ["Twon winners", "EXILIM wifi camera (MOP$1499)"]
+          image: require("@/assets/SILVERb.png"),
+          details: ["Two winners", "EXILIM wifi camera (MOP$1499)"]
         },
         {
           key: 2,
           title: "Bronz",
-          image: require("@/assets/bronez.png"),
+          image: require("@/assets/bronezb.png"),
           details: [
             "Three winners",
             "Canon Selphy CP1300 wifi photo printer (MOP$1199)"
@@ -69,7 +69,7 @@ export default {
         {
           key: 3,
           title: "Excellent",
-          image: require("@/assets/excellent.png"),
+          image: require("@/assets/excellentb.png"),
           details: [
             "Four winners",
             "Oral-B electric toothbrush Pro 600 (MOP$248)"
@@ -92,7 +92,7 @@ export default {
     .reward-hero {
       display: block;
       img {
-        width: 250px;
+        width: 120px;
         display: block;
         margin: 0 auto;
       }
@@ -102,7 +102,7 @@ export default {
       overflow: hidden;
       margin: 0;
       padding: 0px 50px;
-      height: 250px;
+      height: 180px;
       .detail-item {
         display: block;
         text-align: left;

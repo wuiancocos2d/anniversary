@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="title">
-      <h5>澳门航空25周年相册征集活动</h5>
+      <h5 class="activity-title">“魅力澳航” 25週年照片徵集評選活動</h5>
       <h3>厚载文化 用心飞翔</h3>
       <h4>To become an airline rooted in Macau, serving Asia Pacific and furnishing first-class services.</h4>
     </div>
@@ -76,7 +76,8 @@ export default {
 }
 .content .title h5 {
   font-size: 18px;
-  color: #878787;
+  color: #555;
+  font-weight: 600;
 }
 .content .title h3 {
   font-size: 48px;

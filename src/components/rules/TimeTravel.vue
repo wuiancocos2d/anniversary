@@ -28,4 +28,9 @@ export default {
     }
   }
 }
+@media only screen and (max-width: 500px) {
+    .timeTravel {
+        min-height: 200px;
+    }
+}
 </style>

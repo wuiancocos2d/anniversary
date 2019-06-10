@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {Modal} from 'ant-design-vue'
+import { Message } from 'ant-design-vue'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charest=UTF-8'
 // axios.defaults.baseURL = ''
@@ -12,13 +12,13 @@ const fetch = (options) => {
   data = JSON.stringify(data)
   switch (method.toLowerCase()) {
     case 'get':
-      return axios.get(url,data)
+      return axios.get(url, data)
     case 'post':
-      return axios.post(url,data)
-    case 'delet': 
-      return axios.delete(url,data) 
+      return axios.post(url, data)
+    case 'delet':
+      return axios.delete(url, data)
     case 'put':
-      return axios.put(url,data)   
+      return axios.put(url, data)
     default:
       return axios(options)
   }
@@ -28,15 +28,14 @@ const fetch = (options) => {
 export default async function http(options) {
   return fetch(options)
     .then((response) => {
-      if(!response) {
-        Modal.error({
-          title: 'Connetion_refused',
-          content: 'Connetion_refused'
-        })
-      }else 
-      return response
+      if (!response) {
+        Message.error(
+          'Connetion_refused'
+        )
+      } else
+        return response
     }).catch((error) => {
-      console.log('error',error)
+      console.log('error', error)
       return error
     })
 }

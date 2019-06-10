@@ -3,7 +3,7 @@
     <a-row class="login-row">
       <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <div class="banner">
-          <img class="banner" src="../../../public/imgs/banner1200_400.png" alt>
+          <img class="banner" src="../../../public/imgs/banner1200_400.jpg" alt>
         </div>
       </a-col>
       <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -128,7 +128,6 @@ export default {
   background-color: #fff;
 
   .login-row {
-    margin-top: 40px;
     min-height: 500px;
     max-width: 1200px;
     margin-left: auto;
@@ -142,12 +141,13 @@ export default {
   }
   .banner {
     margin: 15px auto 0;
-    height: 240px;
+    width: 460px;
   }
   @media only screen and (max-width: 600px) {
     .banner {
-      margin: 30px auto 0;
-      height: 160px;
+      margin: 10px auto 0;
+      height: 260px;
+      width: auto;
     }
   }
   .loginFormContainer {

@@ -18,10 +18,10 @@
   </div>
 </template>
 <script>
-import { Icon } from "ant-design-vue"
-import { mapState } from "vuex"
-import { stageCode } from "../../config/config"
-import { likeImage, getImageLikeListById } from "../../service/getData"
+import { Icon } from "ant-design-vue";
+import { mapState } from "vuex";
+import { stageCode } from "../../config/config";
+import { likeImage, getImageLikeListById } from "../../service/getData";
 export default {
   name: "AddLike",
   components: {
@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     handleLikeClick() {
-      console.log(this.uesrLikeList)
       if (this.uesrLikeList.length >= 10) {
         this.$modal.warning({
           title: "The number of votes cannot exceed 10",
@@ -64,30 +63,31 @@ export default {
               <p>
                 The number of votes cannot exceed 10 and cannot be withdrawn.
               </p>
-              <p>
-                只有10次點贊機會，且不能撤回
-              </p>
+              <p>只有10次點贊機會，且不能撤回</p>
             </div>
           )
         });
-        return 
+        return;
       }
 
       if (this.userStage === this.stageCode.like) {
+        const that = this
         this.$modal.confirm({
-          title: "Are you sure you want to vote for this photo?"
-        });
-        this.$modal.confirm;
-        this.iconSpin = true;
-        likeImage(this.id).then(res => {
-          this.iconSpin = false;
-          if (res.code === 200) {
-            this.liked = true;
-            this.likeTimes = this.likeTimes + 1;
-            this.$emit("likeSuccess");
-          } else {
-            this.$error("msg:" + res.message);
-            this.loadMessage = "Load failed ,please flesh and try again ";
+          title: "Are you sure you want to vote for this photo?",
+          content: "Once voted, cannot be withdrawn(投票無法撤回)",
+          onOk() {
+            that.iconSpin = true;
+            likeImage(that.id).then(res => {
+              that.iconSpin = false;
+              if (res.code === 200) {
+                that.liked = true;
+                that.likeTimes = that.likeTimes + 1;
+                that.$emit("likeSuccess");
+              } else {
+                that.$error("msg:" + res.message);
+                that.loadMessage = "Load failed ,please flesh and try again ";
+              }
+            });
           }
         });
       } else {
