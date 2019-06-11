@@ -1,13 +1,13 @@
 <template>
   <div class="waterfallContainer" v-bind:class="{scroll: this.userStage < stageCode.approve}">
-    <div class="btns">
+    <!-- <div class="btns">
       <a-button
         type="primary"
         v-for="(stageV,i) in stagesBtns"
         v-bind:key="i"
         @click="handleS(i)"
       >{{stageString[stageV -1 ]}}</a-button>
-    </div>
+    </div> -->
     <div v-if="userStage < stageCode.approve" class="rule-container">
       <Rules></Rules>
     </div>
@@ -34,12 +34,12 @@ export default {
     return {
       stagesBtns: [1, 2, 3, 4, 5, 6],
       stageString: [
-        "开始上传",
-        "停止上传",
-        "开始审核",
-        "开始投票",
+        "開始上傳",
+        "停止上傳",
+        "開始審核",
+        "開始投票",
         "停止投票",
-        "开始打分"
+        "開始打分"
       ],
       stageCode: stageCode
     };

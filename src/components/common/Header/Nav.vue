@@ -1,5 +1,5 @@
 <template>
-  <a-menu theme="light" :mode="mode" class="nav-header right">
+  <a-menu theme="light" :mode="mode" class="nav-header right" @click="handleClick">
     <a-menu-item key="home" class="nav-item">
       <router-link to="/">Home</router-link>
     </a-menu-item>
@@ -49,6 +49,9 @@ export default {
           return
         }
       })
+    },
+    handleClick() {
+      this.$emit('navClick')
     }
   }
 };

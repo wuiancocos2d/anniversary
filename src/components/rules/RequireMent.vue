@@ -4,6 +4,7 @@
       <a-card :bordered="false">
         <div class="title" slot="title">
           <h3 class="title-txt">Requirement</h3>
+          <h4>參賽要求</h4>
         </div>
         <div class="requireds">
           <ul class="list">
@@ -48,11 +49,11 @@ export default {
         {
           key: 4,
           en:
-            "A simple guide to the type of cameras use, not limited to mobile phone camera, traditional" +
+            "A simple guide to the type of cameras use: Not limited to mobile phone camera, traditional" +
             " camera and digital monocular camera, either in black-and-white or color output photography " +
             " works is acceptable",
           cn:
-            "不分手機、傳統相機、彩色或黑白,數位單眼相機的拍攝作品皆具有參賽資格"
+            "相機要求: 不分手機、傳統相機、彩色或黑白,數位單眼相機的拍攝作品皆具有參賽資格"
         },
         {
           key: 5,
@@ -67,7 +68,7 @@ export default {
             "The photography submissions require to be completed in one shot, without the post production," +
             "and the theme of the same attraction is limited to one photography work entry." +
             "(The original photography work file must require high-quality pixel output. For the JPEG file" +
-            "submission, the photography work is limited to 5 MByte “MB” with high-quality display " +
+            "submission, the photography work is limited to 5 Megabyte “MB” with high-quality display " +
             "resolution.)",
           cn:
             "以一次拍攝完成之作品，不得後期製作，且同一個景" +

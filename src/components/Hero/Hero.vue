@@ -2,12 +2,12 @@
   <div class="content">
     <div class="title">
       <h5 class="activity-title">“魅力澳航” 25週年照片徵集評選活動</h5>
-      <h3>厚载文化 用心飞翔</h3>
+      <h3>厚載文化  用心飛翔</h3>
       <h4>To become an airline rooted in Macau, serving Asia Pacific and furnishing first-class services.</h4>
     </div>
-    <button class="hero-btn" v-if="displayBtn">
+    <div class="hero-btn" v-if="displayBtn">
       <router-link class="txt"   to="/Profile">Upload</router-link>
-    </button>
+    </div>
   </div>
 </template>
 <script>

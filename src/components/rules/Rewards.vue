@@ -24,23 +24,35 @@
                   </div>
                 </a-col>
                 <a-col :span="22">
-                  <div class="title">{{detail}}</div>
-                </a-col>
+                  <div class="title" v-if="key===0">{{detail}}</div>
+                  <div class="title" v-else><div class="rewardLink" @click="openModal(item)">{{detail}}</div></div>
+                </a-col> 
               </a-row>
             </li>
           </ul>
         </a-col>
       </a-row>
     </div>
+    <a-modal :footer="null" v-model="visible" :width="360">
+      <a-card title="" :bordered="false" >
+        <img class="priceImage" :src="rewardImgSrc" alt="reward" :style="{width:'100%'}">
+        <a-card-meta :title="rewardDescription">
+          <template c slot="description"><p class="rewardDescription">{{rewardDescription}}</p></template>
+        </a-card-meta>
+      </a-card>
+    </a-modal>
   </div>
 </template>
 <script>
-import { Row, Col } from "ant-design-vue";
+import { Row, Col, Modal, Card } from "ant-design-vue";
 export default {
   name: "Rewards",
   components: {
     "a-row": Row,
-    "a-col": Col
+    "a-col": Col,
+    "a-modal": Modal,
+    "a-card": Card,
+    "a-card-meta": Card.Meta
   },
   data() {
     return {
@@ -49,13 +61,15 @@ export default {
           key: 0,
           title: "Gold",
           image: require("@/assets/GOLDb.png"),
-          details: ["One winner", "Dyson supersonic - Hair dryer (MOP$3086)"]
+          details: ["One winner", "Dyson supersonic - Hair dryer (MOP$3086)"],
+          rewardImage: require("@/assets/dyson-supersonic-hair-dryer.jpg")
         },
         {
           key: 1,
           title: "Silver",
           image: require("@/assets/SILVERb.png"),
-          details: ["Two winners", "EXILIM wifi camera (MOP$1499)"]
+          details: ["Two winners", "EXILIM wifi camera (MOP$1499)"],
+          rewardImage: require("@/assets/camera.jpg")
         },
         {
           key: 2,
@@ -64,7 +78,8 @@ export default {
           details: [
             "Three winners",
             "Canon Selphy CP1300 wifi photo printer (MOP$1199)"
-          ]
+          ],
+          rewardImage: require("@/assets/intro-canon-selphy-cp1300.jpg")
         },
         {
           key: 3,
@@ -73,10 +88,23 @@ export default {
           details: [
             "Four winners",
             "Oral-B electric toothbrush Pro 600 (MOP$248)"
-          ]
+          ],
+          rewardImage: require("@/assets/Oral_B Pro 600.jpg")
         }
-      ]
+      ],
+      rewardImgSrc: "",
+      visible: false,
+      rewardTitle: "",
+      rewardDescription: ""
     };
+  },
+  methods: {
+    openModal: function(item){
+        this.rewardImgSrc = item.rewardImage
+        this.rewardTitle = item.title
+        this.rewardDescription = item.details[1]
+        this.visible = true
+    }
   }
 };
 </script>
@@ -125,10 +153,20 @@ export default {
           color: #34495e;
           font-weight: 600;
           display: block;
-          
+          .rewardLink {
+              cursor: pointer;
+          }
         }
+
       }
     }
+  }
+  .priceImage {
+      width: 100%;
+  }
+  .rewardDescription {
+      font-size: 15px;
+
   }
 }
 </style>

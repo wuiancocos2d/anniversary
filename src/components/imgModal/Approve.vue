@@ -7,14 +7,14 @@
         type="primary"
         block
         @click="handlePassClick"
-      >Pass</a-button>
+      >Accept</a-button>
       <a-button
         class="control-btn"
         :loading="Offing"
         type="danger"
         block
         @click="handleOffClick"
-      >Off</a-button>
+      >Deny</a-button>
     </div>
   </div>
 </template>

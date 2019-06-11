@@ -1,6 +1,6 @@
 <template>
   <div class="uploadItems">
-    <a-card title="The photos you uploaded">
+    <a-card title="The photos have been uploaded">
       <a-row :gutter="16">
         <a-col
           v-for="photoItem in userUploads"

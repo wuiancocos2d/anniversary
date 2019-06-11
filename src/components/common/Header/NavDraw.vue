@@ -10,8 +10,9 @@
       @close="onClose"
       :closable="false"
       :placement="placement"
+
     >
-      <Navigation :mode="'inline'"></Navigation>
+      <Navigation :mode="'inline'" v-on:navClick="onClose"></Navigation>
     </a-drawer>
   </div>
 </template>
@@ -38,7 +39,8 @@ export default {
     },
     onClose() {
       this.visible = false;
-    }
+    },
+    
   }
 };
 </script>

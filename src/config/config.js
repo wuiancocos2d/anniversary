@@ -1,6 +1,6 @@
-const BASE_URL = '/'
+const BASE_URL = '/activity25/'
 const BASE_URL_DEV = '/'
-export const env = 'dev'
+export const env = 'production'
 
 export const devPath = {
     LOAD_USER_INFO: BASE_URL + 'api/userInfo/',//用户基本信息
@@ -26,28 +26,28 @@ export const devPath = {
 }
 
 export const production = {
-    LOAD_USER_INFO: BASE_URL_DEV + 'user/info/',//用户基本信息
-    USER_LOGIN: BASE_URL_DEV + 'user/login?',//用户登陆
-    IMAGE_URL: BASE_URL_DEV + 'mock/',
-    ARTICEL_URL: BASE_URL_DEV + 'api/article',
-    AUTHORITYList_URL: BASE_URL_DEV + 'api/authoList',
-    IMG_UPLOAD_URL: '/resource/image',
-    USERUPLOAD_URL: BASE_URL_DEV + 'resource/submit?',
-    RESOURCE_UPDATE: '/resource/update?',
-    LOAD_USER_BY_ID: BASE_URL_DEV + 'api/getUserById',
-    USER_DELET_IMAGE: BASE_URL_DEV + 'resource/delete/',
-    GET_IMAGE_BY_TIME: BASE_URL_DEV + 'resource/check/',
-    RESOURCE_CHECK: BASE_URL_DEV + 'resource/status/check?id=',
-    RESOURCE_UNCHECK: BASE_URL_DEV + 'resource/status/uncheck?id=',
-    USER_IMAGES: BASE_URL_DEV+ 'resource/uid/',
+    LOAD_USER_INFO: BASE_URL + 'user/info/',//用户基本信息
+    USER_LOGIN: BASE_URL + 'user/login?',//用户登陆
+    IMAGE_URL: BASE_URL + 'mock/',
+    ARTICEL_URL: BASE_URL + 'api/article',
+    AUTHORITYList_URL: BASE_URL + 'api/authoList',
+    IMG_UPLOAD_URL: BASE_URL +'resource/image',
+    USERUPLOAD_URL: BASE_URL  + 'resource/submit?',
+    RESOURCE_UPDATE: BASE_URL +'resource/update?',
+    LOAD_USER_BY_ID: BASE_URL  + 'api/getUserById',
+    USER_DELET_IMAGE: BASE_URL  + 'resource/delete/',
+    GET_IMAGE_BY_TIME: BASE_URL  + 'resource/check/',
+    RESOURCE_CHECK: BASE_URL  + 'resource/status/check?id=',
+    RESOURCE_UNCHECK: BASE_URL  + 'resource/status/uncheck?id=',
+    USER_IMAGES: BASE_URL + 'resource/uid/',
     //主页图片相关
     GET_UNCHECK_IMAGES: BASE_URL + 'resource/unchecked/',
-    GET_CHECK_IMAGES: BASE_URL_DEV + 'resource/check/',
-    GET_CANDIDATE_IMAGES: BASE_URL_DEV + 'like/count/30/',
-    GET_WINNERS_IMAGES: BASE_URL_DEV + 'resource/winners/',
-    ADD_LIKE_IMAGE: BASE_URL_DEV+'like/add/',
-    POINT_IMAGE: BASE_URL_DEV+ 'resource/point?',
-    GET_IMAGE_LIKE_LIST: BASE_URL_DEV +'like/info/'
+    GET_CHECK_IMAGES: BASE_URL  + 'resource/check/',
+    GET_CANDIDATE_IMAGES: BASE_URL  + 'like/count/30/',
+    GET_WINNERS_IMAGES: BASE_URL  + 'resource/winners/',
+    ADD_LIKE_IMAGE: BASE_URL +'like/add/',
+    POINT_IMAGE:BASE_URL + 'resource/point?',
+    GET_IMAGE_LIKE_LIST: BASE_URL +'like/info/'
 }
 
 export const stageCode = {
