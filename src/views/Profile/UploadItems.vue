@@ -64,8 +64,8 @@ export default {
     outline: none;
     border: none;
     &:hover {
-      box-shadow: 0 8px 14px rgba(0, 0, 0, 0.25),
-            0 10px 10px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35),
+            0 15px 15px rgba(0, 0, 0, 0.32);
     }
   }
   .uploadImg {

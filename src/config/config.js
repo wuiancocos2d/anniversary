@@ -1,4 +1,4 @@
-const BASE_URL = '/activity25/'
+const BASE_URL = '/'
 const BASE_URL_DEV = '/'
 export const env = 'production'
 

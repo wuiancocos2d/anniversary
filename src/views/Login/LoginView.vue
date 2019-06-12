@@ -60,7 +60,8 @@ export default {
   name: "login",
   data() {
     return {
-      userInfo: null
+      userInfo: null,
+      logining: false
     };
   },
   beforeCreate() {
@@ -91,9 +92,12 @@ export default {
       });
     },
     login(user) {
-      const loadingMessage = this.$message.loading("Loading..", 0);
+      if(this.logining === true) return
+      const loadingMessage = this.$message.loading("Loading..", 0)
+      this.logining = true
       userLogin(user).then(
         res => {
+          this.logining = false
           setTimeout(loadingMessage, 0);
           if (!res) {
             this.$modal.error({ title: "ERR_CONNECTION_REFUSED" });
@@ -111,6 +115,7 @@ export default {
           }
         },
         error => {
+          this.logining = false
           console.log("error", error);
         }
       );

@@ -1,11 +1,11 @@
 <template>
   <div class="rate-container">
     <div class="rate-area">
-      <span class="ant-rate-text">Picture: {{pointMind}} point</span>
+      <span class="ant-rate-text">Theme(35%): {{pointMind}} point</span>
       <a-rate :count="10" v-model="pointMind"></a-rate>
-      <span class="ant-rate-text">Structure: {{pointSkill}} point</span>
+      <span class="ant-rate-text">Techniques(35%): {{pointSkill}} point</span>
       <a-rate :count="10" v-model="pointSkill"></a-rate>
-      <span class="ant-rate-text">Beauty: {{pointTheme}} point</span>
+      <span class="ant-rate-text">Creativity(30%): {{pointTheme}} point</span>
       <a-rate :count="10" v-model="pointTheme"></a-rate>
     </div>
     <a-button type="primary" :loading="rating" @click="handleRate">Update Rate</a-button>

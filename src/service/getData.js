@@ -105,7 +105,7 @@ export const resourceUnCheck = async function (itemId) {
 //点赞
 export const likeImage = async function (imageId) {
   let res = await http({
-    url: env === 'dev' ? config.ADD_LIKE_IMAGE : config.ADD_LIKE_IMAGE + imageId + '/' + store.state.userId,
+    url: env === 'dev' ? config.ADD_LIKE_IMAGE : config.ADD_LIKE_IMAGE + imageId + '/' + getStore('userId'),
     method: 'post'
   })
   return res.data
@@ -120,7 +120,7 @@ export const rateImage = async function(imageItem) {
 }
 export const getUserImages = async function () {
   let res = await http({
-    url: env === 'dev' ? config.USER_IMAGES : config.USER_IMAGES + store.state.userId,
+    url: env === 'dev' ? config.USER_IMAGES : config.USER_IMAGES + getStore('userId'),
     method: 'get'
   })
   return res.data

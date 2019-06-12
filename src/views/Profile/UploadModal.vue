@@ -15,7 +15,7 @@
         >
           <img class="uploadShow" v-if="imageUrl" :src="imageUrl" alt="avatar">
           <div v-else>
-            <a-icon class="plus" type="imgLoading? loading : plus"/>
+            <a-icon class="plus" :type="imgLoading ? 'loading' : 'plus'"/>
             <p class="hint">Please upload you image here</p>
           </div>
         </a-upload>
@@ -130,6 +130,7 @@ export default {
     },
     handleImgChange(info) {
       if (info.file.status === "uploading") {
+        this.imgLoading = true;
         this.loading = true;
         return;
       }

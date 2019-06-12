@@ -3,7 +3,7 @@
     <div class="requirement-container">
       <a-card :bordered="false">
         <div class="title" slot="title">
-          <h3 class="title-txt">Requirement</h3>
+          <h3 class="title-txt"> Contest Rules </h3>
           <h4>參賽要求</h4>
         </div>
         <div class="requireds">

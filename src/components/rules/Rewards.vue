@@ -18,12 +18,12 @@
           <ul class="details">
             <li class="detail-item" v-for="(detail,key) in item.details" :key="key">
               <a-row>
-                <a-col :span="2">
+                <a-col :span="8">
                   <div class="title-image">
                     <img src="../../assets/flag.png" alt="'flag'">
                   </div>
                 </a-col>
-                <a-col :span="22">
+                <a-col :span="16">
                   <div class="title" v-if="key===0">{{detail}}</div>
                   <div class="title" v-else><div class="rewardLink" @click="openModal(item)">{{detail}}</div></div>
                 </a-col> 
@@ -37,7 +37,7 @@
       <a-card title="" :bordered="false" >
         <img class="priceImage" :src="rewardImgSrc" alt="reward" :style="{width:'100%'}">
         <a-card-meta :title="rewardDescription">
-          <template c slot="description"><p class="rewardDescription">{{rewardDescription}}</p></template>
+          <template  slot="description"><p class="rewardDescription">{{rewardDescription}}</p></template>
         </a-card-meta>
       </a-card>
     </a-modal>
@@ -61,14 +61,14 @@ export default {
           key: 0,
           title: "Gold",
           image: require("@/assets/GOLDb.png"),
-          details: ["One winner", "Dyson supersonic - Hair dryer (MOP$3086)"],
+          details: ["One winner", "Dyson supersonic - Hair dryer"],
           rewardImage: require("@/assets/dyson-supersonic-hair-dryer.jpg")
         },
         {
           key: 1,
           title: "Silver",
           image: require("@/assets/SILVERb.png"),
-          details: ["Two winners", "EXILIM wifi camera (MOP$1499)"],
+          details: ["Two winners", "EXILIM wifi camera"],
           rewardImage: require("@/assets/camera.jpg")
         },
         {
@@ -77,7 +77,7 @@ export default {
           image: require("@/assets/bronezb.png"),
           details: [
             "Three winners",
-            "Canon Selphy CP1300 wifi photo printer (MOP$1199)"
+            "Canon Selphy CP1300 wifi photo printer"
           ],
           rewardImage: require("@/assets/intro-canon-selphy-cp1300.jpg")
         },
@@ -87,7 +87,7 @@ export default {
           image: require("@/assets/excellentb.png"),
           details: [
             "Four winners",
-            "Oral-B electric toothbrush Pro 600 (MOP$248)"
+            "Oral-B electric toothbrush Pro 600"
           ],
           rewardImage: require("@/assets/Oral_B Pro 600.jpg")
         }

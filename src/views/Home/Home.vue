@@ -1,13 +1,13 @@
 <template>
   <div class="waterfallContainer" v-bind:class="{scroll: this.userStage < stageCode.approve}">
-    <!-- <div class="btns">
+    <div class="btns">
       <a-button
         type="primary"
         v-for="(stageV,i) in stagesBtns"
         v-bind:key="i"
         @click="handleS(i)"
       >{{stageString[stageV -1 ]}}</a-button>
-    </div> -->
+    </div>
     <div v-if="userStage < stageCode.approve" class="rule-container">
       <Rules></Rules>
     </div>

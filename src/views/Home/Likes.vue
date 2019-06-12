@@ -197,6 +197,7 @@ export default {
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02),
       0 4px 8px rgba(0, 0, 0, 0.02);
       transition-duration: 0.15s;
+
   }
   .img-box.default-card-animation .alink.img-inner-box:hover {
     margin-top: -2px;
