@@ -17,7 +17,7 @@ const state = {
 	},
 	userId: null,
 	userStage: stageCode.stopuload,
-	userUploads: [],
+	userUploads: false,
 	uesrLikeList: []
 }
 

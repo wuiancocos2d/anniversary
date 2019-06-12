@@ -25,6 +25,7 @@
       </div>
       <div slot="waterfall-over">
         <h3>...No More Images...</h3>
+        <VFooter></VFooter>
       </div>
     </vue-waterfall-easy>
     <a-modal
@@ -47,13 +48,15 @@ import ImageModal from "../../components/imgModal/ImageModal";
 import { mapState, mapActions } from "vuex";
 import { stageCode } from "../../config/config";
 import Hero from "../../components/Hero/Hero";
+import VFooter from '../../components/common/VFooter'
 export default {
   name: "Likes",
   components: {
     "vue-waterfall-easy": vueWaterfallEasy,
     Hero,
     "a-modal": Modal,
-    ImageModal
+    ImageModal,
+    VFooter
   },
   computed: {
     ...mapState(["userStage"])
@@ -106,14 +109,18 @@ export default {
       getHomepageImage(this.page).then(
         res => {
           if (res && res.code === 200) {
-            if (res.data && res.data.length === 0)
+            if (res.data && res.data.length === 0 || this.page === 5) {
+              //加载结束
               this.$refs.waterfall.waterfallOver();
-            if (this.userStage < this.stageCode.rate) {
-              this.imgsArr = this.imgsArr.concat(res.data);
-              this.page++;
-            } else if (this.userStage === this.stageCode.rate) {
-              for (let i = 0; i < res.data.length; i++) {
-                this.imgsArr.push(res.data[i]["resource"]);
+            } else {
+              //打分返回数据结构不同
+              if (this.userStage < this.stageCode.rate) {
+                this.imgsArr = this.imgsArr.concat(res.data);
+                this.page++;
+              } else if (this.userStage === this.stageCode.rate) {
+                for (let i = 0; i < res.data.length; i++) {
+                  this.imgsArr.push(res.data[i]["resource"]);
+                }
               }
             }
           } else {
@@ -155,8 +162,10 @@ export default {
 </script>
 <style lang="scss" >
 .like-container {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
   display: block;
-  height: 100%;
   width: 100%;
   padding: 0 2px;
   overflow-y: auto;
@@ -196,8 +205,7 @@ export default {
       0 4px 8px rgba(0, 0, 0, 0.02);
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02),
       0 4px 8px rgba(0, 0, 0, 0.02);
-      transition-duration: 0.15s;
-
+    transition-duration: 0.15s;
   }
   .img-box.default-card-animation .alink.img-inner-box:hover {
     margin-top: -2px;

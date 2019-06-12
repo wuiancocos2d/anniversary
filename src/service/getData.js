@@ -141,11 +141,11 @@ export const getHomepageImage = async function (page) {
   let url
   switch (userStage) {
     case stageCode.approve:
-      url =  env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_UNCHECK_IMAGES + page + '/12'
+      url =  env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_UNCHECK_IMAGES + page + '/4'
       break;
     case stageCode.like:
     case stageCode.stopLike:
-      url = env === 'dev' ? config.GET_CHECK_IMAGES : config.GET_CHECK_IMAGES + page + '/12'
+      url = env === 'dev' ? config.GET_CHECK_IMAGES : config.GET_CHECK_IMAGES + page + '/4'
       break
     case stageCode.rate:
       url =  config.GET_CANDIDATE_IMAGES 

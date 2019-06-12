@@ -135,6 +135,7 @@ export default {
         return;
       }
       if (info.file.status === "done") {
+        this.imgLoading = false
         const res = info.file.response;
         if (res.code === 200) {
           this.imageUrl = res.data;

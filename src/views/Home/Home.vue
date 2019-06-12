@@ -12,7 +12,7 @@
       <Rules></Rules>
     </div>
     <Likes v-else></Likes>
-    <VFooter></VFooter>
+    <VFooter v-if="userStage === stageCode.upload"></VFooter>
   </div>
 </template>
 <script>

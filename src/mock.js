@@ -301,10 +301,10 @@ const sampleImages = function () {
                 "resourceUrl": "http://arenaillustration.com/news/wp-content/uploads/2018/11/alex-t-smith-how-winston-powerpoint-10.jpg",
             },
             {
-                "resourceUrl": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/66590962179295.5a875ef232bf3.jpg",
+                "resourceUrl": "http://p9.pstatp.com/origin/pgc-image/46573cec16b14e2b85009c6d608d86b5",
             },
             {
-                "resourceUrl": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/850c1574280331.5c29fdbaead23.jpg"
+                "resourceUrl": "https://hbimg.huabanimg.com/6414414aec329e841ff3fed3c8d2e607c3570a0360e38-DbZIN5_fw658"
             },
             {
                 "resourceUrl": "https://img.zcool.cn/community/01cc465bc81ba2a801213dea1a1ae4.jpg@1280w_1l_2o_100sh.jpg"
