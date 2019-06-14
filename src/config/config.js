@@ -1,6 +1,6 @@
 const BASE_URL = '/'
 const BASE_URL_DEV = '/'
-export const env = 'dev'
+export const env = 'production'
 
 export const devPath = {
     LOAD_USER_INFO: BASE_URL + 'api/userInfo/',//用户基本信息
@@ -22,7 +22,8 @@ export const devPath = {
     ADD_LIKE_IMAGE: 'api/like/',
     POINT_IMAGE: '/api/point/',
     GET_IMAGE_LIKE_LIST: 'api/like_list/info/',
-    GET_CANDIDATE_IMAGES: 'api/candidate/'
+    GET_CANDIDATE_IMAGES: 'api/candidate/',
+    GET_USER_LIKE_LIST: BASE_URL + 'like/rids/uid/'
 }
 
 export const production = {
@@ -47,7 +48,8 @@ export const production = {
     GET_WINNERS_IMAGES: BASE_URL  + 'resource/winners/',
     ADD_LIKE_IMAGE: BASE_URL +'like/add/',
     POINT_IMAGE:BASE_URL + 'resource/point?',
-    GET_IMAGE_LIKE_LIST: BASE_URL +'like/info/'
+    GET_IMAGE_LIKE_LIST: BASE_URL +'like/info/',
+    GET_USER_LIKE_LIST: BASE_URL + 'like/rids/uid/'
 }
 
 export const stageCode = {

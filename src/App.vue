@@ -87,7 +87,7 @@ body {
   height: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
-  padding: 0 5px;
+  padding: 0;
 }
 #header {
   background: #fff;

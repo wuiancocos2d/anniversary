@@ -45,7 +45,7 @@ import vueWaterfallEasy from "vue-waterfall-easy";
 import { Modal } from "ant-design-vue";
 import { getHomepageImage } from "../../service/getData.js";
 import ImageModal from "../../components/imgModal/ImageModal";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 import { stageCode } from "../../config/config";
 import Hero from "../../components/Hero/Hero";
 import VFooter from '../../components/common/VFooter'
@@ -98,18 +98,18 @@ export default {
   },
   mounted: function() {
     const that = this;
+
     this.$nextTick(() => {
       this.handleSize();
       window.addEventListener("resize", that.handleSize);
     });
   },
   methods: {
-    ...mapActions(["syncUserImages"]),
     getData() {
       getHomepageImage(this.page).then(
         res => {
           if (res && res.code === 200) {
-            if (res.data && res.data.length === 0 || this.page === 5) {
+            if (res.data && res.data.length === 0) {
               //加载结束
               this.$refs.waterfall.waterfallOver();
             } else {
@@ -155,8 +155,8 @@ export default {
   created() {
     if (this.userStage > this.$stageCode.upload) {
       this.getData();
-      this.syncUserImages();
     }
+    
   }
 };
 </script>

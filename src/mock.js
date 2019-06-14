@@ -304,13 +304,13 @@ const sampleImages = function () {
                 "resourceUrl": "http://p9.pstatp.com/origin/pgc-image/46573cec16b14e2b85009c6d608d86b5",
             },
             {
-                "resourceUrl": "https://hbimg.huabanimg.com/6414414aec329e841ff3fed3c8d2e607c3570a0360e38-DbZIN5_fw658"
+                "resourceUrl": "https://i.pinimg.com/236x/4c/c4/c4/4cc4c418fad09c5e065d8ef4035e9520.jpg"
             },
             {
                 "resourceUrl": "https://img.zcool.cn/community/01cc465bc81ba2a801213dea1a1ae4.jpg@1280w_1l_2o_100sh.jpg"
             },
             {
-                "resourceUrl": "https://img.zcool.cn/community/01529e5bc81bbaa8012099c8a32f1c.jpg@1280w_1l_2o_100sh.jpg"
+                "resourceUrl": "https://i.pinimg.com/originals/99/ad/45/99ad452155ee05129aa95eb2a32d57d7.jpg"
             },
             {
                 "resourceUrl": "https://img.zcool.cn/community/0171195bc81bbaa801213dea6746d6.jpg@1280w_1l_2o_100sh.jpg"
@@ -324,8 +324,10 @@ const sampleImages = function () {
         ]
     let returnData = function () {
         let data = []
+        console.log(Mock)
         for (let i = 0; i < imgs.length; i++) {
             const obj = {
+                "id": Mock.Random.integer(0, 200),
                 "resourceUrl": imgs[i]["resourceUrl"],
                 "resourceTitle": Mock.mock('@title(3,5)'),
                 "resourceContent": Mock.mock('@cparagraph')
@@ -365,6 +367,45 @@ const rateSource = function () {
     return rateResources
 }
 
+const userLikeList = function () {
+    const likes = function () {
+        let arr = []
+        for (let i = 0; i < 100; i++) {
+            arr.push(i)
+        }
+        return arr
+    }
+    return {
+        "code": 200,
+        "message": "OK",
+        "data": [
+            likes
+        ]
+    }
+}
+
+const imageLikeList = function () {
+    return {
+        "code": 200,
+        "message": "OK",
+        "data": [
+            {
+                "id": 47,
+                "uid": 4035,
+                "rid": 14,
+                "likeTime": "2019-06-13T06:36:46.000+0000"
+            },
+            {
+                "id": 45,
+                "uid": 4035,
+                "rid": 14,
+                "likeTime": "2019-06-13T06:36:46.000+0000"
+            },
+
+        ]
+    }
+}
+
 Mock.mock(devPath.IMAGE_URL, 'get', postData())
 Mock.mock(devPath.USER_LOGIN, 'post', userLogin())
 Mock.mock(devPath.LOAD_USER_INFO, 'post', userInfor())
@@ -377,3 +418,5 @@ Mock.mock(devPath.GET_UNCHECK_IMAGES, 'get', sampleImages())
 Mock.mock(devPath.GET_CHECK_IMAGES, 'get', sampleImages())
 Mock.mock(devPath.USER_IMAGES, 'get', userResource())
 Mock.mock(devPath.GET_CANDIDATE_IMAGES, 'get', rateSource())
+Mock.mock(devPath.GET_USER_LIKE_LIST, 'get', userLikeList())
+Mock.mock(devPath.GET_IMAGE_LIKE_LIST, 'get',imageLikeList())

@@ -1,16 +1,18 @@
 <template>
   <div class="add-like-container">
     <div class="content" v-if="loadInfoSuccess">
-      <a-icon
-        v-if="liked"
-        type="heart"
-        class="like-icon"
-        theme="twoTone"
-        twoToneColor="#eb2f96"
-        @click="handleLikedClick"
-      />
-      <a-icon v-else class="like-icon" type="heart" @click="handleLikeClick" :spin="iconSpin"/>
-      <span class="like-num">{{likeTimes}}</span>
+      <div class="content">
+        <a-icon
+          v-if="liked"
+          type="heart"
+          class="like-icon"
+          theme="twoTone"
+          twoToneColor="#eb2f96"
+          @click="handleLikedClick"
+        />
+        <a-icon v-else class="like-icon" type="heart" @click="handleLikeClick" :spin="iconSpin"/>
+        <span class="like-num">{{likeTimes}}</span>
+      </div>
     </div>
     <div v-else class="errorMessage">
       <span>{{loadMessage}}</span>
@@ -19,9 +21,10 @@
 </template>
 <script>
 import { Icon } from "ant-design-vue";
-import { mapState } from "vuex";
+import { mapState,mapMutations } from "vuex";
 import { stageCode } from "../../config/config";
-import { likeImage, getImageLikeListById } from "../../service/getData";
+import { likeImage } from "../../service/getData";
+import {getUserLikeList,getImageLikeListById} from '../../service/getData'
 export default {
   name: "AddLike",
   components: {
@@ -31,29 +34,41 @@ export default {
     return {
       stageCode: stageCode,
       iconSpin: false,
-      loadInfoSuccess: false,
-      likeTimes: 0,
-      liked: false,
       remainVote: 0,
-      loadMessage: "Loading user Like info ..."
+      likeTimes: 0,
+      loadInfoSuccess: false,
+      loadMessage: "Loading like info",
     };
   },
   props: {
-    resourceLike: Number,
-    id: Number
-  },
-  computed: {
-    ...mapState(["userStage", "userId", "uesrLikeList"])
-  },
-  mounted: function() {
-    this.ifLike();
-  },
-  watch: {
-    id: function() {
-      this.ifLike();
+    id: {
+      type: Number,
+      required: true
     }
   },
+  computed: {
+    ...mapState(["userStage", "userId", "uesrLikeList"]),
+    liked: function() {
+      console.log('computed hasliked')
+      return this.hasLiked()
+    },
+    voteLeft: function(){
+      return (10 - this.uesrLikeList.length)
+    }
+  },
+
+  watch: {
+    id: function(){
+      this.updateLikeTimes()
+    }
+  },
+  mounted: function() {
+    this.initLike()
+    this.updateLikeTimes()
+  },
+  
   methods: {
+    ...mapMutations(['USER_LIKE_LIST']),
     handleLikeClick() {
       if (this.uesrLikeList.length >= 10) {
         this.$modal.warning({
@@ -61,9 +76,9 @@ export default {
           content: (
             <div>
               <p>
-                The number of votes cannot exceed 10 and cannot be withdrawn.
+                Your vote has been used up,vote cannot be withdrawn.
               </p>
-              <p>只有10次點贊機會，且不能撤回</p>
+              <p>您的點贊機會已經用完，且點贊不能撤回</p>
             </div>
           )
         });
@@ -71,10 +86,11 @@ export default {
       }
 
       if (this.userStage === this.stageCode.like) {
-        const that = this
+        const that = this;
         this.$modal.confirm({
-          title: "Are you sure you want to vote for this photo?",
-          content: "Once voted, cannot be withdrawn(投票無法撤回)",
+          title: "Are you sure you want to vote for this photo? ",
+          content: "Once voted, cannot be withdrawn(投票無法撤回)"+
+          "Your still have "+ this.voteLeft + " left",
           onOk() {
             that.iconSpin = true;
             likeImage(that.id).then(res => {
@@ -82,6 +98,7 @@ export default {
               if (res.code === 200) {
                 that.liked = true;
                 that.likeTimes = that.likeTimes + 1;
+                that.asyncUserLikeList();
                 that.$emit("likeSuccess");
               } else {
                 that.$error("msg:" + res.message);
@@ -111,25 +128,37 @@ export default {
         ])
       });
     },
-    ifLike() {
-      if (this.id) {
-        const that = this;
-        getImageLikeListById(this.id).then(res => {
-          if (res.code === 200) {
-            this.loadInfoSuccess = true;
-            const list = res.data;
-            that.likeTimes = list.length;
-            this.liked = false;
-            for (let i = 0; i < list.length; i++) {
-              (function(uid) {
-                if (uid === that.userId) that.liked = true;
-              })(list[i]["uid"]);
-            }
-          } else {
-            (this.loadInfoSuccess = true), (this.loadMessage = res.message);
+    async initLike () {
+      getUserLikeList().then(
+        res => {
+          if(res && res.data) {
+            this.USER_LIKE_LIST(res.data[0])
+            this.loadInfoSuccess = true
+          }else {
+            this.loadInfoSuccess = false
+            if(res)
+            this.loadMessage = res.message
           }
-        });
+        }
+      )
+    },
+    hasLiked() {
+      const list = this.uesrLikeList;
+      for (let i = 0; i < list.length; i++) {
+        if (this.id === list[i]) {
+          return true;
+        }
       }
+      return false
+    },
+    updateLikeTimes() {
+      getImageLikeListById(this.id).then(
+        res => {
+          if(res && res.data) {
+            this.likeTimes = res.data.length
+          }
+        }
+      )
     }
   }
 };

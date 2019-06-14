@@ -1,5 +1,5 @@
 import * as types from './mutaions-types.js'
-import { loadUserInfo, userLogin, getUserImages } from '../service/getData'
+import { loadUserInfo, userLogin, getUserImages, getUserLikeList } from '../service/getData'
 import router from '../router'
 import store from './index'
 export default {
@@ -52,7 +52,16 @@ export default {
             res => {
                 if (res && res.data) {
                     commit(types.USER_IMAGES, res.data.resourceList)
-                    commit(types.USER_LIKE_LIST, res.data.likeList)
+                }
+            }
+        )
+    },
+
+    async asyncUserLikeList({commit}) {
+        return getUserLikeList().then(
+            res => {
+                if(res && res.data) {
+                     commit(types.USER_LIKE_LIST,res.data[0])
                 }
             }
         )

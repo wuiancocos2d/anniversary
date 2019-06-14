@@ -141,14 +141,14 @@ export const getHomepageImage = async function (page) {
   let url
   switch (userStage) {
     case stageCode.approve:
-      url =  env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_UNCHECK_IMAGES + page + '/4'
+      url =  env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_UNCHECK_IMAGES + page + '/12'
       break;
     case stageCode.like:
     case stageCode.stopLike:
-      url = env === 'dev' ? config.GET_CHECK_IMAGES : config.GET_CHECK_IMAGES + page + '/4'
+      url = env === 'dev' ? config.GET_CHECK_IMAGES : config.GET_CHECK_IMAGES + page + '/12'
       break
     case stageCode.rate:
-      url =  config.GET_CANDIDATE_IMAGES 
+      url = env === 'dev'?  config.GET_CANDIDATE_IMAGES :config.GET_CANDIDATE_IMAGES + page + '/12'
       break
     case stageCode.end:
       url = config.GET_WINNERS_IMAGES
@@ -165,7 +165,13 @@ export const getHomepageImage = async function (page) {
   return res.data
 }
 
-
+export const getUserLikeList = async function(){
+  let res = await http({
+    url: env === 'dev' ? config.GET_USER_LIKE_LIST : config.GET_USER_LIKE_LIST + getStore('userId'),
+    method: 'get'
+  })
+  return res.data
+}
 
 
 
@@ -173,7 +179,7 @@ function parseJsonToPostString(obj) {
   var str = [];
   for (var p in obj)
     if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]))
     }
   return str.join("&");
 }

@@ -52,7 +52,10 @@ export default {
     };
   },
   props: {
-    imageItem: Object
+    imageItem: {
+      type: Object,
+      required: true,
+    }
   },
   computed: {
     ...mapState(["userStage", "userId"])

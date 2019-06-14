@@ -53,7 +53,6 @@ export const mutations = {
         state.uesrLikeList = imgs
     },
     [types.USER_STAGE] (state, {stage,role}) {
-        console.log('stage',stage,'role',role)
         if(!stage || !role) return 
         let userLevelCode,userStage 
         //user code
@@ -90,12 +89,12 @@ export const mutations = {
             //结束
             userStage = stageCode.end
         }
-        console.log('userStage',userStage)
         state.userStage = userStage
     },
     [types.SET_USER_STAGE] (state,userStage) {
         state.userStage = userStage
-    }
+    },
+    
 }
 
 export default mutations
