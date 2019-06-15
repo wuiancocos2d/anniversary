@@ -8,7 +8,7 @@ module.exports = {
   },
   // baseUrl: './',
   publicPath: process.env.NODE_ENV === 'production'
-    ? ".//activity25"
+    ? "./"
     : './'
   
   // assetsDir: './'

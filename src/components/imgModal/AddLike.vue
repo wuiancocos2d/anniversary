@@ -155,6 +155,7 @@ export default {
       getImageLikeListById(this.id).then(
         res => {
           if(res && res.data) {
+            this.loadInfoSuccess = true
             this.likeTimes = res.data.length
           }
         }

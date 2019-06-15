@@ -3,7 +3,7 @@
     <div class="requirement-container">
       <a-card :bordered="false">
         <div class="title" slot="title">
-          <h3 class="title-txt"> Contest Rules </h3>
+          <h3 class="title-txt">Contest Rules</h3>
           <h4>參賽要求</h4>
         </div>
         <div class="requireds">
@@ -84,7 +84,7 @@ export default {
   max-width: 894px;
   width: 100%;
   margin: 40px auto 30px;
-  
+
   .title {
     .title-txt {
       font-size: 48px;
@@ -109,13 +109,26 @@ export default {
         }
         .en {
           font-size: 16px;
-          color: #3C4043;
+          color: #3c4043;
         }
         .cn {
           font-size: 13px;
-          color: #34495E;
+          color: #34495e;
         }
-        
+      }
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .requireMent {
+      max-width: 894px;
+      width: 100%;
+      margin: 30px auto 30px;
+    }
+    .title {
+      .title-txt {
+        font-size: 28px;
+        color: #202124;
+        line-height: 30px;
       }
     }
   }

@@ -1,4 +1,4 @@
-const BASE_URL = '/'
+const BASE_URL = 'http://nx25th.airmacau.com.mo/activity25/'
 const BASE_URL_DEV = '/'
 export const env = 'production'
 
@@ -44,7 +44,7 @@ export const production = {
     //主页图片相关
     GET_UNCHECK_IMAGES: BASE_URL + 'resource/unchecked/',
     GET_CHECK_IMAGES: BASE_URL  + 'resource/check/',
-    GET_CANDIDATE_IMAGES: BASE_URL  + 'like/count/30/',
+    GET_CANDIDATE_IMAGES: BASE_URL  + 'like/count/',
     GET_WINNERS_IMAGES: BASE_URL  + 'resource/winners/',
     ADD_LIKE_IMAGE: BASE_URL +'like/add/',
     POINT_IMAGE:BASE_URL + 'resource/point?',

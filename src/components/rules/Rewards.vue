@@ -25,8 +25,10 @@
                 </a-col>
                 <a-col :span="16">
                   <div class="title" v-if="key===0">{{detail}}</div>
-                  <div class="title" v-else><div class="rewardLink" @click="openModal(item)">{{detail}}</div></div>
-                </a-col> 
+                  <div class="title" v-else>
+                    <div class="rewardLink" @click="openModal(item)">{{detail}}</div>
+                  </div>
+                </a-col>
               </a-row>
             </li>
           </ul>
@@ -34,10 +36,12 @@
       </a-row>
     </div>
     <a-modal :footer="null" v-model="visible" :width="360">
-      <a-card title="" :bordered="false" >
+      <a-card title :bordered="false">
         <img class="priceImage" :src="rewardImgSrc" alt="reward" :style="{width:'100%'}">
         <a-card-meta :title="rewardDescription">
-          <template  slot="description"><p class="rewardDescription">{{rewardDescription}}</p></template>
+          <template slot="description">
+            <p class="rewardDescription">{{rewardDescription}}</p>
+          </template>
         </a-card-meta>
       </a-card>
     </a-modal>
@@ -75,20 +79,14 @@ export default {
           key: 2,
           title: "Bronz",
           image: require("@/assets/bronezb.png"),
-          details: [
-            "Three winners",
-            "Canon Selphy CP1300 wifi photo printer"
-          ],
+          details: ["Three winners", "Canon Selphy CP1300 wifi photo printer"],
           rewardImage: require("@/assets/intro-canon-selphy-cp1300.jpg")
         },
         {
           key: 3,
           title: "Excellent",
           image: require("@/assets/excellentb.png"),
-          details: [
-            "Four winners",
-            "Oral-B electric toothbrush Pro 600"
-          ],
+          details: ["Four winners", "Oral-B electric toothbrush Pro 600"],
           rewardImage: require("@/assets/Oral_B Pro 600.jpg")
         }
       ],
@@ -99,11 +97,11 @@ export default {
     };
   },
   methods: {
-    openModal: function(item){
-        this.rewardImgSrc = item.rewardImage
-        this.rewardTitle = item.title
-        this.rewardDescription = item.details[1]
-        this.visible = true
+    openModal: function(item) {
+      this.rewardImgSrc = item.rewardImage;
+      this.rewardTitle = item.title;
+      this.rewardDescription = item.details[1];
+      this.visible = true;
     }
   }
 };
@@ -130,11 +128,11 @@ export default {
       overflow: hidden;
       margin: 0;
       padding: 0px 50px;
-      height: 180px;
+      height: 160px;
       .detail-item {
         display: block;
         text-align: left;
-        margin-top: 30px;
+        margin-top: 20px;
         .title-image {
           display: block;
           width: 25px;
@@ -154,19 +152,27 @@ export default {
           font-weight: 600;
           display: block;
           .rewardLink {
-              cursor: pointer;
+            cursor: pointer;
           }
         }
-
       }
     }
   }
   .priceImage {
-      width: 100%;
+    width: 100%;
   }
   .rewardDescription {
-      font-size: 15px;
-
+    font-size: 15px;
+  }
+  @media only screen and (max-width: 600px) {
+    .reward-hero {
+      display: block;
+      img {
+        width: 95px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
   }
 }
 </style>

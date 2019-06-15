@@ -62,7 +62,7 @@ export default {
   color: #38219a;
 }
 .content {
-  background: url("~@/assets/hero.png") repeat-x;
+  background: url("~@/assets/hero_1.png") repeat-x;
   background-color: #fff;
 }
 .content {

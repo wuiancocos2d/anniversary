@@ -1,13 +1,13 @@
 <template>
   <div class="waterfallContainer" v-bind:class="{scroll: this.userStage < stageCode.approve}">
-    <div class="btns">
+    <!-- <div class="btns">
       <a-button
         type="primary"
         v-for="(stageV,i) in stagesBtns"
         v-bind:key="i"
         @click="handleS(i)"
       >{{stageString[stageV -1 ]}}</a-button>
-    </div>
+    </div> -->
     <div v-if="userStage < stageCode.approve" class="rule-container">
       <Rules></Rules>
     </div>
@@ -19,7 +19,7 @@
 import Likes from "./Likes"
 import Rules from '../../components/rules/Rules'
 import { mapActions, mapState } from "vuex"
-import { Button } from "ant-design-vue"
+// import { Button } from "ant-design-vue"
 import { stageCode } from "../../config/config"
 import VFooter from '../../components/common/VFooter'
 export default {
@@ -27,7 +27,7 @@ export default {
   components: {
     Likes,
     Rules,
-    "a-button": Button,
+    // "a-button": Button,
     VFooter
   },
   data() {
@@ -75,7 +75,6 @@ export default {
 }
 .btns {
   position: relative;
-  top: 10px;
   background-color: #fff;
 }
 </style>
