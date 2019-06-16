@@ -1,8 +1,8 @@
 <template>
   <div class="navDrawer-contaienr">
     <a class="drawer-handel" @click="showDrawer">
-      <a-icon v-if="fold" type="menu-unfold"/>
-      <a-icon v-else type="menu-unfold" />
+      <a-icon class="drawIcon" v-if="fold" type="menu-unfold"/>
+      <a-icon class="drawIcon" v-else type="menu-unfold"/>
     </a>
     <a-drawer
       title="25th Anniversary"
@@ -10,14 +10,13 @@
       @close="onClose"
       :closable="false"
       :placement="placement"
-
     >
       <Navigation :mode="'inline'" v-on:navClick="onClose"></Navigation>
     </a-drawer>
   </div>
 </template>
 <script>
-import { Drawer ,Icon} from "ant-design-vue";
+import { Drawer, Icon } from "ant-design-vue";
 import Navigation from "./Nav";
 export default {
   name: "navDraw",
@@ -39,8 +38,7 @@ export default {
     },
     onClose() {
       this.visible = false;
-    },
-    
+    }
   }
 };
 </script>
@@ -60,13 +58,25 @@ export default {
   text-align: center;
   line-height: 40px;
   font-size: 16px;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #fff;
   z-index: 10000;
   right: -40px;
+  color: #01134b;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
   border-radius: 0 4px 4px 0;
+  font-size: 18px;
+ 
 }
+ .drawIcon {
+    font-size: 18px;
+    color: #01134b;
+    a{
+        color: #01134B;
+
+    }
+  }
 </style>

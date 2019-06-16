@@ -3,7 +3,7 @@
     <a-row class="login-row">
       <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <div class="banner">
-          <img class="banner" src="../../../public/imgs/banner1200_400.jpg" alt>
+          <img class="banner" src="../../../public/imgs/banner2.png" alt>
         </div>
       </a-col>
       <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -40,15 +40,15 @@
               </a-input>
             </a-form-item>
             <a-form-item>
-              <a-button type="primary" html-type="submit" class="login-form-button">Log in</a-button>
+              <a-button type="primary" html-type="submit" class="login-form-button">Login</a-button>
             </a-form-item>
           </a-form>
         </div>
       </a-col>
     </a-row>
-    <div class="footer">
+    <a-row class="footer">
       <VFooter></VFooter>
-    </div>
+    </a-row>
   </div>
 </template>
 <script>
@@ -92,12 +92,12 @@ export default {
       });
     },
     login(user) {
-      if(this.logining === true) return
-      const loadingMessage = this.$message.loading("Loading..", 0)
-      this.logining = true
+      if (this.logining === true) return;
+      const loadingMessage = this.$message.loading("Loading..", 0);
+      this.logining = true;
       userLogin(user).then(
         res => {
-          this.logining = false
+          this.logining = false;
           setTimeout(loadingMessage, 0);
           if (!res) {
             this.$modal.error({ title: "ERR_CONNECTION_REFUSED" });
@@ -115,7 +115,7 @@ export default {
           }
         },
         error => {
-          this.logining = false
+          this.logining = false;
           console.log("error", error);
         }
       );
@@ -129,7 +129,8 @@ export default {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: #fff;
 
   .login-row {
@@ -138,9 +139,10 @@ export default {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    padding-bottom: 150px;
   }
   .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
   }
@@ -148,28 +150,65 @@ export default {
     margin: 15px auto 0;
     width: 460px;
   }
+  @media screen and (min-width: 600px){
+    .banner {
+      position: relative;
+      left: 35px;;
+    }
+    .loginFormContainer {
+      margin-top: 70px;
+    }
+  }
+  @media screen and (min-width: 900px) {
+    .loginFormContainer {
+      margin-top: 90px;
+    }
+  }
   @media only screen and (max-width: 600px) {
     .banner {
       margin: 10px auto 0;
-      height: 260px;
+      height: 180px;
       width: auto;
+    }
+    .login-row {
+      margin-top: 20px;
+    }
+    .loginFormContainer {
+      margin-top: 45px;
     }
   }
   .loginFormContainer {
     position: relative;
-    max-width: 350px;
-    margin: 0 auto;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
     min-width: 300px;
-    margin-top: 65px;
     height: 100%;
+    padding: 0 35px;
     .an-ipt {
       line-height: 18px;
     }
+    .login-form-button {
+      height: 30px;
+      line-height: 30px;
+      font-size: 15px;
+    } 
   }
 
   #components-form-demo-normal-login {
     .login-form-button {
       width: 100%;
+      background-color: #4c3b9f;
+      border-color: #4c3b9f;
+      font-size: 18px;
+      height: 36px;
+      font-weight: 600;
+      color: #fcfcfc;
+      &:hover {
+        opacity: 0.9;
+        box-shadow: 0 7px 18px rgba(0, 0, 0, 0.25),
+        0 5px 5px rgba(0, 0, 0, 0.22);
+      }
     }
     .login-form-forgot {
       float: right;

@@ -4,9 +4,10 @@
       <div class="heroImage">
         <img src="../../assets/hero.png" alt>
       </div>
+      <router-link class="uploadLink" to="/Profile">Go Upload</router-link>
       <div class="description-container">
         <div class="cn">
-          <div class="title">活動簡介</div>
+          <a-divider class="title">活動簡介</a-divider>
           <div class="quotation left">
             <img src="../../assets/left.png" alt class="left-quotation">
           </div>
@@ -24,8 +25,12 @@
   </div>
 </template>
 <script>
+import { Divider } from "ant-design-vue";
 export default {
   name: "Sign",
+  components: {
+    "a-divider": Divider
+  },
   data() {
     return {
       description: {
@@ -50,7 +55,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .Sign {
-  padding-top: 25px;
+  padding-top: 15px;
   width: 100%;
   background-color: #fff;
   .heroImage {
@@ -70,14 +75,14 @@ export default {
     background-color: #fff;
     .cn {
       .title {
-        font-size: 48px;
+        font-size: 38px;
         font-weight: 600;
       }
     }
     .en {
       margin-top: 20px;
       .title {
-        font-size: 28px;
+        font-size: 18px;
         font-weight: 600;
       }
     }
@@ -86,14 +91,14 @@ export default {
       text-align: center;
     }
     .description {
-      text-align: center;
+      text-align: left;
       font-size: 16px;
       line-height: 30px;
     }
     .quotation {
       position: relative;
       width: 100%;
-      height: 50px;
+      height: 30px;
       background-repeat: no-repeat;
       &.left {
         text-align: left;
@@ -103,18 +108,41 @@ export default {
       }
       & .left-quotation {
         text-align: left;
-        height: 40px;
+        height: 25px;
         margin-left: -40px;
       }
       & .right-quotation {
-        height: 40px;
+        height: 25px;
         margin-right: -40px;
       }
     }
   }
+  .uploadLink {
+    display: block;
+    width: 220px;
+    height: 56px;
+    margin: 0 auto;
+    background-color: #fb5520;
+    color: #fcfcfc;
+    position: relative;
+    top: -25px;
+    line-height: 56px;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    animation-duration: 2.2s;
+    animation-timing-function: ease-out;
+    -webkit-animation-duration: 2.2s; /* Safari 4.0 - 8.0 */
+
+    &:hover {
+      top: -26px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+  }
   @media only screen and (max-width: 600px) {
     .description-container {
-        margin-top: 40px;
+      margin-top: 10px;
       padding: 0 35px;
       .cn {
         .title {
@@ -122,9 +150,9 @@ export default {
         }
       }
       .en {
-          .title {
-              font-size: 20px;
-          }
+        .title {
+          font-size: 20px;
+        }
       }
       .quotation {
         position: relative;
@@ -146,6 +174,16 @@ export default {
           height: 20px;
           margin-right: -20px;
         }
+      }
+    }
+    .uploadLink {
+      width: 150px;
+      height: 36px;
+      top: -18px;
+      line-height: 36px;
+      font-size: 15px;
+      &:hover {
+          top: -19px;
       }
     }
   }

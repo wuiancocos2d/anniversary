@@ -14,21 +14,20 @@ export default {
 <style lang="scss" scoped>
 .footer {
   padding-top: 10px;
-    height: 68px;
-    position: relative;
-    background: url("~@/assets/footer.png") repeat-x;
-    .footer-container {
-      text-align: center;
-      .copyRight{
-        padding-top: 5px;
-        line-height: 18px;
-        font-weight: 600;
-      }
-      .copyRightCn {
-        font-size: 13px;
-        line-height: 15px;
-      }
+  position: relative;
+  background: url("~@/assets/footer.png") repeat-x;
+  .footer-container {
+    text-align: center;
+    padding-bottom: 5px;
+    .copyRight {
+      line-height: 20px;
+      font-weight: 600;
     }
+    .copyRightCn {
+      font-size: 13px;
+      line-height: 18px;
+    }
+  }
 }
 </style>
 
