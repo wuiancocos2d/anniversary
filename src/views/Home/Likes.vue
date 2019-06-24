@@ -142,14 +142,14 @@ export default {
       this.imageItem = null;
     },
     handleSize() {
-      console.log('resize',windows.innerWidth)
+      console.log('resize',window.innerWidth)
       if (window.innerWidth < 576) {
         this.imgWidth = 189;
         this.modalWidth = 350;
-      } else if (window.innerWidth > 768) {
+      } else if (window.innerWidth > 768 && window.innerWidth < 1200) {
         this.modalWidth = 760;
       } else if(window.innerWidth > 1200){
-        this.modalWidth = 1200;
+        this.modalWidth = 1000;
       } else {
         this.modalWidth = 500;
       }

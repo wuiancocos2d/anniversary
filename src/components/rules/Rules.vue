@@ -31,6 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .rules-container {
+  overflow-y: auto;
   .rules {
     max-width: 900px;
     margin:  0 auto;

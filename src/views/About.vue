@@ -17,4 +17,11 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.about {
+  height: 100%;
+  overflow-y: auto;
+}
+</style>
+
 
