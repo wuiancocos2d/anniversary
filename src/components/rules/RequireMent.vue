@@ -30,8 +30,7 @@ export default {
       requires: [
         {
           key: 1,
-          en:
-            "All loyal employees are welcome to participate in the “Air Macau’s Charisma” Photo Contest – Online Voting and Elections.",
+          en: "All employees are welcome to participate in the photo contest.",
           cn: "凡熱愛澳航的員工皆可參加"
         },
         {
@@ -43,8 +42,8 @@ export default {
         },
         {
           key: 3,
-          en: "Theme content: Air Macau",
-          cn: "攝影範圍：澳航 (照片須包含澳航元素)"
+          en: "Theme: All photography works shall be included the element of Air Macau",
+          cn: "攝影主題：澳航 (照片須包含澳航元素)"
         },
         {
           key: 4,

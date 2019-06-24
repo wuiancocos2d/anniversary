@@ -12,7 +12,7 @@
           :xl="8"
         >
           <a-card
-          class="uploadItem"
+            class="uploadItem"
             :hoverable="true"
             @click="handleImgClick(photoItem.id,photoItem.resourceTitle,photoItem.resourceUrl,photoItem.resourceContent)"
           >
@@ -22,6 +22,13 @@
               :src="photoItem.resourceUrl"
               slot="cover"
             >
+            <a-card-meta>
+            <div class="status" slot="description">
+                      <a-badge v-if="photoItem.resourceStatus === 0 && this.userStage === this.$stageCode.upload" status="processing" text="Waiting for Approve"></a-badge>
+                      <a-badge v-else-if="photoItem.resourceStatus === 1 " status="Success" text="Approved">Pass</a-badge>
+                      <a-badge v-if="photoItem.resourceStatus === 0 && this.userStage > this.$stageCode.upload" status="Default" text="Approved">Denny</a-badge>
+            </div>
+            </a-card-meta>
           </a-card>
         </a-col>
       </a-row>
@@ -29,7 +36,7 @@
   </div>
 </template>
 <script>
-import { Row, Col, Card } from "ant-design-vue";
+import { Row, Col, Card, Badge } from "ant-design-vue";
 import { mapState } from "vuex";
 
 export default {
@@ -37,10 +44,13 @@ export default {
   components: {
     "a-card": Card,
     "a-row": Row,
-    "a-col": Col
+    "a-col": Col,
+    "a-badge": Badge,
+    "a-card-meta": Card.Meta
   },
   computed: {
-    ...mapState(["userUploads"])
+    ...mapState(["userStage","userUploads"])
+
   },
   methods: {
     handleImgClick(id, title, url, resourceContent) {
@@ -65,7 +75,7 @@ export default {
     border: none;
     &:hover {
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35),
-            0 15px 15px rgba(0, 0, 0, 0.32);
+        0 15px 15px rgba(0, 0, 0, 0.32);
     }
   }
   .uploadImg {

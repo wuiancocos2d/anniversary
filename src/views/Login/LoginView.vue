@@ -40,6 +40,9 @@
               </a-input>
             </a-form-item>
             <a-form-item>
+              <p class="hint">Login with your Staff Number and Birthday(yyyymmdd)</p>
+            </a-form-item>
+            <a-form-item>
               <a-button type="primary" html-type="submit" class="login-form-button">Login</a-button>
             </a-form-item>
           </a-form>
@@ -149,6 +152,12 @@ export default {
   .banner {
     margin: 15px auto 0;
     width: 460px;
+  }
+  .hint {
+    font-size: 13px;
+    text-align: left;
+    line-height: 15px;
+    padding: 0 5px;
   }
   @media screen and (min-width: 600px){
     .banner {

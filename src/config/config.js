@@ -1,10 +1,12 @@
-const BASE_URL = 'http://nx25th.airmacau.com.mo/activity25/'
+// const BASE_URL = '/activity25/'
+const BASE_URL = '/'
 const BASE_URL_DEV = '/'
 export const env = 'production'
 
 export const devPath = {
     LOAD_USER_INFO: BASE_URL + 'api/userInfo/',//用户基本信息
     USER_LOGIN: BASE_URL + 'api/login/',//用户登陆
+    IMAGE_INFO: BASE_URL + 'resource/query/',
     IMAGE_URL: BASE_URL + 'mock/',
     ARTICEL_URL: BASE_URL + 'api/article',
     AUTHORITYList_URL: BASE_URL + 'api/authoList',
@@ -27,9 +29,10 @@ export const devPath = {
 }
 
 export const production = {
-    LOAD_USER_INFO: BASE_URL + 'user/info/',//用户基本信息
-    USER_LOGIN: BASE_URL + 'user/login?',//用户登陆
+    LOAD_USER_INFO: BASE_URL + 'user/info/',
+    USER_LOGIN: BASE_URL + 'user/login?',
     IMAGE_URL: BASE_URL + 'mock/',
+    IMAGE_INFO: BASE_URL + 'resource/query/',
     ARTICEL_URL: BASE_URL + 'api/article',
     AUTHORITYList_URL: BASE_URL + 'api/authoList',
     IMG_UPLOAD_URL: BASE_URL +'resource/image',
@@ -68,6 +71,8 @@ export const userCode = {
     "rater": 2,
     "supperUser": 3
 }
+
+
 
 
 export default env === 'dev' ? devPath : production

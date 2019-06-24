@@ -91,11 +91,11 @@ export default {
     };
   },
   //测试用
-  watch: {
-    userStage: function() {
-      (this.imgsArr = []), (this.page = 1), this.getData();
-    }
-  },
+  // watch: {
+  //   userStage: function() {
+  //     (this.imgsArr = []), (this.page = 1), this.getData();
+  //   }
+  // },
   mounted: function() {
     const that = this;
 
@@ -142,11 +142,14 @@ export default {
       this.imageItem = null;
     },
     handleSize() {
+      console.log('resize',windows.innerWidth)
       if (window.innerWidth < 576) {
         this.imgWidth = 189;
         this.modalWidth = 350;
       } else if (window.innerWidth > 768) {
-        this.modalWidth = 700;
+        this.modalWidth = 760;
+      } else if(window.innerWidth > 1200){
+        this.modalWidth = 1200;
       } else {
         this.modalWidth = 500;
       }

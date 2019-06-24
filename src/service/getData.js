@@ -60,6 +60,14 @@ export const getImgModal = async function () {
   return res.data
 }
 
+//獲取圖片信息
+export const getImageInfo = async function (imgId) {
+  let res = await http({
+    url: env === 'dev' ? config.IMAGE_INFO : config.IMAGE_INFO + imgId,
+    method: 'get'
+  })
+  return res.data
+} 
 
 // 图片控制
 
@@ -111,7 +119,7 @@ export const likeImage = async function (imageId) {
   return res.data
 }
 //打分
-export const rateImage = async function(imageItem) {
+export const rateImage = async function (imageItem) {
   let res = await http({
     url: env === 'dev' ? config.POINT_IMAGE : config.POINT_IMAGE + parseJsonToPostString(imageItem),
     method: 'post'
@@ -120,14 +128,14 @@ export const rateImage = async function(imageItem) {
 }
 export const getUserImages = async function () {
   let res = await http({
-    url: env === 'dev' ? config.USER_IMAGES : config.USER_IMAGES + getStore('userId'),
+    url: env === 'dev' ? config.USER_IMAGES : config.USER_IMAGES + getStore('userId') + dateUrl(),
     method: 'get'
   })
   return res.data
 }
 
 //根据图片ID获取图片点赞列表
-export const getImageLikeListById = async function(imgId) {
+export const getImageLikeListById = async function (imgId) {
   let res = await http({
     url: env === 'dev' ? config.GET_IMAGE_LIKE_LIST : config.GET_IMAGE_LIKE_LIST + imgId,
     method: 'get'
@@ -139,16 +147,23 @@ export const getImageLikeListById = async function(imgId) {
 export const getHomepageImage = async function (page) {
   const userStage = store.state.userStage
   let url
+  const numberLoad = '/8'
   switch (userStage) {
+    case stageCode.upload:
+      url = env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_CHECK_IMAGES + page + numberLoad
+      break;
+    case stageCode.stopuload:
+      url = env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_CHECK_IMAGES + page + numberLoad
+      break;
     case stageCode.approve:
-      url =  env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_UNCHECK_IMAGES + page + '/12'
+      url = env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_UNCHECK_IMAGES + page + numberLoad
       break;
     case stageCode.like:
     case stageCode.stopLike:
-      url = env === 'dev' ? config.GET_CHECK_IMAGES : config.GET_CHECK_IMAGES + page + '/12'
+      url = env === 'dev' ? config.GET_CHECK_IMAGES : config.GET_CHECK_IMAGES + page + numberLoad
       break
     case stageCode.rate:
-      url = env === 'dev'?  config.GET_CANDIDATE_IMAGES :config.GET_CANDIDATE_IMAGES + page + '/12'
+      url = env === 'dev' ? config.GET_CANDIDATE_IMAGES : config.GET_CANDIDATE_IMAGES + page + numberLoad
       break
     case stageCode.end:
       url = config.GET_WINNERS_IMAGES
@@ -159,13 +174,13 @@ export const getHomepageImage = async function (page) {
   }
   if (url === '') return null
   let res = await http({
-    url: url ,
+    url: url,
     method: 'get'
   })
   return res.data
 }
 
-export const getUserLikeList = async function(){
+export const getUserLikeList = async function () {
   let res = await http({
     url: env === 'dev' ? config.GET_USER_LIKE_LIST : config.GET_USER_LIKE_LIST + getStore('userId'),
     method: 'get'
@@ -182,4 +197,9 @@ function parseJsonToPostString(obj) {
       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]))
     }
   return str.join("&");
+}
+
+
+function dateUrl() {
+  return '?date=' + new Date().getTime()
 }

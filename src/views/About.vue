@@ -1,5 +1,20 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+     <div class="rule-container">
+      <Rules></Rules>
+    </div> -->
+    <VFooter></VFooter>
   </div>
 </template>
+<script>
+import Rules from '../components/rules/Rules'
+import VFooter from '../components/common/VFooter' 
+export default {
+  name: 'About',
+  components: {
+    Rules,
+    VFooter
+  }
+}
+</script>
+

@@ -8,27 +8,27 @@
         @click="handleS(i)"
       >{{stageString[stageV -1 ]}}</a-button>
     </div> -->
-    <div v-if="userStage < stageCode.approve" class="rule-container">
+    <!-- <div v-if="userStage < stageCode.approve" class="rule-container">
       <Rules></Rules>
-    </div>
-    <Likes v-else></Likes>
-    <VFooter v-if="userStage === stageCode.upload"></VFooter>
+    </div> -->
+    <Likes></Likes>
+    <!-- <VFooter v-if="userStage === stageCode.upload"></VFooter> -->
   </div>
 </template>
 <script>
 import Likes from "./Likes"
-import Rules from '../../components/rules/Rules'
+// import Rules from '../../components/rules/Rules'
 import { mapActions, mapState } from "vuex"
 // import { Button } from "ant-design-vue"
 import { stageCode } from "../../config/config"
-import VFooter from '../../components/common/VFooter'
+// import VFooter from '../../components/common/VFooter'
 export default {
   name: "home",
   components: {
     Likes,
-    Rules,
+    // Rules,
     // "a-button": Button,
-    VFooter
+    // VFooter
   },
   data() {
     return {

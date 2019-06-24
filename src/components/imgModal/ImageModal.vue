@@ -2,10 +2,10 @@
   <div class="modal-container">
     <a-card :bordered="false">
       <a-row>
-        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+        <a-col :xs="24" :sm="12" :md="12" :lg="16" :xl="16">
           <img class="imageSource" :src="imageItem.resourceUrl" alt="imageItem.resourceTitle">
         </a-col>
-        <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+        <a-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8">
           <div class="txt-container">
             <h2>{{imageItem.resourceTitle}}</h2>
             <div class="disciption">

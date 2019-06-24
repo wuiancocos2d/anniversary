@@ -60,7 +60,7 @@
           type="danger"
           class="deletBtn"
           block
-        >Delet</a-button>
+        >Delete</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -74,7 +74,6 @@ import {
 } from "../../service/getData.js";
 import config from "../../config/config";
 import { mapState } from "vuex";
-
 export default {
   name: "UploadModal",
   components: {
@@ -105,7 +104,10 @@ export default {
   computed: {
     ...mapState(["userStage"]),
     canEdit: function() {
-      return this.$stageCode.upload === this.userStage;
+      //允許上傳的時間段
+      const allowTime = this.$stageCode.upload === this.userStage;
+      const imageApprove = !this.imageModal.resourceStatus;
+      return allowTime&&imageApprove
     }
   },
   watch: {
@@ -185,6 +187,8 @@ export default {
           const res = await resourceUpdate(values);
           if (res && res.code === 200) {
             this.$emit("userUpdate", values);
+          }else {
+            this.$message.erro('failed:' + res.message)
           }
           this.uploading = false;
         }

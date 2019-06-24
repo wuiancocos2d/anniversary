@@ -7,6 +7,9 @@
       <router-link to="/Profile">Upload</router-link>
     </a-menu-item>
     <a-menu-item v-if="userInfo.user" class="nav-item">
+      <router-link to="/about">About</router-link>
+    </a-menu-item>
+    <a-menu-item v-if="userInfo.user" class="nav-item">
       <a class="nav-link" @click="userLogout">Logout</a>
     </a-menu-item>
     <a-menu-item class="nav-item" v-else>

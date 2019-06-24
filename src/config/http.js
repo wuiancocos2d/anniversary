@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Message } from 'ant-design-vue'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charest=UTF-8'
+axios.defaults.timeout = 5000
 // axios.defaults.baseURL = ''
 // axios.defaults.withCredentials=true
 // axios.defaults.crossDomain = true
@@ -16,7 +17,7 @@ const fetch = (options) => {
     case 'post':
       return axios.post(url, data)
     case 'delet':
-      return axios.delete(url, data)
+      return axios.delete(url , data)
     case 'put':
       return axios.put(url, data)
     default:
@@ -39,3 +40,4 @@ export default async function http(options) {
       return error
     })
 }
+
