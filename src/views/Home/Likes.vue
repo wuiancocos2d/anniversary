@@ -2,7 +2,6 @@
   <div class="like-container">
     <div class="water-container" >
       <vue-waterfall-easy
-      v-if="firstLoadFinish"
         ref="waterfall"
         :imgsArr="imgsArr"
         @scrollReachBottom="getData"
@@ -62,10 +61,7 @@ export default {
     VFooter
   },
   computed: {
-    ...mapState(["userId"]),
-    firstLoadFinish: function(){
-      return this.imgsArr.length > 0
-    }
+    ...mapState(["userId","userStage"]),
   },
   data() {
     return {
@@ -74,6 +70,7 @@ export default {
       page: 1,
       imgTitle: "",
       modalOpen: false,
+      firstLoaded: false,
       imageItem: {
         id: 0,
         pointMind: 0,
@@ -114,7 +111,6 @@ export default {
     getData() {
       getHomepageImage(this.page).then(
         res => {
-          console.log('res',res)
           if (res && res.code === 200) {
             if (res.data && res.data.length === 0) {
               //加载结束
@@ -122,7 +118,6 @@ export default {
             } else {
               //打分返回数据结构不同
               if (this.userStage < this.stageCode.rate) {
-                console.log('this.imgArr',this.imgsArr)
                 this.imgsArr = this.imgsArr.concat(res.data);
                 this.page++;
               } else if (this.userStage === this.stageCode.rate) {
@@ -131,6 +126,7 @@ export default {
                 }
               }
             }
+            if(!this.firstLoaded) this.firstLoaded = true
           } else {
             this.$message.error("connect error");
           }

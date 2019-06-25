@@ -69,7 +69,7 @@ export const mutations = {
         }else {
             userStage = stageCode.upload
         }
-
+        console.log('state.userStage = userStage',state.userStage , userStage)
         state.userStage = userStage
         /*
         //user stage
