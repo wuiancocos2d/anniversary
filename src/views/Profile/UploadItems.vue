@@ -26,7 +26,7 @@
             <div class="status" slot="description">
                       <a-badge v-if="photoItem.resourceStatus === 0 && this.userStage === this.$stageCode.upload" status="processing" text="Waiting for Approve"></a-badge>
                       <a-badge v-else-if="photoItem.resourceStatus === 1 " status="Success" text="Approved">Pass</a-badge>
-                      <a-badge v-if="photoItem.resourceStatus === 0 && this.userStage > this.$stageCode.upload" status="Default" text="Approved">Denny</a-badge>
+                      <a-badge v-else-if="photoItem.resourceStatus === 0 && this.userStage > this.$stageCode.upload" status="Default" text="Approved">Denny</a-badge>
             </div>
             </a-card-meta>
           </a-card>

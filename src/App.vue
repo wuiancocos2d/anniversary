@@ -5,7 +5,9 @@
         <VHeader></VHeader>
       </a-layout-header>
       <a-layout-content :style="{height: layoutHeight}">
-        <router-view/>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
       </a-layout-content>
       <!-- <a-layout-footer :style="footerStyle">
         <VFooter></VFooter>

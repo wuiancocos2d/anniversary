@@ -1,7 +1,8 @@
 <template>
   <div class="like-container">
-    <vue-waterfall-easy
-      ref="waterfall"
+    <div class="water-container">
+    <vue-waterfall-easy 
+    
       :imgsArr="imgsArr"
       @scrollReachBottom="getData"
       :imgWidth="imgWidth"
@@ -28,6 +29,7 @@
         <VFooter></VFooter>
       </div>
     </vue-waterfall-easy>
+    </div>
     <a-modal
       :title="imgTitle"
       v-model="modalOpen"
@@ -59,7 +61,7 @@ export default {
     VFooter
   },
   computed: {
-    ...mapState(["userStage"])
+    ...mapState(["userId"])
   },
   data() {
     return {
@@ -108,6 +110,7 @@ export default {
     getData() {
       getHomepageImage(this.page).then(
         res => {
+          console.log('res',res)
           if (res && res.code === 200) {
             if (res.data && res.data.length === 0) {
               //加载结束
@@ -115,6 +118,7 @@ export default {
             } else {
               //打分返回数据结构不同
               if (this.userStage < this.stageCode.rate) {
+                console.log('this.imgArr',this.imgsArr)
                 this.imgsArr = this.imgsArr.concat(res.data);
                 this.page++;
               } else if (this.userStage === this.stageCode.rate) {
@@ -142,7 +146,6 @@ export default {
       this.imageItem = null;
     },
     handleSize() {
-      console.log('resize',window.innerWidth)
       if (window.innerWidth < 576) {
         this.imgWidth = 189;
         this.modalWidth = 350;
@@ -156,10 +159,7 @@ export default {
     }
   },
   created() {
-    if (this.userStage > this.$stageCode.upload) {
       this.getData();
-    }
-    
   }
 };
 </script>

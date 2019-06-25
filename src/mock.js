@@ -324,7 +324,6 @@ const sampleImages = function () {
         ]
     let returnData = function () {
         let data = []
-        console.log(Mock)
         for (let i = 0; i < imgs.length; i++) {
             const obj = {
                 "id": Mock.Random.integer(0, 200),
