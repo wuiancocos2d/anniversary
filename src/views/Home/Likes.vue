@@ -2,6 +2,7 @@
   <div class="like-container">
     <div class="water-container" >
       <vue-waterfall-easy
+      v-if="imgsArr.length >0"
         ref="waterfall"
         :imgsArr="imgsArr"
         @scrollReachBottom="getData"
