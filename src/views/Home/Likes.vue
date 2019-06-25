@@ -2,7 +2,7 @@
   <div class="like-container">
     <div class="water-container" >
       <vue-waterfall-easy
-      v-if="imgsArr.length"
+      v-if="firstLoadFinish"
         ref="waterfall"
         :imgsArr="imgsArr"
         @scrollReachBottom="getData"
@@ -62,7 +62,10 @@ export default {
     VFooter
   },
   computed: {
-    ...mapState(["userId"])
+    ...mapState(["userId"]),
+    firstLoadFinish: function(){
+      return this.imgsArr.length > 0
+    }
   },
   data() {
     return {
@@ -147,7 +150,6 @@ export default {
       this.imageItem = null;
     },
     handleSize() {
-      console.log("resize", window.innerWidth);
       if (window.innerWidth < 576) {
         this.imgWidth = 189;
         this.modalWidth = 350;

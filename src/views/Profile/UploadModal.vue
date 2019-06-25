@@ -16,11 +16,11 @@
           <img class="uploadShow" v-if="imageUrl" :src="imageUrl" alt="avatar">
           <div v-else>
             <a-icon class="plus" :type="imgLoading ? 'loading' : 'plus'"/>
-            <p class="hint">Please upload you image here</p>
+            <p class="hint">Please upload your image here</p>
           </div>
         </a-upload>
       </a-form-item>
-      <a-form-item label="Title: (less than 50)">
+      <a-form-item label="Title: (less than 50 words)">
         <a-input
           placeholder="Give it a title~"
           v-decorator="[
@@ -29,13 +29,13 @@
             ]"
         ></a-input>
       </a-form-item>
-      <a-form-item label="Description: (less than 500)">
+      <a-form-item label="Description: (less than 500 words)">
         <a-textarea
           class="description"
           placeholder="Would you like to Tell us what your Pic is about?"
           :autosize="true"
           v-decorator="[
-                'resourceContent',
+              'resourceContent',
                 {rules: [{required: true,message: 'Please fill some description'},{max: 500,message: 'Oops,the description must not exceed 500,try cutting it down'}]}
           ]"
         ></a-textarea>
