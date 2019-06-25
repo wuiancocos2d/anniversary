@@ -1,33 +1,36 @@
 <template>
   <div class="like-container">
-    <vue-waterfall-easy
-      ref="waterfall"
-      :imgsArr="imgsArr"
-      @scrollReachBottom="getData"
-      :imgWidth="imgWidth"
-      :gap="12"
-      :maxCols="4"
-      srcKey="resourceUrl"
-      @click="openModal"
-    >
-      <div class="hero" slot="waterfall-head">
-        <Hero></Hero>
-      </div>
-      <div class="img-info" slot-scope="props">
-        <!-- <div class="like" v-if="userStage > stageCode.approve">
+    <div class="water-container" >
+      <vue-waterfall-easy
+      v-if="imgsArr.length"
+        ref="waterfall"
+        :imgsArr="imgsArr"
+        @scrollReachBottom="getData"
+        :imgWidth="imgWidth"
+        :gap="12"
+        :maxCols="4"
+        srcKey="resourceUrl"
+        @click="openModal"
+      >
+        <div class="hero" slot="waterfall-head">
+          <Hero></Hero>
+        </div>
+        <div class="img-info" slot-scope="props">
+          <!-- <div class="like" v-if="userStage > stageCode.approve">
           <a-icon v-if="props.value.liked" type="heart" theme="twoTone" twoToneColor="#eb2f96"/>
           <a-icon v-else class="likeIcon" type="heart"/>
           <span class="likeNum">{{props.value.resourceLike}}</span>
-        </div>-->
-        <div class="title">
-          <p class="title-text">{{props.value.resourceTitle}}</p>
+          </div>-->
+          <div class="title">
+            <p class="title-text">{{props.value.resourceTitle}}</p>
+          </div>
         </div>
-      </div>
-      <div slot="waterfall-over">
-        <h3>...No More Images...</h3>
-        <VFooter></VFooter>
-      </div>
-    </vue-waterfall-easy>
+        <div slot="waterfall-over">
+          <h3>...No More Images...</h3>
+          <VFooter></VFooter>
+        </div>
+      </vue-waterfall-easy>
+    </div>
     <a-modal
       :title="imgTitle"
       v-model="modalOpen"
@@ -48,7 +51,7 @@ import ImageModal from "../../components/imgModal/ImageModal";
 import { mapState } from "vuex";
 import { stageCode } from "../../config/config";
 import Hero from "../../components/Hero/Hero";
-import VFooter from '../../components/common/VFooter'
+import VFooter from "../../components/common/VFooter";
 export default {
   name: "Likes",
   components: {
@@ -142,13 +145,13 @@ export default {
       this.imageItem = null;
     },
     handleSize() {
-      console.log('resize',window.innerWidth)
+      console.log("resize", window.innerWidth);
       if (window.innerWidth < 576) {
         this.imgWidth = 189;
         this.modalWidth = 350;
       } else if (window.innerWidth > 768 && window.innerWidth < 1200) {
         this.modalWidth = 760;
-      } else if(window.innerWidth > 1200){
+      } else if (window.innerWidth > 1200) {
         this.modalWidth = 1000;
       } else {
         this.modalWidth = 500;
@@ -156,10 +159,7 @@ export default {
     }
   },
   created() {
-    if (this.userStage > this.$stageCode.upload) {
-      this.getData();
-    }
-    
+    this.getData();
   }
 };
 </script>
@@ -172,6 +172,9 @@ export default {
   width: 100%;
   padding: 0 2px;
   overflow-y: auto;
+  .water-container {
+    height: 100%;
+  }
   .img-info {
     .like {
       margin-top: 15px;
