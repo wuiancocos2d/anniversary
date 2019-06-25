@@ -6,7 +6,7 @@ import store from './store/'
 import {Message, Modal} from 'ant-design-vue'
 import {setCookie,getCookie,delCookie} from './config/mUtils'
 import {stageCode} from './config/config'
-import "./mock" 
+// import "./mock" 
 import FastClick from 'fastclick'
 
 if ('addEventListener' in document) {

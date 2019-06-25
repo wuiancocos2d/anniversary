@@ -11,7 +11,6 @@ export const loadUserInfo = async function () {
   if (userId !== 'undefined' && userId !== undefined && userId !== null && userId !== '') {
     if (env === 'dev') {
       let res = await http({
-        // url: config.LOAD_USER_INFO + userId,
         url: config.LOAD_USER_INFO,
         method: 'post',
         data: { userNm: userId }
@@ -22,6 +21,7 @@ export const loadUserInfo = async function () {
         url: config.LOAD_USER_INFO + userId,
         method: 'post',
       })
+      console.log('res.data',res,res.data)
       return res.data
     }
   }
@@ -147,7 +147,7 @@ export const getImageLikeListById = async function (imgId) {
 export const getHomepageImage = async function (page) {
   const userStage = store.state.userStage
   let url
-  const numberLoad = '/8'
+  const numberLoad = '/10'
   switch (userStage) {
     case stageCode.upload:
       url = env === 'dev' ? config.GET_UNCHECK_IMAGES : config.GET_CHECK_IMAGES + page + numberLoad

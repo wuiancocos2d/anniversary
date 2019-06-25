@@ -176,6 +176,9 @@ export default {
   .water-container {
     height: 100%;
   }
+  .hero {
+    margin-bottom: 50px;
+  }
   .img-info {
     .like {
       margin-top: 15px;

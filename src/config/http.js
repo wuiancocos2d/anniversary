@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Message } from 'ant-design-vue'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charest=UTF-8'
-axios.defaults.timeout = 5000
+// axios.defaults.timeout = 5000
 // axios.defaults.baseURL = ''
 // axios.defaults.withCredentials=true
 // axios.defaults.crossDomain = true
