@@ -2,7 +2,7 @@
   <div class="about">
      <div class="rule-container">
       <Rules></Rules>
-    </div> -->
+    </div>
     <VFooter></VFooter>
   </div>
 </template>

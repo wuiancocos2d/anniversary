@@ -62,7 +62,7 @@ export default {
     VFooter
   },
   computed: {
-    ...mapState(["userStage"])
+    ...mapState(["userId"])
   },
   data() {
     return {
@@ -111,6 +111,7 @@ export default {
     getData() {
       getHomepageImage(this.page).then(
         res => {
+          console.log('res',res)
           if (res && res.code === 200) {
             if (res.data && res.data.length === 0) {
               //加载结束
@@ -118,6 +119,7 @@ export default {
             } else {
               //打分返回数据结构不同
               if (this.userStage < this.stageCode.rate) {
+                console.log('this.imgArr',this.imgsArr)
                 this.imgsArr = this.imgsArr.concat(res.data);
                 this.page++;
               } else if (this.userStage === this.stageCode.rate) {
