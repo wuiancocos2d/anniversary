@@ -21,11 +21,10 @@ export const loadUserInfo = async function () {
         url: config.LOAD_USER_INFO + userId,
         method: 'post',
       })
-      console.log('res.data',res,res.data)
       return res.data
     }
   }
-  else return
+  else return {code: 0,data: {},message:""}
 }
 
 export const userLogin = async function (user) {
