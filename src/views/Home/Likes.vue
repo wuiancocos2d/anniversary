@@ -91,7 +91,8 @@ export default {
       //默认图片宽度
       imgWidth: 220,
       modalWidth: 350,
-      windowSize: 0
+      windowSize: 0,
+      loading: false
     };
   },
   //测试用
@@ -106,6 +107,7 @@ export default {
     this.$nextTick(() => {
       this.handleSize();
       window.addEventListener("resize", that.handleSize);
+      this.getData();
     });
   },
   watch: {
@@ -114,7 +116,10 @@ export default {
     }
   },
   methods: {
+    
     getData() {
+      if(this.loading) return
+      this.loading = true
       getHomepageImage(this.page).then(
         res => {
           if (res && res.code === 200) {
@@ -136,8 +141,10 @@ export default {
           } else {
             this.$message.error("connect error");
           }
+          this.loading = false
         },
         err => {
+          this.loading = false
           this.$message.error("err", err);
         }
       );
@@ -164,9 +171,7 @@ export default {
       }
     }
   },
-  created() {
-    this.getData();
-  }
+  
 };
 </script>
 <style lang="scss" >
