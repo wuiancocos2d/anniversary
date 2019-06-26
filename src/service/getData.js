@@ -21,7 +21,8 @@ export const loadUserInfo = async function () {
         url: config.LOAD_USER_INFO + userId,
         method: 'post',
       })
-      return res.data
+    
+      return res !== undefined ? res.data : res
     }
   }
   else return {code: 0,data: {},message:""}

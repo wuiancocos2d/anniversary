@@ -9,7 +9,6 @@ export default {
     }) {
         return loadUserInfo().then(
             res => {
-                console.log('res loadinfo',res)
                 if (res !== undefined && res.code === 200) {
                     store.dispatch('recordUser',res)
                 } else {
