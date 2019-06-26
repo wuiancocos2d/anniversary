@@ -108,6 +108,11 @@ export default {
       window.addEventListener("resize", that.handleSize);
     });
   },
+  watch: {
+    userStage: function() {
+      this.getData()
+    }
+  },
   methods: {
     getData() {
       getHomepageImage(this.page).then(
