@@ -41,7 +41,13 @@
         ></a-textarea>
       </a-form-item>
       <a-form-item>
-        <a-button v-if="!imageModal.id" type="primary" html-type="submit" :loading="uploading" block>
+        <a-button
+          v-if="!imageModal.id"
+          type="primary"
+          html-type="submit"
+          :loading="uploading"
+          block
+        >
           <span>Upload</span>
         </a-button>
         <a-button
@@ -61,6 +67,7 @@
           class="deletBtn"
           block
         >Delete</a-button>
+        <span v-if="imageModal.resourceStatus === '1'">Hint: Cannot edit photos that have been approved</span>
       </a-form-item>
     </a-form>
   </div>
@@ -106,8 +113,9 @@ export default {
     canEdit: function() {
       //允許上傳的時間段
       const allowTime = this.$stageCode.upload === this.userStage;
-      const imageApprove = !this.imageModal.resourceStatus;
-      return allowTime&&imageApprove
+      const imageApproved = this.imageModal.resourceStatus === "1";
+      console.log('imageapprove',this.imageModal.resourceStatus, this.imageModal.resourceStatus === "1");
+      return allowTime && !imageApproved;
     }
   },
   watch: {
@@ -120,9 +128,9 @@ export default {
   },
   methods: {
     beforeUpload(file) {
-      const isJPG = ["image/jpeg", "image/png"].includes(file.type)
+      const isJPG = ["image/jpeg", "image/png"].includes(file.type);
       if (!isJPG) {
-        this.$message.error("You can only upload JPG/JPGE/PNG file!")
+        this.$message.error("You can only upload JPG/JPGE/PNG file!");
       }
       const isLt2M = file.size / 1024 / 1024 < 5;
       if (!isLt2M) {
@@ -137,7 +145,7 @@ export default {
         return;
       }
       if (info.file.status === "done") {
-        this.imgLoading = false
+        this.imgLoading = false;
         const res = info.file.response;
         if (res.code === 200) {
           this.imageUrl = res.data;
@@ -153,7 +161,7 @@ export default {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (err) {
-          this.$info.error(err)
+          this.$info.error(err);
           return;
         } else {
           let formVl = values;
@@ -187,8 +195,8 @@ export default {
           const res = await resourceUpdate(values);
           if (res && res.code === 200) {
             this.$emit("userUpdate", values);
-          }else {
-            this.$message.erro('failed:' + res.message)
+          } else {
+            this.$message.erro("failed:" + res.message);
           }
           this.uploading = false;
         }
@@ -217,18 +225,18 @@ export default {
         this.disableChangeImage = true;
         this.$nextTick(function() {
           this.imageUrl = data.resourceUrl;
-          this.form.setFieldsValue({ resourceTitle: data.resourceTitle })
+          this.form.setFieldsValue({ resourceTitle: data.resourceTitle });
           this.form.setFieldsValue({
             resourceContent: data.resourceContent
-          })
+          });
         });
       } else {
         this.disableChangeImage = false;
         this.imageUrl = null;
-        this.form.setFieldsValue({ resourceTitle: '' })
-          this.form.setFieldsValue({
-            resourceContent: ''
-          });
+        this.form.setFieldsValue({ resourceTitle: "" });
+        this.form.setFieldsValue({
+          resourceContent: ""
+        });
       }
     }
   }

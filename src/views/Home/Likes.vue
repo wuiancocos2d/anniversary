@@ -103,7 +103,6 @@ export default {
   // },
   mounted: function() {
     const that = this;
-
     this.$nextTick(() => {
       this.handleSize();
       window.addEventListener("resize", that.handleSize);
@@ -112,13 +111,13 @@ export default {
   },
   watch: {
     userStage: function() {
+      console.log('userstagechange')
       this.getData()
     }
   },
   methods: {
-    
     getData() {
-      if(this.loading) return
+      if(this.loading || !this.userStage) return
       this.loading = true
       getHomepageImage(this.page).then(
         res => {

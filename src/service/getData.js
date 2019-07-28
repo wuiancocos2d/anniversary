@@ -137,7 +137,7 @@ export const getUserImages = async function () {
 //根据图片ID获取图片点赞列表
 export const getImageLikeListById = async function (imgId) {
   let res = await http({
-    url: env === 'dev' ? config.GET_IMAGE_LIKE_LIST : config.GET_IMAGE_LIKE_LIST + imgId,
+    url: env === 'dev' ? config.GET_IMAGE_LIKE_LIST : config.GET_IMAGE_LIKE_LIST + imgId + dateUrl(),
     method: 'get'
   })
   return res.data
@@ -182,7 +182,7 @@ export const getHomepageImage = async function (page) {
 
 export const getUserLikeList = async function () {
   let res = await http({
-    url: env === 'dev' ? config.GET_USER_LIKE_LIST : config.GET_USER_LIKE_LIST + getStore('userId'),
+    url: env === 'dev' ? config.GET_USER_LIKE_LIST : config.GET_USER_LIKE_LIST + getStore('userId') + dateUrl(),
     method: 'get'
   })
   return res.data

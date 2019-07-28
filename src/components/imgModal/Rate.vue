@@ -25,6 +25,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       pointMind: 0,
       pointSkill: 0,
       pointTheme: 0,
@@ -33,12 +34,15 @@ export default {
   },
   watch: {
     id: function() {
+      this.loading = false
       this.pointMind= 0
       this.pointSkill= 0
-      this.pointTheme= 0,
+      this.pointTheme= 0
       this.rating = false
+      this.updateRate()
     }
   },
+  
   methods: {
     handleRate: function() {
       if(this.rating === true) return
@@ -63,6 +67,9 @@ export default {
           this.$message.error("Rate error:" + err + err.message);
         }
       );
+    },
+    updateRate: function(){
+      console.log('mounted')
     }
   }
 };

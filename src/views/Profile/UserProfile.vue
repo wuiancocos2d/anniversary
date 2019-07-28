@@ -27,12 +27,12 @@
                 <a-row>
                   <a-col span="12">
                     <div class="fun-btn-item heart-item">
-                      <a-badge class="icon heart-icon-block" :count="likeTimes" :offset="[-10,20]">
+                      <!-- <a-badge class="icon heart-icon-block" :count="likeTimes" :offset="[-10,20]">
                         <a-icon class="heart" type="heart"/>
                       </a-badge>
                       <div class="description">
                         <h3>Get {{likeTimes}} Like</h3>
-                      </div>
+                      </div> -->
                     </div>
                   </a-col>
                   <a-col span="12">
@@ -58,7 +58,9 @@
   </div>
 </template>
 <script>
-import { Icon, Row, Col, Card, Badge } from "ant-design-vue";
+// import { Icon, Row, Col, Card, Badge } from "ant-design-vue";
+import { Icon, Row, Col, Card } from "ant-design-vue";
+
 import { mapState } from "vuex";
 import { stageCode } from "../../config/config";
 export default {
@@ -68,7 +70,7 @@ export default {
     "a-row": Row,
     "a-col": Col,
     "a-card": Card,
-    "a-badge": Badge
+    // "a-badge": Badge
   },
   data() {
     return {

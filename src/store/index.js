@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 import mutations from './mutations'
 import actions from './action'
 import getters from './getters'
-import {stageCode} from '../config/config'
 Vue.use(Vuex)
 
 
@@ -16,9 +15,11 @@ const state = {
 		message: null
 	},
 	userId: null,
-	userStage: stageCode.stopuload,
+	userStage: null,
 	userUploads: [],
-	uesrLikeList: []
+	uesrLikeList: [],
+	timeStage: null,
+	
 }
 
 export default new Vuex.Store({

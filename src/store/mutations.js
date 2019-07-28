@@ -57,17 +57,20 @@ export const mutations = {
         
         let userLevelCode, userStage
         //user code
-        if (role.length > 2) {
+        if (role.length === 2) {
             userLevelCode = userCode.supperUser
         } else if (role.length === 1) {
             userLevelCode = role[0]['id'] === 2 ? userCode.rater : userCode.approver
         } else {
             userLevelCode = userCode.normalUser
         }
-        if(userLevelCode === userCode.approver && stage < 3) {
-            userStage = stageCode.approve
+        // if(userLevelCode === userCode.approver && stage < 3) {
+        //     userStage = stageCode.approve
+        // }
+        if(userLevelCode === userCode.rater || userLevelCode === userCode.supperUser) {
+            userStage = stageCode.rate
         }else {
-            userStage = stageCode.upload
+            userStage = stageCode.stopLike
         }
         console.log('state.userStage = userStage',state.userStage , userStage)
         state.userStage = userStage

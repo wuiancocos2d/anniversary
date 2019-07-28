@@ -38,6 +38,7 @@ export default {
       likeTimes: 0,
       loadInfoSuccess: false,
       loadMessage: "Loading like info",
+      liked: false
     };
   },
   props: {
@@ -48,10 +49,7 @@ export default {
   },
   computed: {
     ...mapState(["userStage", "userId", "uesrLikeList"]),
-    liked: function() {
-      console.log('computed hasliked')
-      return this.hasLiked()
-    },
+    
     voteLeft: function(){
       return (10 - this.uesrLikeList.length)
     }
@@ -59,6 +57,7 @@ export default {
 
   watch: {
     id: function(){
+          this.initLike()
       this.updateLikeTimes()
     }
   },
@@ -98,7 +97,6 @@ export default {
               if (res.code === 200) {
                 that.liked = true;
                 that.likeTimes = that.likeTimes + 1;
-                that.asyncUserLikeList();
                 that.$emit("likeSuccess");
               } else {
                 that.$error("msg:" + res.message);
@@ -129,10 +127,12 @@ export default {
       });
     },
     async initLike () {
+      this.loadInfoSuccess = false
       getUserLikeList().then(
         res => {
           if(res && res.data) {
-            this.USER_LIKE_LIST(res.data[0])
+            this.$store.commit('USER_LIKE_LIST',res.data)
+            this.hasLiked()
             this.loadInfoSuccess = true
           }else {
             this.loadInfoSuccess = false
@@ -144,12 +144,13 @@ export default {
     },
     hasLiked() {
       const list = this.uesrLikeList;
+      let l = false;
       for (let i = 0; i < list.length; i++) {
         if (this.id === list[i]) {
-          return true;
+          l = true
         }
       }
-      return false
+      this.liked = l;
     },
     updateLikeTimes() {
       getImageLikeListById(this.id).then(

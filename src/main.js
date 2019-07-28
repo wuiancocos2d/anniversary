@@ -6,7 +6,9 @@ import store from './store/'
 import {Message, Modal} from 'ant-design-vue'
 import {setCookie,getCookie,delCookie} from './config/mUtils'
 import {stageCode} from './config/config'
-// import "./mock" 
+import VueAnalytics from 'vue-analytics'
+
+import "./mock" 
 import FastClick from 'fastclick'
 
 if ('addEventListener' in document) {
@@ -28,6 +30,11 @@ Vue.prototype.delCookie = delCookie
 
 Vue.prototype.$stageCode = stageCode
 
+Vue.use(VueAnalytics, {
+  id: 'UA-142140652-1',
+  router,
+  checkDuplicatedScript: true
+})
 
 new Vue({
   router,

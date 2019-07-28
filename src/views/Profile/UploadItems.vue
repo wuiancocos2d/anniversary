@@ -14,7 +14,7 @@
           <a-card
             class="uploadItem"
             :hoverable="true"
-            @click="handleImgClick(photoItem.id,photoItem.resourceTitle,photoItem.resourceUrl,photoItem.resourceContent)"
+            @click="handleImgClick(photoItem)"
           >
             <img
               class="uploadImg"
@@ -24,8 +24,9 @@
             >
             <a-card-meta>
             <div class="status" slot="description">
-                      <a-badge v-if="photoItem.resourceStatus === 0" status="processing" text="Waiting for Approve"></a-badge>
-                      <a-badge v-else-if="photoItem.resourceStatus === 1 " status="Success" text="Approved"></a-badge>
+                      <a-badge v-if="photoItem.resourceStatus === '0' && userStage < $stageCode.approve" status="processing" text="Waiting for Approve"></a-badge>
+                      <a-badge v-else-if="photoItem.resourceStatus === '0' && userStage > $stageCode.approve" status="Default" text="Denny"></a-badge>
+                      <a-badge v-else-if="photoItem.resourceStatus === '1' " status="success" text="Approved"></a-badge>
             </div>
             </a-card-meta>
           </a-card>
@@ -51,14 +52,9 @@ export default {
     ...mapState(["userStage","userUploads"])
   },
   methods: {
-    handleImgClick(id, title, url, resourceContent) {
-      const imgData = {
-        id: id,
-        resourceTitle: title,
-        resourceUrl: url,
-        resourceContent: resourceContent
-      };
-      this.$emit("listenUpdateImage", imgData);
+    handleImgClick(imgModal) {
+      
+      this.$emit("listenUpdateImage", imgModal);
     }
   }
 };
