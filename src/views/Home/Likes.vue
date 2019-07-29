@@ -46,9 +46,9 @@
 <script>
 import vueWaterfallEasy from "vue-waterfall-easy";
 import { Modal } from "ant-design-vue";
-import { getHomepageImage } from "../../service/getData.js";
+import { getHomepageImage,getUserPoint } from "../../service/getData.js";
 import ImageModal from "../../components/imgModal/ImageModal";
-import { mapState } from "vuex";
+import { mapState,mapMutations } from "vuex";
 import { stageCode } from "../../config/config";
 import Hero from "../../components/Hero/Hero";
 import VFooter from "../../components/common/VFooter";
@@ -72,6 +72,7 @@ export default {
       imgTitle: "",
       modalOpen: false,
       firstLoaded: false,
+      pointList: [],
       imageItem: {
         id: 0,
         pointMind: 0,
@@ -103,6 +104,9 @@ export default {
   // },
   mounted: function() {
     const that = this;
+    if(this.userStage === 6) {
+      this.getUserPointList()
+    }
     this.$nextTick(() => {
       this.handleSize();
       window.addEventListener("resize", that.handleSize);
@@ -111,11 +115,15 @@ export default {
   },
   watch: {
     userStage: function() {
-      console.log('userstagechange')
       this.getData()
+      if(this.userStage === 6) {
+        this.pointList = [],
+        this.getUserPointList()
+      }
     }
   },
   methods: {
+    ...mapMutations(['USER_POINT_LIST']),
     getData() {
       if(this.loading || !this.userStage) return
       this.loading = true
@@ -168,6 +176,17 @@ export default {
       } else {
         this.modalWidth = 500;
       }
+    },
+    getUserPointList() {
+      getUserPoint().then(
+        res => {
+          this.USER_POINT_LIST(res.data)
+          console.log('getpoint',res)
+        },
+        err => {
+          console.log('getUserPointList error' + err)
+        }
+      )
     }
   },
   

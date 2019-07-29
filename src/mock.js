@@ -326,7 +326,7 @@ const sampleImages = function () {
         let data = []
         for (let i = 0; i < imgs.length; i++) {
             const obj = {
-                "id": Mock.Random.integer(0, 200),
+                "id": i,
                 "resourceUrl": imgs[i]["resourceUrl"],
                 "resourceTitle": Mock.mock('@title(3,5)'),
                 "resourceContent": Mock.mock('@cparagraph')
@@ -405,6 +405,33 @@ const imageLikeList = function () {
     }
 }
 
+const pointList = function() {
+    return {
+        "code": 200,
+        "message": "ok",
+        "data": [
+            {
+                "rid": 1,
+                "pointMind": 4,
+                "pointSkill": 5,
+                "pointTheme": 8
+            },
+            {
+                "rid": 4,
+                "pointMind": 10,
+                "pointSkill": 4,
+                "pointTheme": 6
+            },
+            {
+                "rid": 3,
+                "pointMind": 4,
+                "pointSkill": 6,
+                "pointTheme": 6
+            }
+        ]
+    }
+}
+
 Mock.mock(devPath.IMAGE_URL, 'get', postData())
 Mock.mock(devPath.USER_LOGIN, 'post', userLogin())
 Mock.mock(devPath.LOAD_USER_INFO, 'post', userInfor())
@@ -419,3 +446,4 @@ Mock.mock(devPath.USER_IMAGES, 'get', userResource())
 Mock.mock(devPath.GET_CANDIDATE_IMAGES, 'get', rateSource())
 Mock.mock(devPath.GET_USER_LIKE_LIST, 'get', userLikeList())
 Mock.mock(devPath.GET_IMAGE_LIKE_LIST, 'get',imageLikeList())
+Mock.mock(devPath.GET_USER_POINT, 'get',pointList())

@@ -188,7 +188,13 @@ export const getUserLikeList = async function () {
   return res.data
 }
 
-
+export const getUserPoint = async function() {
+  let res = await http({
+    url: env === 'dev' ? config.GET_USER_POINT : config.GET_USER_POINT + getStore('userId') + dateUrl(),
+    method: 'get'
+  })
+  return res.data
+}
 
 function parseJsonToPostString(obj) {
   var str = [];

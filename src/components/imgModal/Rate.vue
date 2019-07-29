@@ -2,18 +2,20 @@
   <div class="rate-container">
     <div class="rate-area">
       <span class="ant-rate-text">Theme(35%): {{pointMind}} point</span>
-      <a-rate :count="10" v-model="pointMind"></a-rate>
+      <a-rate :count="10" v-model="pointMind" :disabled="rated"></a-rate>
       <span class="ant-rate-text">Techniques(35%): {{pointSkill}} point</span>
-      <a-rate :count="10" v-model="pointSkill"></a-rate>
+      <a-rate :count="10" v-model="pointSkill" :disabled="rated"></a-rate>
       <span class="ant-rate-text">Creativity(30%): {{pointTheme}} point</span>
-      <a-rate :count="10" v-model="pointTheme"></a-rate>
+      <a-rate :count="10" v-model="pointTheme" :disabled="rated"></a-rate>
     </div>
-    <a-button type="primary" :loading="rating" @click="handleRate">Update Rate</a-button>
+    <a-button v-if="rated === false" type="primary" :loading="rating" @click="handleRate">Update Rate</a-button>
   </div>
 </template>
 <script>
-import { Rate,Button } from "ant-design-vue";
+import { Rate, Button } from "ant-design-vue";
 import { rateImage } from "../../service/getData";
+import { mapState,mapMutations } from "vuex";
+
 export default {
   name: "Rate",
   components: {
@@ -23,44 +25,50 @@ export default {
   props: {
     id: Number
   },
+  computed: {
+    ...mapState(["userPointList"])
+  },
+  mounted: function() {
+    this.updateRate();
+  },
   data() {
     return {
       loading: true,
       pointMind: 0,
       pointSkill: 0,
       pointTheme: 0,
-      rating: false
+      rating: false,
+      rated: false
     };
   },
   watch: {
     id: function() {
-      this.loading = false
-      this.pointMind= 0
-      this.pointSkill= 0
-      this.pointTheme= 0
-      this.rating = false
-      this.updateRate()
+      this.reset();
+      this.updateRate();
     }
   },
-  
+
   methods: {
+    ...mapMutations(["USER_POINT_LIST"]),
     handleRate: function() {
-      if(this.rating === true) return
-      this.rating = true
+      if (this.rating === true) return;
+      this.rating = true;
       const imageRateData = {
         id: this.id,
         pointMind: this.pointMind,
         pointSkill: this.pointSkill,
-        pointTheme: this.pointTheme,
-      }
+        pointTheme: this.pointTheme
+      };
       rateImage(imageRateData).then(
         res => {
-          this.rating = false
+          this.rating = false;
           if (res.code === 200) {
             this.$message.success("Rate successful");
-            this.$emit("rateSuccess");
-          }else {
-            this.$message.error("Rate faild:" + res.message)
+            this.$emit("rateSuccess")
+            this.addNewRate(imageRateData)
+
+          } else {
+            this.$message.error("Rate faild:" + res.message);
           }
         },
         err => {
@@ -68,8 +76,35 @@ export default {
         }
       );
     },
-    updateRate: function(){
-      console.log('mounted')
+    updateRate: function() {
+      console.log("this.userPointList", this.userPointList);
+      const list = this.userPointList;
+
+      for (let i = 0; i < list.length; i++) {
+        const item = list[i];
+        if (item.rid === this.id) {
+          this.rated = true
+          this.pointMind = item.pointMind;
+          this.pointSkill = item.pointSkill;
+          this.pointTheme = item.pointTheme;
+        }
+      }
+    },
+    reset: function() {
+      this.loading = false;
+      this.pointMind = 0;
+      this.pointSkill = 0;
+      this.pointTheme = 0;
+      this.rating = false;
+      this.rated = false;
+    },
+    addNewRate: function(imageRate){
+      let item = imageRate;
+      item.rid = imageRate.id;
+
+      let newList = this.userPointList;
+      newList.push(item)
+      this.USER_POINT_LIST(newList)
     }
   }
 };

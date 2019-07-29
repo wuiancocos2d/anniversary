@@ -25,7 +25,8 @@ export const devPath = {
     POINT_IMAGE: '/api/point/',
     GET_IMAGE_LIKE_LIST: 'api/like_list/info/',
     GET_CANDIDATE_IMAGES: 'api/candidate/',
-    GET_USER_LIKE_LIST: BASE_URL + 'like/rids/uid/'
+    GET_USER_LIKE_LIST: BASE_URL + 'like/rids/uid/',
+    GET_USER_POINT: BASE_URL + 'resourc/api/getRateList'
 }
 
 export const production = {

@@ -112,6 +112,9 @@ export const mutations = {
     [types.SET_USER_STAGE](state, userStage) {
         state.userStage = userStage
     },
+    [types.USER_POINT_LIST](state, userPointList) {
+        state.userPointList = userPointList
+    }
 
 }
 

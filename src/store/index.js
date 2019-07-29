@@ -19,6 +19,7 @@ const state = {
 	userUploads: [],
 	uesrLikeList: [],
 	timeStage: null,
+	userPointList: []
 	
 }
 
