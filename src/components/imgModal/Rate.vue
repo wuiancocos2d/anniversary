@@ -38,7 +38,7 @@ export default {
       pointSkill: 0,
       pointTheme: 0,
       rating: false,
-      rated: false
+      rated: true
     };
   },
   watch: {
@@ -54,15 +54,17 @@ export default {
       if (this.rating === true) return;
       this.rating = true;
       const imageRateData = {
-        id: this.id,
-        pointMind: this.pointMind,
-        pointSkill: this.pointSkill,
-        pointTheme: this.pointTheme
+        resourceId: this.id,
+        scoreMind: this.pointMind,
+        scoreSkill: this.pointSkill,
+        scoreTheme: this.pointTheme
       };
       rateImage(imageRateData).then(
         res => {
-          this.rating = false;
-          if (res.code === 200) {
+          this.rated = true;
+          
+          if (res && res.code === "OK") {
+            this.rating = false;
             this.$message.success("Rate successful");
             this.$emit("rateSuccess")
             this.addNewRate(imageRateData)
@@ -77,16 +79,16 @@ export default {
       );
     },
     updateRate: function() {
-      console.log("this.userPointList", this.userPointList);
       const list = this.userPointList;
-
+      this.rated = false
       for (let i = 0; i < list.length; i++) {
         const item = list[i];
-        if (item.rid === this.id) {
+        if (item.resourceId === this.id) {
+          
           this.rated = true
-          this.pointMind = item.pointMind;
-          this.pointSkill = item.pointSkill;
-          this.pointTheme = item.pointTheme;
+          this.pointMind = item.scoreMind;
+          this.pointSkill = item.scoreSkill;
+          this.pointTheme = item.scoreTheme;
         }
       }
     },
@@ -100,7 +102,7 @@ export default {
     },
     addNewRate: function(imageRate){
       let item = imageRate;
-      item.rid = imageRate.id;
+      item.resourceId = imageRate.resourceId;
 
       let newList = this.userPointList;
       newList.push(item)

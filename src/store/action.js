@@ -1,5 +1,5 @@
 import * as types from './mutaions-types.js'
-import { loadUserInfo, userLogin, getUserImages, getUserLikeList,getUserPoint } from '../service/getData'
+import { loadUserInfo, userLogin, getUserImages, getUserLikeList } from '../service/getData'
 import router from '../router'
 import store from './index'
 export default {
@@ -44,6 +44,7 @@ export default {
 
     logout({ commit }) {
         commit(types.USER_LOGOUT)
+        window.location.reload()
         router.push('/login')
     },
 

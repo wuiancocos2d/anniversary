@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8000/activity25/'
+const BASE_URL = '/activity25/'
 // const BASE_URL = '/'
 const BASE_URL_DEV = '/'
 export const env = 'dev'
@@ -26,7 +26,8 @@ export const devPath = {
     GET_IMAGE_LIKE_LIST: 'api/like_list/info/',
     GET_CANDIDATE_IMAGES: 'api/candidate/',
     GET_USER_LIKE_LIST: BASE_URL + 'like/rids/uid/',
-    GET_USER_POINT: BASE_URL + 'resourc/api/getRateList'
+    GET_USER_POINT: BASE_URL + 'resourc/api/getRateList',
+    GET_REWARED_LIST: BASE_URL + 'resource/scores/'
 }
 
 export const production = {
@@ -51,9 +52,11 @@ export const production = {
     GET_CANDIDATE_IMAGES: BASE_URL  + 'like/count/',
     GET_WINNERS_IMAGES: BASE_URL  + 'resource/winners/',
     ADD_LIKE_IMAGE: BASE_URL +'like/add/',
-    POINT_IMAGE:BASE_URL + 'resource/point?',
+    POINT_IMAGE:BASE_URL + 'score/add?',
     GET_IMAGE_LIKE_LIST: BASE_URL +'like/info/',
-    GET_USER_LIKE_LIST: BASE_URL + 'like/rids/uid/'
+    GET_USER_LIKE_LIST: BASE_URL + 'like/rids/uid/',
+    GET_USER_POINT: BASE_URL + 'score/query/',
+    GET_REWARED_LIST: BASE_URL + 'resource/scores/'
 }
 
 export const stageCode = {

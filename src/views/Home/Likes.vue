@@ -126,6 +126,10 @@ export default {
     ...mapMutations(['USER_POINT_LIST']),
     getData() {
       if(this.loading || !this.userStage) return
+      if(this.userStage === 6 && this.page === 4) {
+        this.$refs.waterfall.waterfallOver();
+        return
+      }
       this.loading = true
       getHomepageImage(this.page).then(
         res => {
@@ -134,15 +138,8 @@ export default {
               //加载结束
               this.$refs.waterfall.waterfallOver();
             } else {
-              //打分返回数据结构不同
-              if (this.userStage < this.stageCode.rate) {
                 this.imgsArr = this.imgsArr.concat(res.data);
                 this.page++;
-              } else if (this.userStage === this.stageCode.rate) {
-                for (let i = 0; i < res.data.length; i++) {
-                  this.imgsArr.push(res.data[i]["resource"]);
-                }
-              }
             }
             if(!this.firstLoaded) this.firstLoaded = true
           } else {

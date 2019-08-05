@@ -9,6 +9,11 @@ export const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/awards',
+      name: 'awards',
+      component: () => import(/* webpackChunkName: "about" */ './views/Result.vue')
+    },
+    {
       path: '/',
       name: 'home',
       component: Home,

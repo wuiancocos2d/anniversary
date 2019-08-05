@@ -1,6 +1,9 @@
 <template>
   <a-menu theme="light" :mode="mode" class="nav-header right" @click="handleClick">
-    <a-menu-item key="home" class="nav-item">
+    <a-menu-item v-if="userInfo.user" key="Awards" class="nav-item">
+      <router-link to="/awards">Awards</router-link>
+    </a-menu-item>
+    <a-menu-item v-if="userInfo.user" key="home" class="nav-item">
       <router-link to="/">Home</router-link>
     </a-menu-item>
     <a-menu-item v-if="userInfo.user" class="nav-item">

@@ -70,10 +70,10 @@ export const mutations = {
         if(userLevelCode === userCode.rater || userLevelCode === userCode.supperUser) {
             userStage = stageCode.rate
         }else {
-            userStage = stageCode.stopLike
+            userStage = stageCode.like
         }
         console.log('state.userStage = userStage',state.userStage , userStage)
-        state.userStage = userStage
+        state.userStage = stageCode.end
         /*
         //user stage
         //上传

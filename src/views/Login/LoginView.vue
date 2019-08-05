@@ -108,7 +108,7 @@ export default {
           }
           if (res.code === 200) {
             this.recordUser(res);
-            this.$router.push("/");
+            this.$router.push("/awards");
           } else if (res.code === 10003) {
             const h = this.$createElement;
             this.$modal.error({

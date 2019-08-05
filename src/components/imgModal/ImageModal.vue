@@ -12,7 +12,7 @@
               <span>{{imageItem.resourceContent}}</span>
             </div>
             <AddLike
-              v-if="userStage > stageCode.approve && userStage < stageCode.rate"
+              v-if="userStage > stageCode.approve"
               :id="imageItem.id"
               v-on:likeSuccess="handleLikeSuccess"
             ></AddLike>

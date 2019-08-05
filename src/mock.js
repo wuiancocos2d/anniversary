@@ -405,7 +405,7 @@ const imageLikeList = function () {
     }
 }
 
-const pointList = function() {
+const pointList = function () {
     return {
         "code": 200,
         "message": "ok",
@@ -432,6 +432,155 @@ const pointList = function() {
     }
 }
 
+const rewards = function () {
+    return {
+        "code": 200,
+        "message": "OK",
+        "data": [
+            {
+                "id": 158,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1562649689191.jpg",
+                "resourceTitle": "新机如佳人 远航初弄色",
+                "resourceContent": "“美食之都”新机揭幕",
+                "resourceStatus": "1",
+                "uploadTime": "2019-07-09T06:08:08.000+0000",
+                "scoreTheme": 0,
+                "scoreSkill": 0,
+                "scoreMind": 0,
+                "scoreTotal": 0,
+                "scoreTime": "2019-08-01T08:12:54.000+0000",
+                "total": 55
+            },
+            {
+                "id": 182,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1563527993347.jpg",
+                "resourceTitle": "定",
+                "resourceContent": "大概做过几年航线的人都会有同样的感慨--雨总在飞机开始闪灯时下得最大！既然避无可避，唯有坚定面对。瓢泼大雨中一人一机的对话，世界仿佛入定。",
+                "resourceStatus": "1",
+                "uploadTime": "2019-07-19T09:23:22.000+0000",
+                "scoreTheme": 8,
+                "scoreSkill": 4,
+                "scoreMind": 8,
+                "scoreTotal": 6,
+                "scoreTime": "2019-08-01T08:01:27.000+0000",
+                "total": 54
+            },
+            {
+                "id": 122,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1561615600295.jpg",
+                "resourceTitle": "Beijing ， I am coming…",
+                "resourceContent": "Before landing Beijing",
+                "resourceStatus": "1",
+                "uploadTime": "2019-06-27T06:08:27.000+0000",
+                "scoreTheme": 9,
+                "scoreSkill": 7,
+                "scoreMind": 9,
+                "scoreTotal": 8,
+                "scoreTime": "2019-08-01T08:50:34.000+0000",
+                "total": 51
+            },
+            {
+                "id": 175,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1563173408219.jpg",
+                "resourceTitle": "每次到达都是新的起飞",
+                "resourceContent": "希望好天气伴随NX的每一次飞行。",
+                "resourceStatus": "1",
+                "uploadTime": "2019-07-15T06:52:17.000+0000",
+                "scoreTheme": 9,
+                "scoreSkill": 9,
+                "scoreMind": 9,
+                "scoreTotal": 9,
+                "scoreTime": "2019-08-01T08:01:35.000+0000",
+                "total": 46
+            },
+            {
+                "id": 137,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1562047384765.jpg",
+                "resourceTitle": "絢爛",
+                "resourceContent": "雨後的天空總是絢爛 總是讓人充滿著希望\n澳門航空載著來自不同的城市 \n懷著不一樣的期待  \n看著不一樣的風景 \n向著不同的目的地的客人出發",
+                "resourceStatus": "1",
+                "uploadTime": "2019-07-02T06:30:07.000+0000",
+                "scoreTheme": 9,
+                "scoreSkill": 9,
+                "scoreMind": 8,
+                "scoreTotal": 8,
+                "scoreTime": "2019-08-01T07:48:01.000+0000",
+                "total": 45
+            },
+            {
+                "id": 94,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1561364724917.jpg",
+                "resourceTitle": "ALL AIR MACAU ALONG THE SEASIDE",
+                "resourceContent": "IT'S NOT OFTEN TO SEE ALL AIRCRAFT LIKE THIS",
+                "resourceStatus": "1",
+                "uploadTime": "2019-06-24T08:27:04.000+0000",
+                "scoreTheme": 9,
+                "scoreSkill": 8,
+                "scoreMind": 9,
+                "scoreTotal": 8,
+                "scoreTime": "2019-08-01T08:00:57.000+0000",
+                "total": 40
+            },
+            {
+                "id": 100,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1561521578196.jpeg",
+                "resourceTitle": "Lovely welcome",
+                "resourceContent": "Before boarding , 2 cabin crew show their lovely smile and heart sign by  finger . lovely welcome .",
+                "resourceStatus": "1",
+                "uploadTime": "2019-06-26T04:07:58.000+0000",
+                "scoreTheme": 5,
+                "scoreSkill": 5,
+                "scoreMind": 5,
+                "scoreTotal": 5,
+                "scoreTime": "2019-08-01T00:01:38.000+0000",
+                "total": 31
+            },
+            {
+                "id": 142,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1562167071798.jpeg",
+                "resourceTitle": "光芒万丈·飞跃天际",
+                "resourceContent": "愿澳航如初升之旭日，朝气蓬勃，光芒万丈，带领澳航人圆梦天空！",
+                "resourceStatus": "1",
+                "uploadTime": "2019-07-03T15:29:17.000+0000",
+                "scoreTheme": 0,
+                "scoreSkill": 0,
+                "scoreMind": 0,
+                "scoreTotal": 0,
+                "scoreTime": "2019-08-01T08:00:21.000+0000",
+                "total": 31
+            },
+            {
+                "id": 102,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1561523001922.jpeg",
+                "resourceTitle": "Working in the sky !",
+                "resourceContent": "Cockpit crew are working hard in the sky to keep the flight smoothly and safely.",
+                "resourceStatus": "1",
+                "uploadTime": "2019-06-26T04:23:41.000+0000",
+                "scoreTheme": 0,
+                "scoreSkill": 6,
+                "scoreMind": 6,
+                "scoreTotal": 3,
+                "scoreTime": "2019-08-01T08:02:00.000+0000",
+                "total": 31
+            },
+            {
+                "id": 177,
+                "resourceUrl": "https://nx25th.airmacau.com.cn/activity25/images/1563246111333.JPG",
+                "resourceTitle": "飞悦大湾区",
+                "resourceContent": "澳航与港珠澳大桥人工岛",
+                "resourceStatus": "1",
+                "uploadTime": "2019-07-16T03:02:26.000+0000",
+                "scoreTheme": 8,
+                "scoreSkill": 8,
+                "scoreMind": 8,
+                "scoreTotal": 8,
+                "scoreTime": "2019-08-01T08:02:08.000+0000",
+                "total": 31
+            }
+        ]
+    }
+}
+
 Mock.mock(devPath.IMAGE_URL, 'get', postData())
 Mock.mock(devPath.USER_LOGIN, 'post', userLogin())
 Mock.mock(devPath.LOAD_USER_INFO, 'post', userInfor())
@@ -445,5 +594,6 @@ Mock.mock(devPath.GET_CHECK_IMAGES, 'get', sampleImages())
 Mock.mock(devPath.USER_IMAGES, 'get', userResource())
 Mock.mock(devPath.GET_CANDIDATE_IMAGES, 'get', rateSource())
 Mock.mock(devPath.GET_USER_LIKE_LIST, 'get', userLikeList())
-Mock.mock(devPath.GET_IMAGE_LIKE_LIST, 'get',imageLikeList())
-Mock.mock(devPath.GET_USER_POINT, 'get',pointList())
+Mock.mock(devPath.GET_IMAGE_LIKE_LIST, 'get', imageLikeList())
+Mock.mock(devPath.GET_USER_POINT, 'get', pointList())
+Mock.mock(devPath.GET_REWARED_LIST, 'get',rewards())

@@ -120,8 +120,9 @@ export const likeImage = async function (imageId) {
 }
 //打分
 export const rateImage = async function (imageItem) {
+  console.log('imageItem',imageItem)
   let res = await http({
-    url: env === 'dev' ? config.POINT_IMAGE : config.POINT_IMAGE + parseJsonToPostString(imageItem),
+    url: env === 'dev' ? config.POINT_IMAGE : config.POINT_IMAGE + parseJsonToPostString(imageItem)+'&userNo='+getStore('userId'),
     method: 'post'
   })
   return res.data
@@ -166,7 +167,7 @@ export const getHomepageImage = async function (page) {
       url = env === 'dev' ? config.GET_CANDIDATE_IMAGES : config.GET_CANDIDATE_IMAGES + page + numberLoad
       break
     case stageCode.end:
-      url = config.GET_WINNERS_IMAGES
+      url = env === 'dev' ? config.GET_CHECK_IMAGES : config.GET_CHECK_IMAGES + page + numberLoad
       break
     default:
       url = ''
@@ -190,7 +191,15 @@ export const getUserLikeList = async function () {
 
 export const getUserPoint = async function() {
   let res = await http({
-    url: env === 'dev' ? config.GET_USER_POINT : config.GET_USER_POINT + getStore('userId') + dateUrl(),
+    url: env === 'dev' ? config.GET_USER_POINT : config.GET_USER_POINT +'/'+ getStore('userId') + dateUrl(),
+    method: 'get'
+  })
+  return res.data
+}
+
+export const getRewardList = async function(){
+  let res = await http({
+    url: env === 'dev' ? config.GET_REWARED_LIST : config.GET_REWARED_LIST + '/1/10',
     method: 'get'
   })
   return res.data

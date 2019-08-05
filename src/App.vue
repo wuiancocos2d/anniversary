@@ -43,7 +43,7 @@ export default {
     ...mapActions(["getUserInfo"]),
     getUser: function() {
       this.getUserInfo();
-    }
+    },
   },
   created: function() {
     axios.interceptors.response.use(
