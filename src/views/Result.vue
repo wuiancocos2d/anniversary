@@ -25,9 +25,11 @@
       <div class="imgContainer">
         <img :src="imgsSource[1]['image']" alt />
         <div class="winner-container">
-          <a-row>
-              <a-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="winners" v-for="(winner,index) in silver" :key="index">
-                  
+          <a-row class="winner-row">
+              <a-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="winner" v-for="(winner,index) in silver" :key="index">
+                      <div class="winnerImg silverImg">
+                        <img  :src="winner.resourceUrl" alt="">
+                      </div>
               </a-col>
           </a-row>
         </div>
@@ -122,6 +124,7 @@ export default {
 .result-container {
   height: 100%;
   overflow: auto;
+  padding-bottom: 40px;
   .medal {
     max-width: 1100px;
     margin: 0 auto;
@@ -140,9 +143,28 @@ export default {
     display: flex;
     margin-top: 20px;
     background-color: #fafafa;
+    .winner-row {
+      width: 100%;
+      text-align: center;
+    }
     .winnerImg {
       flex: 1;
       .rewardImage {
+        width: 100%;
+      }
+    }
+    .winner-row {
+      display: flex;
+
+    }
+    .winner {
+      flex: 1;
+      margin-top: 25px;
+      .winnerImg.silverImg {
+        width: 50%;
+        margin: 0 auto;
+      }
+      .winnerImg img {
         width: 100%;
       }
     }
